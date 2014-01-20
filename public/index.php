@@ -3,6 +3,8 @@
 ?>
 <?php require_once(ROOT_PATH.'/header.php'); ?>
 
-<div>MATKASSE TEST</div>
+<section>
+	<div>MATKASSE TEST</div>
+</section>
 
 <?php require_once(ROOT_PATH.'/footer.php'); ?>
