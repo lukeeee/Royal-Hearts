@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Matkassen</title>
+        <title><?php echo $pagetitle; ?></title>
         <link href="css/bootstrap.css" rel="stylesheet">
         <style type="text/css">
 			body {
@@ -41,11 +41,11 @@
                 margin-left: -14px;
             }
 			#header {
-				display:inline-block;
+				display:block;
 				margin:2em 0 4em 0;
-				width:50em;
+				text-align:center;
 			}
-			#title {
+			.title-div {
 				font-size:5em;
 				margin-bottom:0.2em;
 			}
@@ -54,18 +54,16 @@
                 display: inline-block;
                 
             }
+			#menu {
+				width:50em;
+				display:inline-block;
+			}
+			.title-div a, a:active {
+				color: #333;
+				text-decoration:none;
+			}
 		</style>
     </head>
     <header>
-    	<div id="header">
-        	<div id="title">MATKASSEN.SE</div>
-            <div class="btn-toolbar" role="toolbar">
-                <div class="btn-group btn-group-lg btn-group-justified">
-                   	<a class="btn btn-default" role="button">Varor</a>
-                    <a class="btn btn-default" role="button">Om</a>
-                    <a class="btn btn-default" role="button">Logga in</a>
-                </div>
-            </div>
-        </div>
     </header>
     <body>
