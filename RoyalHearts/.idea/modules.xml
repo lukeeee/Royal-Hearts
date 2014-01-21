@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Royal Hearts/Royal Hearts.iml" filepath="$PROJECT_DIR$/Royal Hearts/Royal Hearts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RoyalHearts.iml" filepath="$PROJECT_DIR$/RoyalHearts.iml" />
+    </modules>
+  </component>
+</project>
+
