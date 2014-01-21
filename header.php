@@ -8,6 +8,38 @@
 			body {
 				text-align:center;
 			}
+
+            #login {
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+
+            #inputEmail {
+                width:200px;
+                position:relative;
+                left:585px;
+            }
+
+            #inputPassword {
+                width:200px;
+                position:relative;
+                left:585px;
+            }
+
+            label#inputPassword {
+                left: -15px;  
+            }
+
+            #checkbox {
+                width:120px;
+                position:relative;
+                left:585px;
+            }
+
+            #btn {
+                margin-left: 100px;
+            }
+
 		</style>
     </head>
     <header>
