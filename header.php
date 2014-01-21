@@ -16,28 +16,29 @@
 
             #inputEmail {
                 width:200px;
-                position:relative;
-                left:585px;
+                
             }
 
             #inputPassword {
                 width:200px;
-                position:relative;
-                left:585px;
+                
             }
 
-            label#inputPassword {
-                left: -15px;  
+            #password {
+                padding-right: 150px;
+            }
+
+            #email {
+                padding-right: 120px;
             }
 
             #checkbox {
                 width:120px;
-                position:relative;
-                left:585px;
+                
             }
 
             #btn {
-                margin-left: 100px;
+                margin-left: -14px;
             }
 			#header {
 				display:inline-block;
@@ -48,6 +49,11 @@
 				font-size:5em;
 				margin-bottom:0.2em;
 			}
+
+            #loginForm {
+                display: inline-block;
+                
+            }
 		</style>
     </head>
     <header>
