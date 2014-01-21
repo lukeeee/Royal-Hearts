@@ -39,9 +39,27 @@
             #btn {
                 margin-left: 100px;
             }
-
+			#header {
+				display:inline-block;
+				margin:2em 0 4em 0;
+				width:50em;
+			}
+			#title {
+				font-size:5em;
+				margin-bottom:0.2em;
+			}
 		</style>
     </head>
     <header>
+    	<div id="header">
+        	<div id="title">MATKASSEN.SE</div>
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group btn-group-lg btn-group-justified">
+                   	<a class="btn btn-default" role="button">Varor</a>
+                    <a class="btn btn-default" role="button">Om</a>
+                    <a class="btn btn-default" role="button">Logga in</a>
+                </div>
+            </div>
+        </div>
     </header>
     <body>
