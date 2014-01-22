@@ -24,30 +24,17 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="5dp"/>
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Välj Stad"
-            android:textStyle="bold"
-            android:textSize="17dp"/>
         <Spinner
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:background="@drawable/button"
             android:layout_gravity="center"
             android:gravity="center"
-            android:id="@+id/CitySpinner"/>
+            android:id="@+id/CitySpinner"
+            android:dropDownSelector="@drawable/arrow_down"/>
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"/>
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Välj Butik"
-            android:textStyle="bold"
-            android:textSize="17dp"/>
+            android:layout_height="5dp"/>
         <Spinner
             android:layout_width="300dp"
             android:layout_height="40dp"
@@ -69,12 +56,14 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center"
             android:text="Inköpslista"
             android:textStyle="bold"
             android:textSize="20dp"/>
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:id="@+id/shopList"/>
 
     </LinearLayout>
 </ScrollView>

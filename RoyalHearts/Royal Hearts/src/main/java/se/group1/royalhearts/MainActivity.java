@@ -19,6 +19,7 @@ public class MainActivity extends Activity {
     private ProgressDialog progressDialog;
     private TextView kasse;
     private Spinner storeSpinner;
+    private Spinner citySpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,68 +27,33 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         kasse = (TextView)findViewById(R.id.kasse);
         kasse.setText("Användarnamns " + "Matkasse");
-        //storeSpinner = (Spinner)findViewById(R.id.StoreSpinner);
+        storeSpinner = (Spinner)findViewById(R.id.StoreSpinner);
+        citySpinner= (Spinner) findViewById(R.id.CitySpinner);
 
-        final List<String> list=new ArrayList<String>();
-        list.add("Item 1");
-        list.add("Item 2");
-        list.add("Item 3");
-        list.add("Item 4");
-        list.add("Item 5");
+        final List<String> cList=new ArrayList<String>();
+        cList.add("Välj Stad");
+        cList.add("Borås");
+        cList.add("Göteborg");
+        cList.add("Stockholm");
+        cList.add("Växjö");
 
-        final String[] str={"Report 1","Report 2","Report 3","Report 4","Report 5"};
-
-        final Spinner storeSpinner= (Spinner) findViewById(R.id.StoreSpinner);
-        final Spinner sp2= (Spinner) findViewById(R.id.spinner2);
-
-        ArrayAdapter<String> adp1=new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,list);
-        adp1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp1.setAdapter(adp1);
+        ArrayAdapter<String> CityAdr=new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1,cList);
+        CityAdr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        citySpinner.setAdapter(CityAdr);
 
 
-        ArrayAdapter<String> adp2=new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item,str);
-        adp2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp2.setAdapter(adp2);
-        sp1.setOnItemSelectedListener(new OnItemSelectedListener()
-        {
+        final List<String> sList=new ArrayList<String>();
+        sList.add("Välj Butik");
+        sList.add("City Gross");
+        sList.add("Coop Extra");
+        sList.add("Ica Maxi");
+        sList.add("Willys");
 
-            @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1,int position, long id) {
-                // TODO Auto-generated method stub
-                Toast.makeText(getBaseContext(),list.get(position), Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-
-            }
-
-        });
-
-
-        sp2.setOnItemSelectedListener(new OnItemSelectedListener()
-        {
-
-            @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1,int position, long id) {
-                // TODO Auto-generated method stub
-                Toast.makeText(getBaseContext(),str[position], Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-
-            }
-
-        });
-
-
+        ArrayAdapter<String> StoreAdr=new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1,sList);
+        StoreAdr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        storeSpinner.setAdapter(StoreAdr);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
