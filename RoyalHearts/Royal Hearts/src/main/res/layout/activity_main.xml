@@ -8,21 +8,72 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="20dp"/>
         <TextView
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginTop="10dp"
-            android:text="Matkasse"
             android:textSize="25dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:id="@+id/kasse"/>
         <View
             android:layout_width="match_parent"
-            android:layout_height="60dp"/>
+            android:layout_height="1dp"
+            android:background="#000"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"/>
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Välj Stad"
+            android:textStyle="bold"
+            android:textSize="17dp"/>
+        <Spinner
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:background="@drawable/button"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/StoreSpinner"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"/>
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Välj Butik"
+            android:textStyle="bold"
+            android:textSize="17dp"/>
+        <Spinner
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:background="@drawable/button"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"/>
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Inköpslista"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 </ScrollView>

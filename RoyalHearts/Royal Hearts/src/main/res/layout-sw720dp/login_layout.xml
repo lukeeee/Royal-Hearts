@@ -1,0 +1,92 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="se.group1.royalhearts.Login" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+        <TextView
+            android:layout_width="600dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Logga in till din matkasse"
+            android:textSize="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="bold"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="90dp"/>
+        <TextView
+            android:layout_width="600dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Användarnamn"
+            android:id="@+id/username"
+            android:textSize="40dp"/>
+
+        <LinearLayout
+            android:layout_width="600dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:paddingLeft="10dp"
+                android:inputType="textPersonName"
+                android:hint="tex. pelle_85"
+                android:singleLine="true"
+                android:maxLength="30"
+                android:background="@drawable/shape"
+                android:ems="10"
+                android:id="@+id/usernameLoginInput"
+                android:layout_gravity="center_horizontal" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+            <TextView
+                android:layout_width="600dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Lösenord"
+                android:id="@+id/password"
+                android:textSize="40dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:paddingLeft="10dp"
+                android:inputType="textPassword"
+                android:hint="5-10 bokstäver"
+                android:singleLine="true"
+                android:maxLength="30"
+                android:background="@drawable/shape"
+                android:ems="10"
+                android:id="@+id/passwordLoginInput"
+                android:layout_gravity="center_horizontal" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="60dp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:id="@+id/login"
+                android:textSize="50dp"
+                android:background="@drawable/button"
+                android:text="Logga In"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
