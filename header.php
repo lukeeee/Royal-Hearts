@@ -6,66 +6,44 @@
         <link href="css/bootstrap.css" rel="stylesheet">
         <style type="text/css">
 			body {
-				text-align:center;
+				/*text-align:center;*/
 			}
 
-            #login {
-                padding-top: 20px;
-                padding-bottom: 20px;
-            }
-
-            #inputEmail {
-                width:200px;
-                
-            }
-
-            #inputPassword {
-                width:200px;
-                
-            }
-
-            #password {
-                padding-right: 150px;
-            }
-
-            #email {
-                padding-right: 120px;
-            }
-
-            #checkbox {
-                width:120px;
-                
-            }
-
-            #btn {
-                margin-left: -14px;
-            }
-			#header {
+			/*#header {
 				display:inline-block;
 				margin:2em 0 4em 0;
 				width:50em;
-			}
+			}*/
 			#title {
 				font-size:5em;
 				margin-bottom:0.2em;
+                text-align: center;
 			}
 
-            #loginForm {
-                display: inline-block;
-                
-            }
 		</style>
     </head>
     <header>
-    	<div id="header">
-        	<div id="title">MATKASSEN.SE</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+      <div id="title">MATKASSEN.SE</div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+       <div id="header">
+                    
             <div class="btn-toolbar" role="toolbar">
                 <div class="btn-group btn-group-lg btn-group-justified">
-                   	<a class="btn btn-default" role="button">Varor</a>
+                    <a class="btn btn-default" role="button">Varor</a>
                     <a class="btn btn-default" role="button">Om</a>
                     <a class="btn btn-default" role="button">Logga in</a>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
+</div>
+
+</header>
     <body>
