@@ -1,5 +1,6 @@
 <?php
 	require_once('../config.php');
+	$pagetitle = "Varor | Matkassen.se"
 ?>
 <?php require_once(ROOT_PATH.'/header.php'); ?>
 
