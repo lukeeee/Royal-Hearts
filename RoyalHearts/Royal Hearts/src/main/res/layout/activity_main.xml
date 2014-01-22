@@ -37,7 +37,7 @@
             android:background="@drawable/button"
             android:layout_gravity="center"
             android:gravity="center"
-            android:id="@+id/StoreSpinner"/>
+            android:id="@+id/CitySpinner"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"/>
@@ -53,7 +53,8 @@
             android:layout_height="40dp"
             android:background="@drawable/button"
             android:layout_gravity="center"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:id="@+id/StoreSpinner"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="5dp"/>

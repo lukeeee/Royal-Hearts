@@ -26,17 +26,66 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         kasse = (TextView)findViewById(R.id.kasse);
         kasse.setText("Användarnamns " + "Matkasse");
-        storeSpinner = (Spinner)findViewById(R.id.StoreSpinner);
+        //storeSpinner = (Spinner)findViewById(R.id.StoreSpinner);
 
-        ArrayList<SpinnerItem> items = new ArrayList<SpinnerItem>();
-        items.add(new SpinnerItem("Item", false));
-        items.add(new SpinnerItem("Item 2", false));
-        items.add(new SpinnerItem("Välj Butik", true)); // Last item
+        final List<String> list=new ArrayList<String>();
+        list.add("Item 1");
+        list.add("Item 2");
+        list.add("Item 3");
+        list.add("Item 4");
+        list.add("Item 5");
 
-        MySpinnerAdapter adapter = new MySpinnerAdapter(this, android.R.layout.simple_spinner_item, items);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        storeSpinner.setAdapter(adapter);
-        storeSpinner.setSelection(items.size() - 1);
+        final String[] str={"Report 1","Report 2","Report 3","Report 4","Report 5"};
+
+        final Spinner storeSpinner= (Spinner) findViewById(R.id.StoreSpinner);
+        final Spinner sp2= (Spinner) findViewById(R.id.spinner2);
+
+        ArrayAdapter<String> adp1=new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1,list);
+        adp1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp1.setAdapter(adp1);
+
+
+        ArrayAdapter<String> adp2=new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item,str);
+        adp2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp2.setAdapter(adp2);
+        sp1.setOnItemSelectedListener(new OnItemSelectedListener()
+        {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,int position, long id) {
+                // TODO Auto-generated method stub
+                Toast.makeText(getBaseContext(),list.get(position), Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
+
+
+        sp2.setOnItemSelectedListener(new OnItemSelectedListener()
+        {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,int position, long id) {
+                // TODO Auto-generated method stub
+                Toast.makeText(getBaseContext(),str[position], Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
 
 
     }
