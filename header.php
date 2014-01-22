@@ -24,6 +24,21 @@
 				color: #333;
 				text-decoration:none;
 			}
+			hr {
+				border: 0;
+				clear:both;
+				display:block;
+				width: 80%;               
+				background-color:#000;
+				height: 1px;
+			}	
+			#footer {
+				text-align:center;
+				padding-bottom:1em;
+			}
+			#footer-margin {
+				padding-top:5em;
+			}
 		</style>
     </head>
     <header>

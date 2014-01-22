@@ -15,3 +15,5 @@
   		<div><h3>Med matkassen kan du beställa mat……. </h3></div>
 	</div> 
 </div> 
+
+<?php require_once(ROOT_PATH.'/footer.php'); ?>
