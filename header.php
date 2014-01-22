@@ -6,7 +6,9 @@
         <link href="css/bootstrap.css" rel="stylesheet">
         <style type="text/css">
 			body {
-				/*text-align:center;*/
+
+                background:url(img/gradient.png);
+                background-size:100%;
 			}
 
 			#header {
