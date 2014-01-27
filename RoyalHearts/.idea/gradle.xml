@@ -5,15 +5,8 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/Royal Hearts" />
-          </set>
-        </option>
       </GradleProjectSettings>
     </option>
-    <option name="serviceDirectoryPath" value="$USER_HOME$/.gradle/caches/1.9/caches/1.9/scripts/settings_2mos735bqacdtvusqu1alkssv/SettingsScript/buildscript/classes" />
   </component>
 </project>
 

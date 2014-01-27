@@ -44,6 +44,12 @@
     <header>
 
     <div class="row">
+        <div class="col-md-7 col-md-offset-4">
+            <p class="text-right">Inloggad som </p>
+        </div>
+    </div>
+
+    <div class="row">
       <div class="col-md-6 col-md-offset-3">
           <div id="title"><a href="index.php">MATKASSEN.SE</a></div>
       </div>
