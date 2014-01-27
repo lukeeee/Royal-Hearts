@@ -2,7 +2,7 @@
         	<div id="footer-margin" class="col-md-12"></div>
             <div id="footer" class="col-md-12">
                 <hr />
-                THIS IS A FOOTER
+                Matkassen &copy; 2014
             </div>
         </div>
         <script src="http://code.jquery.com/jquery-latest.js"></script>

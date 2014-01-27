@@ -10,6 +10,79 @@
     		}
     	}
 		
+		private $users_sql = "SELECT * FROM users";
+		private $users_salt_sql = "SELECT salt FROM users";
+		
+		public function getUsers() {
+    		$sth = $this->dbh->query($this->users_sql);
+      		$sth->setFetchMode(PDO::FETCH_CLASS, 'Users');
+
+      		$objects = array();
+
+      		while($obj = $sth->fetch()) {
+        		$objects[] = $obj;
+      		}
+
+      		return $objects;
+    	}
+		
+		public function getUsername($username) {
+			$sql = $this->users_sql." WHERE username = :username";
+			$sth = $this->dbh->prepare($sql);
+			$sth->bindParam(':username', $username, PDO::PARAM_INT);
+			$sth->setFetchMode(PDO::FETCH_CLASS, 'Users');
+			$sth->execute();
+
+			$objects = array();
+
+			while($obj = $sth->fetch()) {
+				$objects[] = $obj;
+			}
+			if (count($objects) > 0) {
+				return $objects[0];
+			} else {
+				return null;
+			}
+		}
+		
+		public function getPassword($password) {
+			$sql = $this->users_sql." WHERE password = :password";
+			$sth = $this->dbh->prepare($sql);
+			$sth->bindParam(':password', $password, PDO::PARAM_INT);
+			$sth->setFetchMode(PDO::FETCH_CLASS, 'Users');
+			$sth->execute();
+
+			$objects = array();
+
+			while($obj = $sth->fetch()) {
+				$objects[] = $obj;
+			}
+			if (count($objects) > 0) {
+				return $objects[0];
+			} else {
+				return null;
+			}
+		}
+		
+		public function getUserSalt($username) {
+			$sql = $this->users_salt_sql." WHERE username = :username";
+			$sth = $this->dbh->prepare($sql);
+			$sth->bindParam(':username', $username, PDO::PARAM_INT);
+			$sth->setFetchMode(PDO::FETCH_CLASS, 'Users');
+			$sth->execute();
+
+			$objects = array();
+
+			while($obj = $sth->fetch()) {
+				$objects[] = $obj;
+			}
+			if (count($objects) > 0) {
+				return $objects[0];
+			} else {
+				return null;
+			}
+		}
+		
 		public function query($sql, $class_name) {
       		$sth = $this->dbh->query($sql);
       		$sth->setFetchMode(PDO::FETCH_CLASS, $class_name);
