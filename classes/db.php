@@ -12,6 +12,7 @@
 		
 		private $users_sql = "SELECT * FROM users";
 		private $users_salt_sql = "SELECT salt FROM users";
+		private $users_privilege_sql = "SELECT privilege FROM users";
 		
 		public function getUsers() {
     		$sth = $this->dbh->query($this->users_sql);
@@ -65,6 +66,25 @@
 		}
 		
 		public function getUserSalt($username) {
+			$sql = $this->users_salt_sql." WHERE username = :username";
+			$sth = $this->dbh->prepare($sql);
+			$sth->bindParam(':username', $username, PDO::PARAM_INT);
+			$sth->setFetchMode(PDO::FETCH_CLASS, 'Users');
+			$sth->execute();
+
+			$objects = array();
+
+			while($obj = $sth->fetch()) {
+				$objects[] = $obj;
+			}
+			if (count($objects) > 0) {
+				return $objects[0];
+			} else {
+				return null;
+			}
+		}
+		
+		public function getUserPrivilege($username) {
 			$sql = $this->users_salt_sql." WHERE username = :username";
 			$sth = $this->dbh->prepare($sql);
 			$sth->bindParam(':username', $username, PDO::PARAM_INT);

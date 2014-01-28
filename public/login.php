@@ -15,16 +15,19 @@
 			
 			if ($db_username->username == $username) {
 				$db_salt = $db->getUserSalt($username);
-				$salt = (string)$db_salt->salt;
+				$salt = (string)$db_salt->salt;		//converts user salt from object to string
 				$password = hash('sha256', $_POST['password'].$salt.SALT);
 				$db_password = $db->getPassword($password);
 				
 				if (count($db_password) > 0) {
 					
 					if ($db_password->password == $password) {
+						$db_privilege = $db->getUserPrivilege($username);
+						$privilege = (int)$db_privilege->privilege;	//converts user privilege from object to integer
 						$_SESSION['is_logged_in'] = true;
-						$_SESSION['user_username'] = $username;
-                      	$_SESSION['user_id'] = $db_username->id;
+						$_SESSION['user_privilege'] = $privilege;	//stores user privilege in session
+						$_SESSION['user_username'] = $username;		//stores username in session
+                      	$_SESSION['user_id'] = $db_username->id;	//stores user id in session
 						
 						if (isset($_SESSION['return_to'])) {
 							$return_to = $_SESSION['return_to'];
@@ -45,16 +48,16 @@
 							header('location: index.php');
 						} 
 					} else {
-						set_feedback("error", "Wrong username or password.");
+						set_feedback("danger", "Fel användarnamn eller lösenord.");
 					}
 				} else {
-						set_feedback("error", "Wrong username or password.");
+						set_feedback("danger", "Fel användarnamn eller lösenord.");
 				}
 			} else {
-					set_feedback("error", "Wrong username or password.");
+					set_feedback("danger", "Fel användarnamn eller lösenord.");
 			}
 		} else {
-				set_feedback("error", "Wrong username or password.");
+				set_feedback("danger", "Fel användarnamn eller lösenord.");
 		}
   	}
 ?>
@@ -80,10 +83,11 @@ echo $_COOKIE['remember_me']; ?>">
 										echo 'checked="checked"';
 									} else {
 										echo '';
-									} ?> >Kom ihåg mig</label>
+									} ?> 
+                      		>Kom ihåg mig</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Logga in</button>
-            	<button type="submit" class="btn btn-default">Skapa användare</button>
+            	<button type="button" class="btn btn-default">Skapa användare</button>
 			</form>
   		</div>
 	</div>
