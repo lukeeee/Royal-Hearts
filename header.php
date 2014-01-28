@@ -29,7 +29,7 @@
 				clear:both;
 				display:block;
 				width: 80%;               
-				background-color:#000;
+				background-color:#333;
 				height: 1px;
 			}	
 			#footer {
@@ -39,13 +39,16 @@
 			#footer-margin {
 				padding-top:5em;
 			}
+			#user-span {
+				font-style:italic;
+			}
 		</style>
     </head>
     <header>
-
+	<div class="alert-div"><?php echo get_feedback(); ?></div>
     <div class="row">
         <div class="col-md-7 col-md-offset-4">
-            <p class="text-right">Inloggad som </p>
+            <p class="text-right"><?php if (isset($_SESSION['is_logged_in'])) { echo 'Inloggad som <span id="user-span">'.$_SESSION['user_username'].'</span>.'; } else { echo 'Ej inloggad.'; } ?> </p>
         </div>
     </div>
 
@@ -62,7 +65,7 @@
                     <div class="btn-group btn-group-lg btn-group-justified">
                         <a class="btn btn-default <?php if(strpos($pagetitle, "Varor") !== false) { echo "active"; } else { echo ""; } ?>" role="button" href="products.php">Varor</a>
                         <a class="btn btn-default <?php if(strpos($pagetitle, "Om") !== false) { echo "active"; } else { echo ""; } ?>" role="button" href="about.php">Om</a>
-                        <a class="btn btn-default <?php if(strpos($pagetitle, "Logga") !== false) { echo "active"; } else { echo ""; } ?>" role="button" href="login.php">Logga in</a>
+                        <a class="btn btn-default <?php if(strpos($pagetitle, "Logga") !== false) { echo "active"; } else { echo ""; } ?>" role="button" <?php if (isset($_SESSION['is_logged_in'])) { echo 'href="logout.php">Logga ut'; } else { echo 'href="login.php">Logga in'; } ?></a>
                     </div>
                 </div>
             </div>
