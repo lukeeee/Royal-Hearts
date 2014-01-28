@@ -87,7 +87,7 @@ echo $_COOKIE['remember_me']; ?>">
                       		>Kom ihåg mig</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Logga in</button>
-            	<button type="button" class="btn btn-default">Skapa användare</button>
+            	<button type="button" onclick="window.location.href='register_user.php'" class="btn btn-default">Skapa användare</button>
 			</form>
   		</div>
 	</div>

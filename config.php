@@ -12,5 +12,3 @@
 	
 	require_once(ROOT_PATH.'/includes.php');
 ?>
-	
-	
