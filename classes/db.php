@@ -13,7 +13,22 @@
 		private $users_sql = "SELECT * FROM users";
 		private $users_salt_sql = "SELECT salt FROM users";
 		private $users_privilege_sql = "SELECT privilege FROM users";
+		private $create_order = "set @unixtime = unix_timestamp(now());
+		set @lastorderid = (SELECT id FROM  `foodbasket_order` ORDER BY  `foodbasket_order`.`id` DESC LIMIT 0 , 1);
+		set @orderid = CONCAT(@unixtime, @lastorderid);";
 		
+		public function createOrder($userID, $quantity, $foodproductID){
+			$data = array($userID, $quantity, $foodproductID);
+			$sth = $this->dbh->prepare($create_order." INSERT INTO `foodbasket_order` (`orderID`,`userID`, `quantity`, `foodproduct_ID`) VALUES (@orderid, ?, ?, ?)");
+			$sth->execute($data);
+
+			if($sth->rowCount() > 0) {
+				return $this->dbh->lastInsertId();
+			} else {
+				return null;
+			}
+		}
+
 		public function getUsers() {
     		$sth = $this->dbh->query($this->users_sql);
       		$sth->setFetchMode(PDO::FETCH_CLASS, 'Users');
