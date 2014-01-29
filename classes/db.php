@@ -119,7 +119,7 @@
 		}
 		
 		public function createUser($username, $password, $salt) {
-			$data = array($user_id, $action_id);
+			$data = array($username, $password, $salt);
 			$sth = $this->dbh->prepare("INSERT INTO users (username, password, salt, privilege) VALUES (?, ?, ?, 0)");
 			$sth->execute($data);
 
