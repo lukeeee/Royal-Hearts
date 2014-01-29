@@ -103,6 +103,18 @@
 			}
 		}
 		
+		public function createUser($username, $password, $salt) {
+			$data = array($user_id, $action_id);
+			$sth = $this->dbh->prepare("INSERT INTO users (username, password, salt, privilege) VALUES (?, ?, ?, 0)");
+			$sth->execute($data);
+
+			if($sth->rowCount() > 0) {
+				return $this->dbh->lastInsertId();
+			} else {
+				return null;
+			}
+		}
+		
 		public function query($sql, $class_name) {
       		$sth = $this->dbh->query($sql);
       		$sth->setFetchMode(PDO::FETCH_CLASS, $class_name);

@@ -2,6 +2,9 @@
 	require_once('../config.php');
 	$pagetitle = "Logga in | Matkassen.se";
 	
+	//$salt = substr(md5(rand()), 0, 21));			//function to generate user salt
+	//hash('sha256', '[password]'.'$salt'.SALT);	//hash function
+	
 	if (!(isset($_COOKIE['remember_me']))) {	//if username cookie isn't set
 		$_COOKIE['remember_me'] = "";			//changes value of username-input to null
 	}
