@@ -50,7 +50,7 @@
             android:maxLength="30"
             android:background="@drawable/shape"
             android:ems="10"
-            android:id="@+id/usernameLoginInput"
+            android:id="@+id/usernameInput"
             android:layout_gravity="center_horizontal" />
         <View
             android:layout_width="match_parent"
@@ -73,7 +73,7 @@
             android:maxLength="30"
             android:background="@drawable/shape"
             android:ems="10"
-            android:id="@+id/passwordLoginInput"
+            android:id="@+id/passwordInput"
             android:layout_gravity="center_horizontal" />
         <View
             android:layout_width="match_parent"
