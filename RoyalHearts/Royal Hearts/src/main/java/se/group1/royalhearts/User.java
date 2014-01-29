@@ -8,7 +8,7 @@ public class User {
      private int id;
      private String username;
      private String password;
-     private String identifier;
+     private String privilege;
 
         public int getId() {
             return id;
@@ -39,12 +39,12 @@ public class User {
             this.password = password;
         }
 
-        public String getIdentifier() {
-            return identifier;
+        public String getPrivilege() {
+            return privilege;
         }
 
-        public void setIdentifier(String identifier) {
-            this.identifier = identifier;
+        public void setPrivilege(String privilege) {
+            this.privilege = privilege;
         }
 
     }

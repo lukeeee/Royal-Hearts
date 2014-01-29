@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -19,19 +21,21 @@ import android.widget.Toast;
  * Created by Lukas on 2014-01-20.
  */
 public class Login extends Activity implements View.OnClickListener {
-    private Button login;
+    private Button login, debug;
     private EditText usernameInput;
     private EditText passwordInput;
     private TextView username;
     private TextView password;
     private ProgressDialog progressDialog;
     private JSONLogin jLoginPoster = null;
+    String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
         login = (Button)findViewById(R.id.login);
+        debug = (Button)findViewById(R.id.debug);
         login.requestFocus();
         login.getBackground().setAlpha(150);
         usernameInput = (EditText)findViewById(R.id.usernameInput);
@@ -39,6 +43,7 @@ public class Login extends Activity implements View.OnClickListener {
         username = (TextView)findViewById(R.id.username);
         password = (TextView)findViewById(R.id.password);
         login.setOnClickListener(this);
+        debug.setOnClickListener(this);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
@@ -54,8 +59,15 @@ public class Login extends Activity implements View.OnClickListener {
     public void showProgressDialog(){
         if(progressDialog ==  null){
             // display dialog when loading data
-            progressDialog = ProgressDialog.show(this, "Laddar", "Var god vänta...", true, false);
+            progressDialog = ProgressDialog.show(this, "Loggar in", "Var god vänta...", true, false);
         }
+    }
+    public void sucess() {
+        Intent i = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(i);
+        HelperClass.User.userName = userName;
+        this.finish();
+
     }
 
     // hide loading dialog
@@ -92,26 +104,33 @@ public class Login extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        String userName = usernameInput.getText().toString();
+        userName = usernameInput.getText().toString();
         String userPass = passwordInput.getText().toString();
         if (v == login){
 
                 jLoginPoster = new JSONLogin(getApplicationContext(), this, userName, userPass);
-
                 // if we are connected
                 if(jLoginPoster.isConnected() != false)
                 {
                     jLoginPoster.PostJson();
+
+                }
+                else if (v == debug){
+                    Intent ij = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(ij);
+                    this.finish();
                 }
 
+
             } else {
-                Toast.makeText(this, "Your Email or Password is wrong", 1000);
+                Toast.makeText(this, "Ditt Användarnamn eller Lösenord är Fel", 1000);
                 username.setTextColor(getResources().getColor(R.color.colorRed));
                 username.setText("*** Användarnamn");
                 password.setTextColor(getResources().getColor(R.color.colorRed));
                 password.setText("*** Lösenord");
 
             }
+
 
         }
 
@@ -146,5 +165,33 @@ public class Login extends Activity implements View.OnClickListener {
         AlertDialog alert = builder.create();
         alert.show();
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.info, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_about:
+                AlertDialog.Builder dialog = new AlertDialog.Builder(Login.this);
+                dialog.setTitle("Om Royal Hearts");
+                dialog.setIcon(R.drawable.ic_action_about_d);
+                dialog.setMessage("Logga in för att se din inköpslista som du har lagt upp på Matkassen.se");
+                dialog.setNegativeButton("Stäng", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
+
+        }
+
+        return true;
+
+    }
 }
+

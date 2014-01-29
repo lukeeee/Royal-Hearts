@@ -26,12 +26,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         kasse = (TextView)findViewById(R.id.kasse);
-        kasse.setText("Användarnamns " + "Matkasse");
+        kasse.setText(HelperClass.User.userName + "'s Matkasse");
         storeSpinner = (Spinner)findViewById(R.id.StoreSpinner);
         citySpinner= (Spinner) findViewById(R.id.CitySpinner);
 
         final List<String> cList=new ArrayList<String>();
-        cList.add("Välj Stad");
         cList.add("Borås");
         cList.add("Göteborg");
         cList.add("Stockholm");
@@ -44,7 +43,6 @@ public class MainActivity extends Activity {
 
 
         final List<String> sList=new ArrayList<String>();
-        sList.add("Välj Butik");
         sList.add("City Gross");
         sList.add("Coop Extra");
         sList.add("Ica Maxi");

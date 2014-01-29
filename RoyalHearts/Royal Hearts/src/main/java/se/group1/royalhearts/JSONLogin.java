@@ -9,19 +9,22 @@ import android.util.Log;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.SocketTimeoutException;
 
-/**
- * Created by Lukas on 2014-01-28.
- */
+
 public class JSONLogin {
     private Context context;
     private User user;
@@ -38,48 +41,68 @@ public class JSONLogin {
 
     public void PostJson(){
         callback.showProgressDialog();
-        new HttpAsyncTask().execute("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/login/");
+        new HttpAsyncTask().execute("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/login/" + username + "/" + password);
     }
 
 
-    public static String POSTLOGIN(String url, User user){
+    public static String POSTLOGIN(String url){
         InputStream inputStream = null;
         String result = "";
         try {
 
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(url);
+            // timeout parameters
+            HttpParams httpParams = new BasicHttpParams();
+            int timeoutConnection = 3000;
+            int timeoutSocket = 5000;
+            HttpConnectionParams.setConnectionTimeout(httpParams, timeoutConnection);
+            HttpConnectionParams.setSoTimeout(httpParams, timeoutSocket);
 
-            String json = "";
+            HttpClient httpclient = new DefaultHttpClient(httpParams);
+            HttpGet httpGet = new HttpGet(url);
 
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.accumulate("username", user.getUsername());
-            jsonObject.accumulate("password", user.getPassword());
+            int statusCode;
 
-            json = jsonObject.toString();
-
-            StringEntity se = new StringEntity(json);
-
-            httpPost.setEntity(se);
-            httpPost.setHeader("Accept", "application/json");
-            httpPost.setHeader("Authorization", "apikey='1c9fk3u35ldcefgw'");
-            httpPost.setHeader("Content-type", "application/json");
-
-            HttpResponse httpResponse = httpclient.execute(httpPost);
-
+            HttpResponse httpResponse = httpclient.execute(httpGet);
             inputStream = httpResponse.getEntity().getContent();
-
-            //int statusCode = httpResponse.getStatusLine().getStatusCode();
-
-            if(inputStream != null)
+            statusCode = httpResponse.getStatusLine().getStatusCode();
+            if(inputStream != null){
                 result = convertInputStreamToString(inputStream);
-            else
+            } else {
                 result = "Did not work!";
+            }
 
+            // if there is a server error
+            if(statusCode == 500){
+                result = "Server Error";
+            }
+
+
+            // wrong combination of userId and identifier
+            if(statusCode == 403){
+                result = "Wrong account details";
+            }
+
+            // to much data sent in
+            if(statusCode == 400){
+                result = "Something went wrong";
+            }
+
+            // to much data sent in
+            if(statusCode == 404){
+                result = "Something went wrong";
+            }
+
+        } catch (ConnectTimeoutException ex) {
+            result = "Server Timeout";
+            Log.e("Exception Timeout: ", ex.getMessage());
+        } catch (SocketTimeoutException ex) {
+            result = "Server Timeout";
+            Log.e("Exception Timeout: ", ex.getMessage());
         } catch (Exception e) {
             Log.d("InputStream", e.getLocalizedMessage());
             result = "Did not work!";
         }
+
 
         return result;
     }
@@ -98,23 +121,15 @@ public class JSONLogin {
         @Override
         protected String doInBackground(String... urls) {
 
-            user = new User();
-            user.setUsername(username);
-            user.setPassword(password);
 
-            return POSTLOGIN(urls[0], user);
+
+            return POSTLOGIN(urls[0]);
         }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
 
-            if(result.contains("Loggats in")){
-                // set values to helper class
-                HelperClass.User.setValues(result);
-                //callback.saveValues();
-                callback.hideProgressDialog();
-                //callback.finishActivity(HelperClass.User.userName + " Har loggats in");
-            } else if(result.contains("Login failed!")){
+             if(result.contains("Login failed!")){
                 callback.hideProgressDialog();
                 callback.showErrorDialog("Login failed, wrong email or password!");
             } else if(result.contains("Internal Error")){
@@ -122,9 +137,80 @@ public class JSONLogin {
                 callback.showErrorDialog("A server error has occurred!");
             } else if(result.contains("Did not work!")){
                 callback.hideProgressDialog();
+            } else {
+                 int userId = 0;
+                // String userIdentifier = null;
+                 //String userCountryCode = null;
+
+                 try {
+                     JSONObject jsonObject = new JSONObject(result);
+
+                     userId = Integer.parseInt(jsonObject.getString("id"));
+                     //userIdentifier = jsonObject.getString("identifier");
+                     //userCountryCode = jsonObject.getString("country");
+
+                 } catch (JSONException e) {
+                     Log.e("Exception JSON: ", e.getMessage());
+                 }
+
+
+                 if(userId == -1){
+                     // wrong username or password
+                     callback.hideProgressDialog();
+                     //callback.showFeedbackToast("Wrong username or password!, Please try again.");
+                 } else if (userId != -1){
+                     // user logged in
+
+                     callback.hideProgressDialog();
+                     callback.sucess();
+                 }
+
             }
         }
     }
+
+    /* if(result.contains("Did not work!")){
+                callback.hideProgressDialog();
+                callback.showErrorDialog("A error has occurred! Please try again.");
+            } else if (result.contains("Server Error")){
+                callback.hideProgressDialog();
+                callback.showErrorDialog("A server error has occurred! Please try again.");
+            } else if (result.contains("Server Timeout")){
+                callback.hideProgressDialog();
+                callback.showErrorDialog("The server is not responding! Please try again.");
+            } else {
+                int userId = 0;
+                String userIdentifier = null;
+                String userCountryCode = null;
+
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+
+                    userId = Integer.parseInt(jsonObject.getString("userid"));
+                    userIdentifier = jsonObject.getString("identifier");
+                    userCountryCode = jsonObject.getString("country");
+
+                } catch (JSONException e) {
+                    Log.e("Exception JSON: ", e.getMessage());
+                }
+
+
+                if(userId == -1){
+                    // wrong username or password
+                    callback.hideProgressDialog();
+                    callback.showFeedbackToast("Wrong username or password!, Please try again.");
+                } else if (userId != -1 && userId != 0 && userIdentifier != null
+                        && userCountryCode != null){
+                    // user logged in
+
+                    User.UserDetails.setIdentifier(userIdentifier);
+                    User.UserDetails.setUserId(userId);
+                    User.UserDetails.setUserCountryCode(userCountryCode);
+                    callback.googleRegister();
+                }
+            }*/
+
+
 
     private static String convertInputStreamToString(InputStream inputStream) throws IOException {
         BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
