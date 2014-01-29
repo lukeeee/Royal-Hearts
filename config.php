@@ -11,12 +11,4 @@
 	define('SALT', 'gasd5yg7td7asg332ea9');
 	
 	require_once(ROOT_PATH.'/includes.php');
-<<<<<<< HEAD
-<<<<<<< HEAD
-?>	
-=======
 ?>
->>>>>>> 241eb262ce0a9a5a473ad883f54bf64070963adc
-=======
-?>
->>>>>>> 241eb262ce0a9a5a473ad883f54bf64070963adc
