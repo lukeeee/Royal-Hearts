@@ -9,6 +9,7 @@
 
                 background:url(img/gradient.png);
                 background-size:100%;
+				
 			}
 
 			#header {
