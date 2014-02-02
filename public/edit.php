@@ -16,19 +16,19 @@
 
 <section id="content_wrap" class="row">
                
-                        <div id="cv" class="col span_12">
+  <div id="cv" class="col span_12">
                             
-                              <section class="col span_12">
-                                <h1><?php //echo $page_title ?></h1>
-                                <form method="post" action="run.php?func=adm_adm_update" enctype="multipart/form-data">
-                                  <input type="text" name="id" value="<?php echo $id?>">
-                                  <input type="text" name="name" value="<?php echo $name ?>">
-                                  <button type="submit">Update</button>
+    <section class="col-md-8 col-md-offset-4">
+      <h1><?php //echo $page_title ?></h1>
+      <form method="post" action="run.php?func=adm_adm_update" enctype="multipart/form-data">
+        <input type="text" name="id" value="<?php echo $id?>">
+        <input type="text" name="name" value="<?php echo $name ?>">
+        <button type="submit">Update</button>
                                   
-                                </form>
-                              </section>
+      </form>
+    </section>
                            
-                           </div>
+  </div>
                         
-                       </section>
+</section>
 <?php require_once(ROOT_PATH.'/footer.php'); ?>
