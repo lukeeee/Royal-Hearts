@@ -20,13 +20,13 @@
     <section class="col-md-8 col-md-offset-4">
        <h1><?php //echo $page_title ?></h1>
       <form method="post" action="run.php?func=adm_adm_update" enctype="multipart/form-data">
-       <div class="col-xs-1">
-         <input type="text" class="form-control" name="id" value="<?php echo $id?>">
-       </div>
-       <div class="col-xs-3">
-         <input type="text" class="form-control" name="name" value="<?php echo $name ?>">
-       </div>
-        <button type="submit" class="btn btn-default">Update</button>                             
+        <div class="col-xs-1">
+          <input type="text" class="form-control" name="id" value="<?php echo $id?>">
+        </div>
+        <div class="col-xs-3">
+          <input type="text" class="form-control" name="name" value="<?php echo $name ?>">
+        </div>
+         <button type="submit" class="btn btn-default">Update</button>                             
       </form>
     </section>                          
   </div>                       
