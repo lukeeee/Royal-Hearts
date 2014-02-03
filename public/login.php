@@ -96,6 +96,4 @@ echo $_COOKIE['remember_me']; ?>">
 	</div>
 </div>
 
- 
-
 <?php require_once(ROOT_PATH.'/footer.php'); ?>

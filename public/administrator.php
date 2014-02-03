@@ -45,5 +45,4 @@
      </section>
     </div>
 
-
 <?php require_once(ROOT_PATH.'/footer.php'); ?>
