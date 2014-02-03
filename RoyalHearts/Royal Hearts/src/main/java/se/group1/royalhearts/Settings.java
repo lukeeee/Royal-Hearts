@@ -42,7 +42,7 @@ public class Settings extends Activity implements View.OnClickListener {
             AlertDialog.Builder dialog = new AlertDialog.Builder(Settings.this);
             dialog.setTitle("Dina Uppgifter");
             dialog.setIcon(R.drawable.ic_action_about_d);
-            dialog.setMessage("Användarnamn:\nE-Mail:\n");
+            dialog.setMessage("Användarnamn: " +HelperClass.User.userName+ "\nE-Mail:\n");
             dialog.setNegativeButton("Stäng", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();

@@ -11,7 +11,6 @@
         <TextView
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:layout_marginTop="10dp"
             android:textSize="25dp"
             android:layout_gravity="center"
             android:gravity="center"
@@ -19,11 +18,9 @@
             android:id="@+id/kasse"/>
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#000"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"/>
+            android:layout_height="2dp"
+            android:background="#fff"
+            android:layout_marginBottom="10dp"/>
         <Spinner
             android:layout_width="300dp"
             android:layout_height="40dp"
@@ -42,28 +39,123 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:id="@+id/StoreSpinner"/>
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="5dp"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#000"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"/>
+            android:layout_height="2dp"
+            android:background="#fff"
+            android:layout_marginTop="10dp"/>
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:id="@+id/cat1Text"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="#000"
+            android:paddingLeft="3dp"
+            android:layout_marginBottom="1dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#fff"/>
+        <LinearLayout
+            android:layout_marginTop="4dp"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:id="@+id/cat1"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:text="Inköpslista"
-            android:textStyle="bold"
-            android:textSize="20dp"/>
-        <ListView
+            android:orientation="vertical"/>
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/shopList"/>
+            android:layout_height="2dp"
+            android:background="#fff"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:id="@+id/cat2Text"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="#000"
+            android:paddingLeft="3dp"
+            android:layout_marginBottom="1dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#fff"/>
+        <LinearLayout
+            android:layout_marginTop="4dp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/cat2"
+            android:layout_gravity="center"
+            android:orientation="vertical"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#fff"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:id="@+id/cat3text"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="#000"
+            android:paddingLeft="3dp"
+            android:layout_marginBottom="1dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#fff"/>
+        <LinearLayout
+            android:layout_marginTop="4dp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/cat3"
+            android:layout_gravity="center"
+            android:orientation="vertical"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#fff"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="#000"
+            android:id="@+id/cat4text"
+            android:paddingLeft="3dp"
+            android:layout_marginBottom="1dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#fff"/>
+        <LinearLayout
+            android:layout_marginTop="4dp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/cat4"
+            android:layout_gravity="center"
+            android:orientation="vertical"/>
 
     </LinearLayout>
 </ScrollView>

@@ -155,7 +155,7 @@ public class JSONLogin {
 
 
                  if(userId == -1){
-                     // wrong username or password
+                     //wrong username or password
                      callback.hideProgressDialog();
                      //callback.showFeedbackToast("Wrong username or password!, Please try again.");
                  } else if (userId != -1){
