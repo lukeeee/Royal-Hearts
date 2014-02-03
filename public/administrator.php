@@ -37,13 +37,12 @@
 
         <div class="row">
       		<div class="col-md-12 col-md-offset-0">
-          		<div><h3>Redigera Städer</h3></div>
-          		<a href='/new.php'>New Category</a>
+          		<div><h3><a href='/new.php'>New Category</a></h3></div>
+          		
       		</div>
 		</div>
         
      </section>
     </div>
-
 
 <?php require_once(ROOT_PATH.'/footer.php'); ?>
