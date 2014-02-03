@@ -14,7 +14,7 @@ INSERT INTO `royalhearts`.`foodproducts` (`name`, `categoryID`) VALUES ('Tomat',
 
 INSERT INTO `royalhearts`.`foodproduct_store` (`foodproductID`, `store_cityID`, `price`) VALUES (1, 6, 49);
 
-INSERT INTO `royalhearts`.`foodbasket_order` (`orderID`, `quantity`, `foodproduct_storeID`) VALUES (1, 2, 3);
+INSERT INTO `royalhearts`.`foodbasket_order` (`userID`, `quantity`, `foodproductID`) VALUES (1, 2, 3);
 
 
 
@@ -62,10 +62,13 @@ LEFT JOIN foodproducts ON foodbasket_order.foodproduct_ID = foodproducts.id
 LEFT JOIN categories ON categories.id = foodproducts.categoryID;
 
 --create order
+	INSERT INTO `foodbasket_order` (`userID`, `quantity`, `foodproduct_ID`) VALUES (1, 2, 3);
+
+--create order, with orderid.. not in use
 	--foreach loop
-	set @unixtime = unix_timestamp(now());
-	set @lastorderid = (SELECT id FROM  `foodbasket_order` ORDER BY  `foodbasket_order`.`id` DESC LIMIT 0 , 1);
-	set @orderid = CONCAT(@unixtime, @lastorderid);
+	--set @unixtime = unix_timestamp(now());
+	--set @lastorderid = (SELECT id FROM  `foodbasket_order` ORDER BY  `foodbasket_order`.`id` DESC LIMIT 0 , 1);
+	--set @orderid = CONCAT(@unixtime, @lastorderid);
 	--SELECT @lastorderid, @orderid, @unixtime;
-	INSERT INTO `foodbasket_order` (`orderID`,`userID`, `quantity`, `foodproduct_ID`) VALUES (@orderid, 1, 2, 3);
+--	INSERT INTO `foodbasket_order` (`orderID`,`userID`, `quantity`, `foodproduct_ID`) VALUES (@orderid, 1, 2, 3);
 	--end forloop

@@ -4,12 +4,38 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title><?php echo $pagetitle; ?></title>
         <link href="css/bootstrap.css" rel="stylesheet">
+	
+		<!-- aToolTip css -->
+		<link type="text/css" href="css/atooltip.css" rel="stylesheet"  media="screen" />
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+    	<script src="js/bootstrap.min.js"></script>
+        
+		<!-- aToolTip js -->
+		<script type="text/javascript" src="js/jquery.atooltip.js"></script>
+
         <style type="text/css">
+
+
 			body {
 
                 background:url(img/gradient.png);
                 background-size:100%;
 				
+			}
+
+			.topright {
+				font-size: 0.8em;
+	width: 15%;
+			  position:absolute;
+			  margin-top: 5em;
+			  margin-right: 5em;
+   top:0;
+   right:0;
+   z-index: 1;
+   opacity:0.8;
+filter:alpha(opacity=80); /* For IE8 and earlier */
+
 			}
 
 			#header {
@@ -43,6 +69,56 @@
 			#user-span {
 				font-style:italic;
 			}
+
+			.ttip {
+    position: absolute;
+    min-width: 10px;
+    min-height: 10px;
+    color: #fff;
+    padding: 20px;
+    -webkit-box-shadow: 0 1px 2px #303030;
+    -moz-box-shadow: 0 1px 2px #303030;
+    box-shadow: 0 1px 2px #303030;
+    border-radius: 8px 8px 8px 8px;
+    -moz-border-radius: 8px 8px 8px 8px;
+    -webkit-border-radius: 8px 8px 8px 8px;
+    -o-border-radius: 8px 8px 8px 8px;
+    background-image:-moz-linear-gradient(top, #F45000, #FF8000);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#F45000), to(#FF8000));
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F45000', endColorstr='#FF8000', GradientType=0);
+    background-color:#000;
+    display: none
+}
+.contents {
+    font-size: 15px;
+    font-weight:bold
+}
+.note {
+    font-size: 13px;
+    text-align:center;
+    display:block;
+    width: 100%
+}
+#background{
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: #000000;
+    z-index: 1;
+}
+#large {
+    display: none;
+    position: absolute;
+    background: #FFFFFF;
+    padding: 0px;
+    z-index: 10;
+    min-height: 0px;
+    min-width: 0px;
+    color: #336699;
+}
 		</style>
     </head>
     <header>
@@ -75,3 +151,30 @@
     
     </header>
     <body>
+    
+    <div class="topright">        	 
+    <a href="#" class="glyphicon glyphicon-shopping-cart tooltip_display"></a>
+	 		<!--<a href="#" class="clickTip exampleTip" >On Click Tooltip</a> -->
+	 	       <div id="large">
+<div class="ttip">
+<?php $array = array("Tomat", "Morot", "Kex", "Juice"); ?>
+  <div class="contents">
+	  <table class="table">
+		  	<th>Produkt</th><th>Antal</th>
+		  </thead>
+		  <tbody>
+		  <?php foreach ($array as $value) : ?>
+			  <tr><td><?php echo $value ?></td><td>10</td></tr>
+			<?php endforeach ?>
+		  </tbody>
+	  </table>
+  </div>
+  <span class="note">(click here to close the box)</span> 
+</div>
+</div>
+<div id="background"></div>
+
+    </div>	
+    
+        
+    
