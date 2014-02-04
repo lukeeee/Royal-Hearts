@@ -38,22 +38,35 @@
   <div class="col-md-6">
   <?php if($itemsbycat != null || count($itemsbycat)) : ?>
 <table class="table">
+<thead>
 	<tr>
 		<th>Produkt</th>
 		<th></th>
 	</tr>
+	</thead>
 	<tbody>
-	<?php foreach ($itemsbycat as $itembycat) : ?>
-		<form class="form-horizontal" method="get" action="run.php">
-		<fieldset>
-		<input type="hidden" name="itemid" value="<?php echo $itembycat["id"] ?>">
-  			<tr><td><?php echo $itembycat["name"] ?></td><td>
-  			<input id="quantity" name="quantity" type="form-control" placeholder="" value="1" class="input-mini search-query">
-  			<button type="submit" class="btn "><span class="glyphicon glyphicon-plus"></span></button>
-		 			 	</td></tr>
-		 			 	</fieldset></form>
-	
-<?php endforeach ?><?php endif ?>
+	<form class="form-horizontal"  method="post" action="run.php">
+  <section class="contact">
+    <fieldset>
+        <input type="hidden" name="itemid" value="1<?php // echo $itembycat['id'] ?>">
+	  			<tr><td><?php //echo $itembycat["name"] ?></td><td>
+	  			<input id="quantity" name="quantity">
+	  			<button type="submit" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
+			 	</td></tr>
+		
+    </fieldset>
+	<?php // foreach ($itemsbycat as $itembycat) : ?>
+		<!--<form class="form-horizontal" method="get" action="run.php">
+			<input type="hidden" name="itemid" value="1<?php // echo $itembycat['id'] ?>">
+	  			<tr><td><?php //echo $itembycat["name"] ?></td><td>
+	  			<input id="quantity" name="quantity">
+	  			<button type="submit" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
+			 	</td></tr>
+		
+	-->
+	<?php // endforeach ?>
+	</form>
+<?php endif ?>
 </tbody>
 </table>
   </div>
