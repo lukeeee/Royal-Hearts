@@ -8,75 +8,31 @@
 <?php 
 
 	$admId = $_SESSION['id'];
-	$products = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodproduct/getall"),true);
-	$cats = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true);
+	$products = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodproduct/getbysupplier/12"),true);
+	
 	//$_SESSION['store'] = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true);
 	
 	
-
  ?>
 
-<br/>
 <div class="row">
-    <div class="col-md-3 col-md-offset-4">
+      <div class="col-md-7 col-md-offset-4">
+          <div><h3>Redigera Varor</h3></div>
+      </div>
+</div>
+
+<div class="col-md-3 col-md-offset-4">
      <section>
-        <div>Redigera Kategorier
-      		
-            	<h2>Add en ny product</h2>
-				 <?php
-                 
-                    echo '<form method="post" action="run.php?func=adm_supplier_update&id="'.$product["id"].'" enctype="multipart/form-data">';
-						echo "<select>";
-						  foreach($cats  as $cat)
-                 		  {
-							echo "<option value=". $cat['id'].">".$cat['name']."</option>";
-						  }
-						  
-						 echo "</select>";
-						
-						echo "<input type='text' name='price' value='".$product["name"]."'>";
-						
-					
-						echo "<button class='cart' type='submit'>Add</button>";
-					echo "</form>";
-             
-	 
-                 ?>
-                <hr>
-                <h2>Uppdatera varo kategory och varor</h2>
-				 <?php
-                 foreach($products  as $product)
-                 {
-                    echo '<form method="post" action="run.php?func=adm_supplier_update&id="'.$product["id"].'" enctype="multipart/form-data">';
-						echo "<select>";
-						  foreach($cats  as $cat)
-                 		  {
-							echo "<option value=". $cat['id'].">".$cat['name']."</option>";
-								
-						  }
-						 echo		"</select>";
-						echo "<div>".$product["id"]."</div>";
-						echo "<input type='text' name='price' value='".$product["name"]."'>";
-						
-					
-						echo "<button class='cart' type='submit'>Uppdatera</button>";
-					echo "</form>";
-                 }
-	 
-                 ?>
-                 
-        <button type="submit">Create</button>
-             </form>
-        </div>
-        
-        <div>Redigera Städer
-      
-            
-        </div>
-        
-        
+     <?php
+		foreach($products  as $product){
+ 			echo "<div><h4 hidden>".$product["id"]."</h4></div>";
+			echo "<div><h4>".$product["name"]."</h4></div>";
+			echo "<a class='btn btn-default' href='/edit_supplier.php?id=".$product['id']."&name=".$product['name']."&cat_id=".$product["categoryID"]."'>Redigera</a>";
+   			echo "<a class='btn btn-danger' href='/run.php?id=".$product['id']."&func=adm_supp_delete'>Delete</a></br>";
+		}
+ 
+?>
      </section>
-    </div>
-</div> 
+</div>
 
 <?php require_once(ROOT_PATH.'/footer.php'); ?>
