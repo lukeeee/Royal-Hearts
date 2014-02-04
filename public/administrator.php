@@ -36,7 +36,7 @@ echo "<a class='btn btn-default' href='/edit.php?id=".$cat['id']."&name=".urlenc
 
         <div class="row">
       <div class="col-md-12 col-md-offset-0">
-          <div><h3><a href='/new.php'>New Category</a></h3></div>
+          <div><h3><a href='/new.php'>Ny Kategori</a></h3></div>
          
       </div>
 </div>
