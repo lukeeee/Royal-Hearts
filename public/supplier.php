@@ -8,7 +8,13 @@
 <?php 
 
 	$admId = $_SESSION['id'];
-	$products = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodproduct/getbysupplier/12"),true);
+	$privilege = $_SESSION['privilege'];
+	if($privilege == 2){
+		$products = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodproduct/getbysupplier/".$admId),true);
+	}else{
+		header("Location: /index.php");	
+	}
+	
 	
 	//$_SESSION['store'] = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true);
 	
