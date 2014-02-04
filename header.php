@@ -77,7 +77,7 @@
 				-o-border-radius: 8px 8px 8px 8px;
 				background-image:-moz-linear-gradient(top, #F45000, #FF8000);
 				background-image: -webkit-gradient(linear, left top, left bottom, from(#F45000), to(#FF8000));
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F45000', endColorstr='#FF8000', GradientType=0);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F45000', endColorstr='#FF8000', GradientType=0);
 				background-color:#000;
 				display: none
 			}
@@ -110,9 +110,6 @@
 				min-height: 0px;
 				min-width: 0px;
 				color: #336699;
-			}
-			#cat-list, a {
-				color:#333;
 			}
 		</style>
     </head>
