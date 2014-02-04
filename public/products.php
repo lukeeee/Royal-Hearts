@@ -24,16 +24,16 @@
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-2">
-  	<ul class="nav nav-pills nav-stacked" id="cat-list">
+  	<div class="list-group">
   	<?php foreach ($categories as $category) {
   		if($categoryID == $category["id"]){
-  			echo '<li class="active"><a href="products.php?catid='.$category["id"].'">'.$category["name"].'</a></li>';				
+  			echo '<a href="products.php?catid='.$category["id"].'" class="list-group-item active">'.$category["name"].'</a>';				
   		} else {
-  			echo '<li><a href="products.php?catid='.$category["id"].'">'.$category["name"].'</a></li>';				
+  			echo '<a href="products.php?catid='.$category["id"].'" class="list-group-item">'.$category["name"].'</a>';				
   		}
 	} ?>
   
-</ul>
+	</div>
   </div>
   <div class="col-md-6">
   <?php if($itemsbycat != null || count($itemsbycat) != 0) : ?>
