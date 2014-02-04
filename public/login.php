@@ -8,7 +8,7 @@
 	if (!(isset($_COOKIE['remember_me']))) {	//if username cookie isn't set
 		$_COOKIE['remember_me'] = "";			//changes value of username-input to null
 	}
-	
+	/*
 	if (isset($_POST) && isset($_POST['username'])) {
 		$username = $_POST['username'];
 		$db = new Db();
@@ -62,7 +62,38 @@
 		} else {
 				set_feedback("danger", "Fel användarnamn eller lösenord.");
 		}
-  	}
+  	}*/
+	if (isset($_POST) && isset($_POST['username']) && isset($_POST['password'])) {
+		$user = json_decode(file_get_contents('http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/login/'.$_POST['username'].'/'.$_POST['password'].''), true);
+		if ($user['id'] > 0) {
+			$_SESSION['is_logged_in'] = true;
+			$_SESSION['privilege'] = $user['privilege'];	//stores user privilege in session
+			$_SESSION['username'] = $user['username'];		//stores username in session
+			$_SESSION['id'] = $user['id'];	//stores user id in session
+			
+			if (isset($_SESSION['return_to'])) {
+				$return_to = $_SESSION['return_to'];
+				$_SESSION['return_to'] = null;
+				header('location: '.$return_to);
+
+			} else {
+				$year = time() + 31536000;
+
+				if($_POST['remember']) {									//if "Remember me"-checkbox is checked
+					setcookie('remember_me', $_POST['username'], $year);	//sets one-year cookie for username
+				} elseif(!$_POST['remember']) {								//if "Remember me"-checkbox isn't checked
+					if(isset($_COOKIE['remember_me'])) {
+						$past = time() - 100;
+						setcookie(remember_me, gone, $past);	//removes username-cookie
+					} 	
+				} 
+				header('location: index.php');
+			}
+		} else {
+			set_feedback("danger", "Fel användarnamn eller lösenord.");
+		}
+	}
+		
 ?>
 <?php require_once(ROOT_PATH.'/header.php'); ?>
 
