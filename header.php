@@ -19,6 +19,10 @@
                 background:url(img/gradient.png);
                 background-size:100%;
 			}
+
+			.inputsam{
+				width: 10%;
+			}
 			.topright {
 				font-size: 0.8em;
 				width: 15%;
@@ -146,14 +150,17 @@
     
     </header>
     <body>
-    
+<?php
+ $foodbasket = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/".$_SESSION['id']),true); 
+ $foodbasket_total = count($foodbasket['items']);
+ ?>    
     <div class="topright">        	 
-    <i class="glyphicon glyphicon-shopping-cart tooltip_display"></i>
+    <i class="glyphicon glyphicon-shopping-cart tooltip_display"></i><span class="badge"><?php echo $foodbasket_total ?></span>
 	 		<!--<a href="#" class="clickTip exampleTip" >On Click Tooltip</a> -->
 	 	       <div id="large">
 <div class="ttip">
-<?php $foodbasket = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/1"),true); 
- ?>
+
+
 
   <div class="contents">
 	  <table class="table">
