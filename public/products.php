@@ -43,22 +43,17 @@
 		<th></th>
 	</tr>
 	<tbody>
-	<form class="form-horizontal" method="get" action="run.php">
 	<?php foreach ($itemsbycat as $itembycat) : ?>
-    </form>
-		<!--<div class="form-group">
+		<form class="form-horizontal" method="get" action="run.php">
+		<fieldset>
 		<input type="hidden" name="itemid" value="<?php echo $itembycat["id"] ?>">
-  			<tr><td><?php echo $itembycat["name"] ?></td>
-  			<td>
-	  			<input id="quantity" name="quantity" type="form-control" placeholder="" value="1" class="input-mini search-query">
-	  			<button type="submit" class="btn "><span class="glyphicon glyphicon-plus"></span></button>
-		 	</td></tr>
-		 	<div> -->
-		 
+  			<tr><td><?php echo $itembycat["name"] ?></td><td>
+  			<input id="quantity" name="quantity" type="form-control" placeholder="" value="1" class="input-mini search-query">
+  			<button type="submit" class="btn "><span class="glyphicon glyphicon-plus"></span></button>
+		 			 	</td></tr>
+		 			 	</fieldset></form>
 	
-<?php endforeach ?>
-</form>
-<?php endif ?>
+<?php endforeach ?><?php endif ?>
 </tbody>
 </table>
   </div>
