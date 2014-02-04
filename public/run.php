@@ -6,26 +6,37 @@ $func = $_GET["func"];
 
 
 if($func == "adm_adm_delete"){
-json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/remove/{$_REQUEST['id']}"),true);
+	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/remove/{$_REQUEST['id']}"),true);
+	if($success == 1){
+		header("Location: /administrator.php");
+	}else{
+		echo "Något gick fel!";
+	}
 }
 
 if($func == "adm_adm_update"){
-json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/update/{$_REQUEST['id']}/{$_REQUEST['name']}"),true);
+	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/update/".$_REQUEST['id']."/".urlencode($_REQUEST['name'])),true);
+	if($success == 1){
+		header("Location: /administrator.php");
+	}else{
+		echo "Något gick fel!";	
+	}
 }
 
 if($func == "adm_adm_add"){
-json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/add/{$_REQUEST['name']}"),true);
-}
-
-if($func == "adm_adm_add"){
-json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/add/{$_REQUEST['name']}"),true);
+	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/add/".urlencode($_REQUEST['name'])),true);
+	if($success == 1){
+		header("Location: /administrator.php");	
+	}else{
+		echo "Något gick fel!";
+	}
 }
 
 if($func == "adm_manager_update"){
 json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/products/update/{$_REQUEST['id']}/{$_REQUEST['price']}/{$_REQUEST['active']}"),true);
 }
 
-if(strpos($func,"manager"))
+/*if(strpos($func,"manager"))
 {
 	header("Location: /manager.php");
 }
@@ -43,7 +54,7 @@ else
 {
 	header("Location: /index.php");
 }
-
+*/
 ob_flush();
 
 ?>
