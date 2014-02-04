@@ -56,6 +56,7 @@
 				background-color:#333;
 				height: 1px;
 			}	
+
 			#footer {
 				text-align:center;
 				padding-bottom:1em;
@@ -66,6 +67,10 @@
 			#user-span {
 				font-style:italic;
 			}
+			.carticon{
+			width: 100em;
+		    height: 100em;
+    		}
 			.ttip {
 				position: absolute;
 				min-width: 10px;
@@ -152,7 +157,7 @@
  $foodbasket_total = count($foodbasket['items']);
  ?>    
     <div class="topright">        	 
-    <i class="glyphicon glyphicon-shopping-cart tooltip_display"></i><span class="badge"><?php echo $foodbasket_total ?></span>
+    <a href="#"><i class="glyphicon glyphicon-shopping-cart tooltip_display carticon"></i><span class="badge"><?php echo $foodbasket_total ?></span></a>
 	 		<!--<a href="#" class="clickTip exampleTip" >On Click Tooltip</a> -->
 	 	       <div id="large">
 <div class="ttip">
@@ -164,14 +169,12 @@
 		  	<th>Produkt</th><th>Antal</th>
 		  </thead>
 		  <tbody>
-<?php foreach ($foodbasket as $foodbasketitem) {
-			  	if(is_array($foodbasketitem)){			  		
-			  		foreach ($foodbasketitem as $arrayitem) {
-			  		//echo $item;
-			  			echo '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td></tr>';
-			  		}
-			  	}
-		  	} ?>
+<?php 
+	foreach ($foodbasket["items"] as $arrayitem) {
+	  		//echo $item;
+	  			echo '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td></tr>';
+	  		}
+ ?>
 		  </tbody>
 	  </table>
   </div>
