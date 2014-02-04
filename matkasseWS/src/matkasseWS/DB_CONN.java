@@ -122,6 +122,8 @@ public class DB_CONN {
 				fp.name = rs.getString("name");
 				fp.id = rs.getInt("id");
 				fp.categoryID = rs.getInt("categoryID");
+				fp.cat_name = "";
+				fp.supplierID = rs.getInt("supplierID");
 
 				return fp;
 			}
@@ -157,6 +159,7 @@ public class DB_CONN {
 				fp.id = rs.getInt("id");
 				fp.categoryID = rs.getInt("categoryID");
 				fp.cat_name = rs.getString("cat_name");
+				fp.supplierID = rs.getInt("supplierID");
 
 				ret.add(fp);
 			}
@@ -168,6 +171,42 @@ public class DB_CONN {
 
 		return ret;
 		
+	}
+	
+	public static ArrayList<Foodproduct> getFoodproductsBySupplier(int userID){
+		Connection con = null;
+		Statement st = null;
+		ResultSet rs = null;
+		ArrayList<Foodproduct> ret = new ArrayList<Foodproduct>();
+		try {
+			try {
+				Class.forName(driverName);
+			} catch (ClassNotFoundException e) {
+				System.out
+						.println("ClassNotFoundException : " + e.getMessage());
+			}
+			con = DriverManager.getConnection(url, user, password);
+
+			st = con.createStatement();
+			rs = st.executeQuery("SELECT foodproducts.name AS foodName, foodproducts.id, foodproducts.categoryID, suppliers.id AS suppID FROM foodproducts JOIN suppliers ON suppliers.id = foodproducts.supplierID WHERE userID =  "+userID);
+
+			while (rs.next()) {
+				Foodproduct fp = new Foodproduct();
+				fp.name = rs.getString("foodName");
+				fp.id = rs.getInt("id");
+				fp.categoryID = rs.getInt("categoryID");
+				fp.cat_name = "";
+				fp.supplierID = rs.getInt("suppID");
+				
+				ret.add(fp);
+			}
+			st.close();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return ret;
 	}
 	
 	public static ArrayList<Foodproduct> getFoodproductsByCat(int cat_id){
@@ -185,13 +224,15 @@ public class DB_CONN {
 			con = DriverManager.getConnection(url, user, password);
 
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT * FROM foodproducts WHERE categoryID = "+cat_id);
+			rs = st.executeQuery("SELECT categories.name AS cat_name, foodproducts.* FROM foodproducts JOIN categories ON categories.id = foodproducts.categoryID WHERE categoryID ="+cat_id);
 
 			while (rs.next()) {
 				Foodproduct fp = new Foodproduct();
 				fp.name = rs.getString("name");
 				fp.id = rs.getInt("id");
 				fp.categoryID = rs.getInt("categoryID");
+				fp.cat_name = rs.getString("cat_name");
+				fp.supplierID = rs.getInt("supplierID");
 
 				ret.add(fp);
 			}
@@ -227,7 +268,8 @@ public class DB_CONN {
 				
 				while (rs.next()) {
 					
-					System.out.println("test2"+rs.getString("name"));					BasketItem bi = new BasketItem();
+					System.out.println("test2"+rs.getString("name"));
+					BasketItem bi = new BasketItem();
 					bi.name = rs.getString("name");
 					bi.id = rs.getInt("foodproduct_ID");
 					bi.category_ID = rs.getInt("categoryID");
@@ -355,8 +397,8 @@ public class DB_CONN {
 	public static Integer addItemBasket(int userID_send, int itemID_send, int quantity_send){
 		Connection con = null;
 		java.sql.PreparedStatement st = null;
-		ResultSet rs = null;
-		Integer ret;
+		
+		
 		
 		try {
 			try {
@@ -366,11 +408,19 @@ public class DB_CONN {
 						.println("ClassNotFoundException : " + e.getMessage());
 			}
 			con = DriverManager.getConnection(url, user, password);
-
-			st = con.prepareStatement("INSERT INTO foodbasket_order (userID, quantity, foodproduct_ID) VALUES ('?','?','?')");
-			st.setInt(2, userID_send);
-			st.setInt(3, quantity_send);
-			st.setInt(4, itemID_send);
+			int exists = checkItemFoodbasket(userID_send, itemID_send);
+			if(exists >= 1){
+				st = con.prepareStatement("UPDATE foodbasket_order SET quantity = ? WHERE userID = "+userID_send+" AND foodproduct_ID = "+itemID_send);
+				st.setInt(1, (quantity_send+exists));
+				
+			}else{
+				st = con.prepareStatement("INSERT INTO foodbasket_order (userID, quantity, foodproduct_ID) VALUES (?, ?, ?)");
+				st.setInt(1, userID_send);
+				st.setInt(2, quantity_send);
+				st.setInt(3, itemID_send);
+			}
+			
+			
 
 			int affectedRows = st.executeUpdate();
 			if (affectedRows == 0) {
@@ -531,7 +581,7 @@ public class DB_CONN {
 			}
 			con = DriverManager.getConnection(url, user, password);
 
-			st = con.prepareStatement("UPDATE categories SET name = '"+cat_name+"' WHERE id = "+cat_id);
+			st = con.prepareStatement("UPDATE categories SET name = ? WHERE id = "+cat_id);
 			st.setString(1, cat_name);
 
 			int affectedRows = st.executeUpdate();
@@ -583,7 +633,7 @@ public class DB_CONN {
 			}
 			con = DriverManager.getConnection(url, user, password);
 
-			st = con.prepareStatement("UPDATE categories SET name = '"+name+"' WHERE id = "+storeID);
+			st = con.prepareStatement("UPDATE categories SET name = ? WHERE id = "+storeID);
 			st.setString(1, name);
 
 			int affectedRows = st.executeUpdate();
@@ -637,7 +687,7 @@ public class DB_CONN {
 		
 	}
 	
-	public static int addFoodProduct(String itemName, int catID){
+	public static int addFoodProduct(String itemName, int catID, int suppID){
 		Connection con = null;
 		java.sql.PreparedStatement st = null;
 		ResultSet rs = null;
@@ -652,10 +702,11 @@ public class DB_CONN {
 			}
 			con = DriverManager.getConnection(url, user, password);
 
-			st = con.prepareStatement("INSERT INTO foodproducts (name, categoryID) VALUES(?, ?)");
+			st = con.prepareStatement("INSERT INTO foodproducts (name, categoryID, supplierID) VALUES(?, ?, ?)");
 			st.setString(1, itemName);
 			st.setInt(2, catID);
-
+			st.setInt(3, suppID);
+			
 			int affectedRows = st.executeUpdate();
 			if (affectedRows == 0) {
 				throw new SQLException("Ett fel uppstod när affären skulle uppdateras");
@@ -664,6 +715,25 @@ public class DB_CONN {
 			}
 			
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return 0;
+	}
+	
+	public static int removeFoodProduct(int itemID){
+		Connection con = null;
+		Statement st = null;
+		ResultSet rs = null;
+		try {
+			con = DriverManager.getConnection(url, user, password);
+			st = con.createStatement();
+			st.executeUpdate("DELETE FROM foodproducts WHERE id=" + itemID);
+
+			
+			return 1;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -692,5 +762,35 @@ public class DB_CONN {
         md.update(text.getBytes("UTF-8"), 0, text.length());
         byte[] sha256hash = md.digest();
         return convertToHex(sha256hash);
+    }
+    
+    private static int checkItemFoodbasket(int userID, int itemID){
+    	Connection con = null;
+		Statement st = null;
+		ResultSet rs = null;
+
+		try {
+			try {
+				Class.forName(driverName);
+			} catch (ClassNotFoundException e) {
+				System.out
+						.println("ClassNotFoundException : " + e.getMessage());
+			}
+			con = DriverManager.getConnection(url, user, password);
+
+			st = con.createStatement();
+			rs = st.executeQuery("SELECT * FROM foodbasket_order WHERE userID=" + userID +" AND foodproduct_ID="+itemID);
+
+			if (rs.next()) {
+				int quant = rs.getInt("quantity");
+				return quant;
+			}
+			st.close();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return 0;
     }
 }

@@ -2688,6 +2688,8 @@ input[type="button"].btn-block {
 .glyphicon {
   position: relative;
   top: 1px;
+  width: 200em;
+  height: 200em;
   display: inline-block;
   font-family: 'Glyphicons Halflings';
   -webkit-font-smoothing: antialiased;

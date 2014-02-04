@@ -1,10 +1,11 @@
 <?php include_once("../config.php");
 
 
-$func = $_GET["func"];
+if(isset($_GET["func"])){
+
+$func = $_GET["func"];	
+}
 $userid = $_GET["userid"];
-$quantity = $_GET["quantity"];
-$itemid = $_GET["itemid"];
 
 if($func == "adm_adm_delete"){
 	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/remove/{$_REQUEST['id']}"),true);
@@ -62,13 +63,19 @@ if($func == "adm_manager_update"){
 json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/products/update/{$_REQUEST['id']}/{$_REQUEST['price']}/{$_REQUEST['active']}"),true);
 }
 
-<<<<<<< HEAD
-if($func == "add_to_basket"){
-	json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/additem/".$userid."/".$itemid."/".$quantity),true);
+if(isset($_POST['itemid'])){
+	$itemids = $_POST['itemid'];
+	$userid = $_POST['userid'];
+	foreach($itemids as $itemid){
+		$quantity = $_POST["quantity_".$itemid];
+		json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/additem/".$userid."/".$itemid."/".$quantity),true);
+		
+	}
+	header("Location: index.php");	
 }
 
-if(strpos($func,"manager"))
-=======
+
+
 /*if(strpos($func,"manager"))
 >>>>>>> 2cac7b570ae415946891db784d46ddde1fcacb06
 {

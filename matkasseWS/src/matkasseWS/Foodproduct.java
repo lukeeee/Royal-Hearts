@@ -5,4 +5,5 @@ public class Foodproduct {
 	public String name;
 	public int categoryID;
 	public String cat_name;
+	public int supplierID;
 }

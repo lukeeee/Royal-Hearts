@@ -32,6 +32,17 @@ public class FoodproductResource {
 		return fps;
 	}
 	
+	@Path("/getbysupplier/{userID}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Foodproduct> doGetJSONFoodProductsBySupp(@PathParam("userID") int user_ID){
+		ArrayList<Foodproduct> fps = new ArrayList<Foodproduct>();
+		
+		fps = DB_CONN.getFoodproductsBySupplier(user_ID);
+		
+		return fps;
+	}
+	
 	
 	@Path("/{foodproductID}")
 	@GET
@@ -58,6 +69,27 @@ public class FoodproductResource {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String doUpdateFoodProduct(@PathParam("itemID") int itemID, @PathParam("itemName") String itemName, @PathParam("catID") int catID){
 		int success = DB_CONN.updateFoodProduct(itemID, itemName, catID);
+		String ret = Integer.toString(success);
+		
+		return ret;
+	}
+	
+	@Path("/add/{itemName}/{catID}/{suppID}")
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	public String doAddFoodProduct(@PathParam("itemName") String itemName, @PathParam("catID") int catID, @PathParam("suppID") int suppID){
+		int success = DB_CONN.addFoodProduct(itemName, catID, suppID);
+		String ret = Integer.toString(success);
+		
+		return ret;
+		
+	}
+	
+	@Path("/remove/{itemID}")
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	public String doDeleteProduct(@PathParam("itemID") int itemID){
+		int success = DB_CONN.removeFoodProduct(itemID);
 		String ret = Integer.toString(success);
 		
 		return ret;

@@ -2,7 +2,7 @@
         	<div id="footer-margin" class="col-md-12"></div>
             <div id="footer" class="col-md-12">
                 <hr />
-                Matkassen &copy; 2014
+                Matkassen &copy; <?php echo date("Y"); ?>
             </div>
         </div>
         <script type="text/javascript">

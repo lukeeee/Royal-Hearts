@@ -15,6 +15,13 @@
 		return $html;
 	}
 
+	function checkbox($class, $name, $value, $checked = null) {
+		$html = '<label class="'.$class.'">';
+		$html .= '<input type="'.$class.'" name="'.$name.'" id="'.$name.'" value="'.$value.'" '.$checked.'>';
+		$html .= '</label>';
+		return $html;
+	}
+
 
   function hidden_input($name, $id) {
     $html = '<input type="hidden" name="'.$name.'" value="'.$id.'">';
