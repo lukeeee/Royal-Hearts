@@ -11,14 +11,10 @@ $cats = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasse
 //$_SESSION['store'] = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true);
 
  ?>
-    <div class="row">
-        <div class="col-md-5 col-md-offset-1">
-        	<div><h3>Redigera Kategorier</h3></div>
-        </div>
-    </div>
 
 <div class="row">
     <div class="col-md-4 col-md-offset-1">
+    <div><h3>Redigera Kategorier</h3></div>
   	    <section>
         
             <?php
@@ -34,28 +30,24 @@ $cats = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasse
  
             ?>
 
+            <div><h3><a href='/new.php'>Ny Kategori</a></h3></div>
 
-            <div class="row">
-         	    <div class="col-md-12 col-md-offset-0">
-             	  <div><h3><a href='/new.php'>Ny Kategori</a></h3></div>
-         		</div>
-   		    </div>
-        
         </section>
 
     </div>
 
    
-        <div class="col-md-5 col-md-offset-1">
-            <div><h3>Redigera Butiker</h3></div>
-        </div>
+
   
 
     <div class="col-md-6 col-md-offset-1">
+
+            <div><h3>Redigera Butiker</h3></div>
+ 
         <section>
         
             <?php
-            foreach($_SESSION['cats']  as $cat)
+            foreach($cats  as $cat)
             {
  
             echo "<div><h4 hidden>".$cat["id"]."</h4></div>";
@@ -67,11 +59,7 @@ $cats = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasse
  
             ?>
 
-             <div class="row">
-                <div class="col-md-12 col-md-offset-0">
-                  <div><h3><a href='/new.php'>Ny Kategori</a></h3></div>
-                </div>
-            </div>
+            <div><h3><a href='/new.php'>Ny Kategori</a></h3></div>
         
         </section>
     </div>
