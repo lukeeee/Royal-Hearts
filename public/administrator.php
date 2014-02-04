@@ -13,7 +13,7 @@ $cats = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasse
  ?>
 
 <div class="row">
-    <div class="col-md-4 col-md-offset-1">
+    <div class="col-md-4 col-md-offset-2">
     <div><h3>Redigera Kategorier</h3></div>
   	    <section>
         
@@ -36,11 +36,8 @@ $cats = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasse
 
     </div>
 
-   
 
-  
-
-    <div class="col-md-6 col-md-offset-1">
+    <div class="col-md-6 col-md-offset-0">
 
             <div><h3>Redigera Butiker</h3></div>
  
