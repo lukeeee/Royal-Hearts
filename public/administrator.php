@@ -1,104 +1,47 @@
 <?php
-	require_once('../config.php');
-	
-	$pagetitle = "Hem | Matkassen.se";
+require_once('../config.php');
+$pagetitle = "Hem | Matkassen.se";
 ?>
 <?php require_once(ROOT_PATH.'/header.php'); ?>
 
 <?php 
 
-	$admId = $_SESSION['id'];
-	$cats = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true);
-	$stores = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true);
-	$cities = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true);
-	
-	
+$admId = $_SESSION['id'];
+$_SESSION['cats'] = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true);
+//$_SESSION['store'] = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true);
 
  ?>
 
-<br/>
 <div class="row">
+      <div class="col-md-7 col-md-offset-4">
+          <div><h3>Redigera Kategorier</h3></div>
+      </div>
+</div>
+
     <div class="col-md-3 col-md-offset-4">
      <section>
-     
-     
-     	<div>Add ny categoty</div>
-        	<?php
-		 foreach($cats  as $cat)
-		 {
-			echo '<form method="post" action="run.php?func=adm_adm_add" enctype="multipart/form-data">';
-		 	
-			echo "<input type='text' name='price' value='".urlencode($cat["name"])."'>";
-			
-			//echo "<a href='/edit.php?id=".$cat['id']."&name=".urlencode($cat['name'])."'>Redigera</a>";
-		
-			echo '</form>';
-		 }
-		 	 
-		 ?>
-         
-        </div>
-        <hr>
-     
-        <div>Uppdate Kategorier
-      
+        
          <?php
-		 foreach($cats  as $cat)
-		 {
-			echo '<form method="post" action="run.php?func=adm_adm_update_cat&id="'.$cat["id"].'" enctype="multipart/form-data">';
-		 	echo "<div>".$cat["id"]."</div>";
-		
-			echo "<input type='text' name='price' value='".urlencode($cat["name"])."'>";
-			
-			//echo "<a href='/edit.php?id=".$cat['id']."&name=".urlencode($cat['name'])."'>Redigera</a>";
-			echo "<a href='/run.php?id=".$cat['id']."&func=adm_adm_delete'>Delete</a>";
-			echo '</form>';
-			
-			
-		 }
-	 
-		 ?>
-            
-        </div>
-        
-        <div>Redigera Städer</div>
-        
-        <?php
-		 foreach($stores  as $st)
-		 {
-			echo '<form method="post" action="run.php?func=adm_adm_update_store&id="'.$st["id"].'" enctype="multipart/form-data">';
-		 	echo "<div>".$st["id"]."</div>";
-		
-			echo "<input type='text' name='name' value='".urlencode($st["name"])."'>";
-			
-			echo "<select>";
-						  foreach($cities  as $city)
-                 		  {
-							if($city['id'] == $city['cityID'])
-							{
-								echo "<option selected value=". $city['id'].">". $city['name']."</option>";
-							}
-							
-							else
-							{
-								echo "<option value=". $city['id'].">". $city['name']."</option>";
-							}
-								
-						  }
-			echo "</select>";
-			
-			
-			echo '</form>';
-			
-			
-		 }
-		
-			 
-		 ?>
-        
+foreach($_SESSION['cats']  as $cat)
+{
+ 
+echo "<div><h4 hidden>".$cat["id"]."</h4></div>";
+echo "<div><h4>".$cat["name"]."</h4></div>";
+
+echo "<a class='btn btn-default' href='/edit.php?id=".$cat['id']."&name=".urlencode($cat['name'])."'>Redigera</a>";
+   echo "<a class='btn btn-danger' href='/run.php?id=".$cat['id']."&func=adm_adm_delete'>Delete</a></br>";
+}
+ 
+?>
+
+        <div class="row">
+      <div class="col-md-12 col-md-offset-0">
+          <div><h3><a href='/new.php'>New Category</a></h3></div>
+         
+      </div>
+</div>
         
      </section>
     </div>
-</div> 
 
 <?php require_once(ROOT_PATH.'/footer.php'); ?>
