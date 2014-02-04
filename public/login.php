@@ -87,7 +87,11 @@
 						setcookie(remember_me, gone, $past);	//removes username-cookie
 					} 	
 				} 
-				header('location: index.php');
+				if($_SESSION['privilege'] == 1) {
+					header("location: administrator.php");
+				} else {
+					header('location: index.php');
+				}
 			}
 		} else {
 			set_feedback("danger", "Fel användarnamn eller lösenord.");

@@ -24,7 +24,7 @@
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-2">
-  	<ul class="nav nav-pills nav-stacked">
+  	<ul class="nav nav-pills nav-stacked" id="cat-list">
   	<?php foreach ($categories as $category) {
   		if($categoryID == $category["id"]){
   			echo '<li class="active"><a href="products.php?catid='.$category["id"].'">'.$category["name"].'</a></li>';				
