@@ -2,8 +2,9 @@
 
 
 $func = $_GET["func"];
-
-
+$userid = $_GET["userid"];
+$quantity = $_GET["quantity"];
+$itemid = $_GET["itemid"];
 
 if($func == "adm_adm_delete"){
 json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/remove/{$_REQUEST['id']}"),true);
@@ -23,6 +24,10 @@ json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/
 
 if($func == "adm_manager_update"){
 json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/products/update/{$_REQUEST['id']}/{$_REQUEST['price']}/{$_REQUEST['active']}"),true);
+}
+
+if($func == "add_to_basket"){
+	json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/additem/".$userid."/".$itemid."/".$quantity),true);
 }
 
 if(strpos($func,"manager"))

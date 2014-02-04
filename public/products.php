@@ -1,6 +1,15 @@
 <?php
 	require_once('../config.php');
-	$pagetitle = "Varor | Matkassen.se"
+	$pagetitle = "Varor | Matkassen.se";
+	$categoryID = null;	
+	$itemsbycat = null;
+	
+	if(isset($_GET['catid'])){
+		$categoryID = $_GET['catid'];	
+		$itemsbycat = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodproduct/getbycat/".$categoryID),true); 
+	}
+	$categories = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true); 
+	
 ?>
 <?php require_once(ROOT_PATH.'/header.php'); ?>
 
@@ -16,28 +25,41 @@
   <div class="col-md-1"></div>
   <div class="col-md-2">
   	<ul class="nav nav-pills nav-stacked">
-  <li class="active"><a href="#">Mejeri</a></li>
-  <li><a href="#">Frukt & Grönt</a></li>
-  <li><a href="#">Kött & Fisk</a></li>
+  	<?php foreach ($categories as $category) {
+  		if($categoryID == $category["id"]){
+  			echo '<li class="active"><a href="products.php?catid='.$category["id"].'">'.$category["name"].'</a></li>';				
+  		} else {
+  			echo '<li><a href="products.php?catid='.$category["id"].'">'.$category["name"].'</a></li>';				
+  		}
+	} ?>
+  
 </ul>
   </div>
   <div class="col-md-6">
+  <?php if($itemsbycat != null || count($itemsbycat)) : ?>
 <table class="table">
-<tr>
-<th>Header 1</th>
-<th>Header 2</th>
-<th>Header 3</th>
-</tr>
 	<tr>
-	<td>row 1, cell 1</td>
-	<td>row 1, cell 2</td>
-	<td>row 1, cell 3</td>
+		<th>Produkt</th>
+		<th></th>
 	</tr>
-	<tr>
-	<td>row 2, cell 1</td>
-	<td>row 2, cell 2</td>
-	<td>row 2, cell 3</td>
-	</tr>
+	<tbody>
+	<form class="form-horizontal" method="get" action="run.php">
+	<?php foreach ($itemsbycat as $itembycat) : ?>
+    </form>
+		<!--<div class="form-group">
+		<input type="hidden" name="itemid" value="<?php echo $itembycat["id"] ?>">
+  			<tr><td><?php echo $itembycat["name"] ?></td>
+  			<td>
+	  			<input id="quantity" name="quantity" type="form-control" placeholder="" value="1" class="input-mini search-query">
+	  			<button type="submit" class="btn "><span class="glyphicon glyphicon-plus"></span></button>
+		 	</td></tr>
+		 	<div> -->
+		 
+	
+<?php endforeach ?>
+</form>
+<?php endif ?>
+</tbody>
 </table>
   </div>
   <div class="col-md-3"></div>
