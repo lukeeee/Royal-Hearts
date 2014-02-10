@@ -145,7 +145,9 @@ public class JSONLogin {
                  try {
                      JSONObject jsonObject = new JSONObject(result);
 
-                     userId = Integer.parseInt(jsonObject.getString("id"));
+                     HelperClass.User.userId = Integer.parseInt(jsonObject.getString("id"));
+                     Log.i("alban", Integer.toString(HelperClass.User.userId));
+
                      //userIdentifier = jsonObject.getString("identifier");
                      //userCountryCode = jsonObject.getString("country");
 

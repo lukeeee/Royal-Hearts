@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -13,25 +13,25 @@ import java.util.ArrayList;
 /**
  * Created by Lukas on 2014-02-03.
  */
-public class CharkAdapter extends BaseAdapter {
-    ArrayList<Categories> categories;
+public class DairyAdapter extends BaseAdapter {
+    ArrayList<Dairies> dairies;
     Context context;
 
 
 
-    public CharkAdapter(Context context, View.OnClickListener myTurnsListener){
+    public DairyAdapter(Context context, View.OnClickListener myTurnsListener){
         this.context = context;
-        this.categories = (ArrayList) JsonManager.getCategories();
+        this.dairies = (ArrayList) JsonManager.getDairies();
     }
 
     @Override
     public int getCount() {
-        return categories.size();
+        return dairies.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return categories.get(i);
+        return dairies.get(i);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class CharkAdapter extends BaseAdapter {
     }
     static class ViewHolder{
         TextView groText;
-        CheckBox cBox;
+        Button addbtn;
     }
 
     @Override
@@ -49,18 +49,18 @@ public class CharkAdapter extends BaseAdapter {
         ViewHolder holder;
         if (v == null) {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = infalInflater.inflate(R.layout.categories_adapter, null);
+            v = infalInflater.inflate(R.layout.add_adapter, null);
         }
         holder = new ViewHolder();
         v.setTag(holder);
 
         holder.groText = (TextView)v.findViewById(R.id.groText);
-        holder.cBox = (CheckBox)v.findViewById(R.id.cBox);
-        Categories cat = JsonManager.getCategories().get(i);
+        holder.addbtn = (Button)v.findViewById(R.id.addBtn);
+        Dairies dai = JsonManager.getDairies().get(i);
 
-        holder.groText.setText(cat.getName().toString());
-        holder.cBox.setTag(cat.getName());
-        v.setTag(categories.get(i));
+        holder.groText.setText(dai.getName().toString());
+        holder.addbtn.setTag(dai.getName());
+        v.setTag(dairies.get(i));
 
         return v;
     }

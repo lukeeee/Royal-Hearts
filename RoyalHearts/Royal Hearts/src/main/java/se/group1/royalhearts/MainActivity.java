@@ -2,34 +2,40 @@ package se.group1.royalhearts;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.json.JSONException;
 
-public class MainActivity extends Activity {
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener {
 
     private ProgressDialog progressDialog;
     private TextView kasse,cat1text,cat2text,cat3text,cat4text;
     private Spinner storeSpinner;
     private Spinner citySpinner;
     private ArrayList<Categories> categories;
+    private ArrayList<Veglists> vegetable;
+    private ArrayList<Dairybaskets> dairies;
+    private ArrayList<Meatbaskets> meats;
+    private ArrayList<Junkfoodbaskets> junkfoods;
+    private ArrayList<Cities> cities;
+    private ArrayList<Stores> stores;
     LinearLayout cat1,cat2,cat3,cat4;
-    boolean fruktAdapterCreated = false;
-    boolean charkAdapterCreated = false;
-    boolean mejeriAdapterCreated = false;
-    boolean godisAdapterCreated = false;
-    //TextView halo;
+    boolean vegbasketAdapterCreated = false;
+    boolean meatAdapterCreated = false;
+    boolean dairyAdapterCreated = false;
+    boolean junkfoodAdapterCreated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,42 +54,49 @@ public class MainActivity extends Activity {
         cat3 = (LinearLayout)findViewById(R.id.cat3);
         cat4 = (LinearLayout)findViewById(R.id.cat4);
 
+        cities = JsonManager.getCities();
+        CityAdapter cityAdapter = new CityAdapter(this, cities);
 
-        final List<String> cList=new ArrayList<String>();
-        cList.add("Borås");
-        cList.add("Göteborg");
-        cList.add("Stockholm");
-        cList.add("Växjö");
+        citySpinner.setAdapter(cityAdapter);
 
-        ArrayAdapter<String> CityAdr=new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,cList);
-        CityAdr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        citySpinner.setAdapter(CityAdr);
+        stores = JsonManager.getStores();
+        StoreAdapter storeAdapter = new StoreAdapter(this, stores);
+        storeSpinner.setAdapter(storeAdapter);
 
+        /*cityId = citySpinner.getId();
+        for(Cities city : cities){
+        Log.i("hej", Integer.toString(city.getId()));
+        }*/
+        Log.i("dralban", Integer.toString(HelperClass.User.userId));
+        Log.i("dralban", HelperClass.User.userName);
 
-        final List<String> sList=new ArrayList<String>();
-        sList.add("City Gross");
-        sList.add("Coop Extra");
-        sList.add("Ica Maxi");
-        sList.add("Willys");
-
-        ArrayAdapter<String> StoreAdr=new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,sList);
-        StoreAdr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        storeSpinner.setAdapter(StoreAdr);
         categories = JsonManager.getCategories();
-        for(Categories cat : categories){
-        Log.i("hej", cat.getName().toString());
-
-        cat1text.setText(categories.get(0).getName().toString());
-        cat2text.setText(categories.get(1).getName().toString());
-        cat3text.setText(categories.get(2).getName().toString());
-        cat4text.setText(categories.get(3).getName().toString());
+        vegetable = JsonManager.getVeglists();
+        for (Junkfoodbaskets junks : junkfoods){
+            Log.i("frukta", junks.getName().toString());
         }
-        createFruktAdapter();
-        createCharkAdapter();
-        createMejeriAdapter();
-        createGodisAdapter();
+        dairies = JsonManager.getDairybaskets();
+        meats = JsonManager.getMeatbaskets();
+        junkfoods = JsonManager.getJunkfoodbaskets();
+
+
+
+        for(Categories cat : categories){
+            Log.i("hej", cat.getName().toString());
+            cat1text.setText(categories.get(0).getName().toString());
+            cat2text.setText(categories.get(1).getName().toString());
+            cat3text.setText(categories.get(3).getName().toString());
+            cat4text.setText(categories.get(2).getName().toString());
+        }
+
+        //if (stores.get(position).getId())
+
+
+        createVegbasketAdapter();
+        createMeatAdapter();
+        createDairyAdapter();
+        createJunkfoodAdapter();
+        citySpinner.setOnItemSelectedListener(this);
 
     }
 
@@ -112,74 +125,7 @@ public class MainActivity extends Activity {
             progressDialog.cancel();
         }
     }
-    private void createFruktAdapter(){
-        if(!categories.isEmpty()) {
-            fruktAdapterCreated = true;
-            FruktAdapter fruktAdapter = new FruktAdapter(getApplicationContext(), new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
 
-                }
-            });
-            final int adapterCount = fruktAdapter.getCount();
-
-            for (int i = 0; i < adapterCount; i++) {
-                View item = fruktAdapter.getView(i, null, null);
-                cat1.addView(item);
-            }
-        }
-    }
-    private void createCharkAdapter(){
-        if(!categories.isEmpty()) {
-            charkAdapterCreated = true;
-            CharkAdapter charkAdapter = new CharkAdapter(getApplicationContext(), new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
-            final int adapterCount = charkAdapter.getCount();
-
-            for (int i = 0; i < adapterCount; i++) {
-                View item = charkAdapter.getView(i, null, null);
-                cat2.addView(item);
-            }
-        }
-    }
-    private void createMejeriAdapter(){
-        if(!categories.isEmpty()) {
-            mejeriAdapterCreated = true;
-            MejeriAdapter mejeriAdapter = new MejeriAdapter(getApplicationContext(), new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
-            final int adapterCount = mejeriAdapter.getCount();
-
-            for (int i = 0; i < adapterCount; i++) {
-                View item = mejeriAdapter.getView(i, null, null);
-                cat3.addView(item);
-            }
-        }
-    }
-    private void createGodisAdapter(){
-        if(!categories.isEmpty()) {
-            godisAdapterCreated = true;
-            GodisAdapter godisAdapter = new GodisAdapter(getApplicationContext(), new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
-            final int adapterCount = godisAdapter.getCount();
-
-            for (int i = 0; i < adapterCount; i++) {
-                View item = godisAdapter.getView(i, null, null);
-                cat4.addView(item);
-            }
-        }
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -187,6 +133,10 @@ public class MainActivity extends Activity {
             case R.id.action_settings:
                 Intent settingsIntent = new Intent(getBaseContext(), Settings.class);
                 startActivity(settingsIntent);
+                return true;
+            case R.id.action_add:
+                Intent addIntent = new Intent(getBaseContext(), AddProducts.class);
+                startActivity(addIntent);
                 return true;
             case R.id.action_refresh:
                 Intent intent = getIntent();
@@ -202,43 +152,97 @@ public class MainActivity extends Activity {
         return true;
 
     }
-    class SpinnerItem {
-        private final String text;
-        private final boolean isHint;
 
-        public SpinnerItem(String strItem, boolean flag) {
-            this.isHint = flag;
-            this.text = strItem;
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        //Log.i("svaleklev", Integer.toString(cities.get(position).getId()));
+        try {
+            JsonManager.updateStores(cities.get(position).getId());
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
-        public String getItemString() {
-            return text;
-        }
 
-        public boolean isHint() {
-            return isHint;
+    }
+        private void createVegbasketAdapter(){
+        if(!vegetable.isEmpty()) {
+            vegbasketAdapterCreated = true;
+            VegbasketAdapter vegbasketAdapter = new VegbasketAdapter(getApplicationContext(), new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+            final int adapterCount = vegbasketAdapter.getCount();
+
+            for (int i = 0; i < adapterCount; i++) {
+                View item = vegbasketAdapter.getView(i, null, null);
+                cat1.addView(item);
+            }
         }
     }
-    class MySpinnerAdapter extends ArrayAdapter<SpinnerItem> {
-        public MySpinnerAdapter(Context context, int resource, List<SpinnerItem> objects) {
-            super(context, resource, objects);
-        }
+    private void createMeatAdapter(){
+        if(!meats.isEmpty()) {
+            meatAdapterCreated = true;
+            MeatbasketAdapter meatAdapter = new MeatbasketAdapter(getApplicationContext(), new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-        @Override
-        public int getCount() {
-            return super.getCount() - 1; // This makes the trick: do not show last item
-        }
+                }
+            });
+            final int adapterCount = meatAdapter.getCount();
 
-        @Override
-        public SpinnerItem getItem(int position) {
-            return super.getItem(position);
+            for (int i = 0; i < adapterCount; i++) {
+                View item = meatAdapter.getView(i, null, null);
+                cat2.addView(item);
+            }
         }
+    }
+    private void createDairyAdapter(){
+        if(!dairies.isEmpty()) {
+            dairyAdapterCreated = true;
+            DairybasketAdapter dairyAdapter = new DairybasketAdapter(getApplicationContext(), new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-        @Override
-        public long getItemId(int position) {
-            return super.getItemId(position);
+                }
+            });
+            final int adapterCount = dairyAdapter.getCount();
+
+            for (int i = 0; i < adapterCount; i++) {
+                View item = dairyAdapter.getView(i, null, null);
+                cat3.addView(item);
+            }
         }
+    }
+    private void createJunkfoodAdapter(){
+        if(!categories.isEmpty()) {
+            junkfoodAdapterCreated = true;
+            JunkbasketAdapter junkfoodAdapter = new JunkbasketAdapter(getApplicationContext(), new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+            final int adapterCount = junkfoodAdapter.getCount();
+
+            for (int i = 0; i < adapterCount; i++) {
+                View item = junkfoodAdapter.getView(i, null, null);
+                cat4.addView(item);
+            }
+        }
+    }
+
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }
+
 

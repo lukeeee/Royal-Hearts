@@ -1,37 +1,39 @@
 package se.group1.royalhearts;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+
 /**
- * Created by Lukas on 2014-02-03.
+ * Created by Lukas on 2014-01-30.
  */
-public class GodisAdapter extends BaseAdapter {
-    ArrayList<Categories> categories;
+public class VegetableAdapter extends BaseAdapter {
+    ArrayList<Vegetables> vegetables;
     Context context;
 
 
 
-    public GodisAdapter(Context context, View.OnClickListener myTurnsListener){
+    public VegetableAdapter(Context context){
         this.context = context;
-        this.categories = (ArrayList) JsonManager.getCategories();
+        this.vegetables = (ArrayList) JsonManager.getVegetables();
     }
 
     @Override
     public int getCount() {
-        return categories.size();
+        return vegetables.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return categories.get(i);
+        return vegetables.get(i);
     }
 
     @Override
@@ -40,7 +42,7 @@ public class GodisAdapter extends BaseAdapter {
     }
     static class ViewHolder{
         TextView groText;
-        CheckBox cBox;
+        Button addbtn;
     }
 
     @Override
@@ -49,18 +51,18 @@ public class GodisAdapter extends BaseAdapter {
         ViewHolder holder;
         if (v == null) {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = infalInflater.inflate(R.layout.categories_adapter, null);
+            v = infalInflater.inflate(R.layout.add_adapter, null);
         }
         holder = new ViewHolder();
         v.setTag(holder);
 
         holder.groText = (TextView)v.findViewById(R.id.groText);
-        holder.cBox = (CheckBox)v.findViewById(R.id.cBox);
-        Categories cat = JsonManager.getCategories().get(i);
+        holder.addbtn = (Button)v.findViewById(R.id.addBtn);
+        Vegetables veg = JsonManager.getVegetables().get(i);
 
-        holder.groText.setText(cat.getName().toString());
-        holder.cBox.setTag(cat.getName());
-        v.setTag(categories.get(i));
+        holder.groText.setText(veg.getName().toString());
+        holder.addbtn.setTag(veg.getName());
+        v.setTag(vegetables.get(i));
 
         return v;
     }
