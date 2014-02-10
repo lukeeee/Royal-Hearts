@@ -157,27 +157,24 @@
  $foodbasket_total = count($foodbasket['items']);
  ?>    
     <div class="topright">        	 
-    <a href="#"><i class="glyphicon glyphicon-shopping-cart tooltip_display carticon"></i><span class="badge"><?php echo $foodbasket_total ?></span></a>
-	 		<!--<a href="#" class="clickTip exampleTip" >On Click Tooltip</a> -->
-	 	       <div id="large">
-<div class="ttip">
-
-
-
-  <div class="contents">
-	  <table class="table">
-		  	<th>Produkt</th><th>Antal</th>
-		  </thead>
-		  <tbody>
-<?php 
-	foreach ($foodbasket["items"] as $arrayitem) {
-	  		//echo $item;
-	  			echo '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td></tr>';
-	  		}
- ?>
-		  </tbody>
-	  </table>
-  </div>
+    <a href="#"><i class="glyphicon-shopping-cart tooltip_display"></i><span class="badge"><?php echo $foodbasket_total ?></span></a>
+		 		<!--<a href="#" class="clickTip exampleTip" >On Click Tooltip</a> -->
+	<div id="large">
+	<div class="ttip">
+	  <div class="contents">
+		  <table class="table">
+			  	<th>Produkt</th><th>Antal</th>
+			  </thead>
+			  <tbody>
+	<?php 
+		foreach ($foodbasket["items"] as $arrayitem) {
+		  		//echo $item;
+		  			echo '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td></tr>';
+		  		}
+	 ?>
+			  </tbody>
+		  </table>
+	  </div>
   <span class="note">(click here to close the box)</span> 
 </div>
 </div>

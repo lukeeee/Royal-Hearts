@@ -2686,7 +2686,6 @@ input[type="button"].btn-block {
 }
 
 .glyphicon {
-  position: relative;
   top: 1px;
   width: 200em;
   height: 200em;

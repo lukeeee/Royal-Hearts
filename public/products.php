@@ -55,13 +55,11 @@
 		  			<td><?php echo $itembycat["name"] ?></td>
 		  			<td><input id="quantity_<?php echo $itembycat['id'] ?>" name="quantity_<?php echo $itembycat['id'] ?>" class="inputsam" value="1"></td>
 	  			</tr>
-		
-
 	<?php endforeach ?>
 </tbody>
 </table>
 <button type="submit" class="btn">
-	  				<span class="glyphicon glyphicon-plus"></span>
+	  				<i class="glyphicon-plus"></i>
 	  			</button>
 </form>	
 <?php endif ?>
