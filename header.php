@@ -29,11 +29,10 @@
 			  	position:absolute;
 			  	margin-top: 5em;
 			  	margin-right: 5em;
+			  	max-height: 10em;
 			   	top:0;
 			   	right:0;
 			   	z-index: 1;
-			   	opacity:0.8;
-				filter:alpha(opacity=80); /* For IE8 and earlier */
 			}
 			#header {
 				display:block;
@@ -120,6 +119,13 @@
 				min-width: 0px;
 				color: #336699;
 			}
+			.centered {
+			  top:10%;
+			  left:8%;
+			  margin-top: 1%;
+			  vertical-align: center;
+			  text-align: center;
+			}
 		</style>
     </head>
     <header>
@@ -142,6 +148,7 @@
                 <div class="btn-toolbar" role="toolbar">
                     <div class="btn-group btn-group-lg btn-group-justified">
                         <a class="btn btn-default <?php if(strpos($pagetitle, "Varor") !== false) { echo "active"; } else { echo ""; } ?>" role="button" href="products.php">Varor</a>
+                        <a class="btn btn-default <?php if(strpos($pagetitle, "Sök") !== false) { echo "active"; } else { echo ""; } ?>" role="button" href="search.php">Sök</a>
                         <a class="btn btn-default <?php if(strpos($pagetitle, "Om") !== false) { echo "active"; } else { echo ""; } ?>" role="button" href="about.php">Om</a>
                         <a class="btn btn-default <?php if(strpos($pagetitle, "Logga") !== false) { echo "active"; } else { echo ""; } ?>" role="button" <?php if (isset($_SESSION['is_logged_in'])) { echo 'href="logout.php">Logga ut'; } else { echo 'href="login.php">Logga in'; } ?></a>
                     </div>
