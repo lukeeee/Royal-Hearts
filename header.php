@@ -11,9 +11,9 @@
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
     	<script src="js/bootstrap.min.js"></script>
         
-		<!-- aToolTip js -->
-		<script type="text/javascript" src="js/jquery.atooltip.js"></script>
-
+		
+		
+<script type="text/javascript" src="js/jquery.qtip-1.0.0-rc3.min.js"></script>
         <style type="text/css">
 			body {
                 background:url(img/gradient.png);
@@ -157,30 +157,35 @@
  $foodbasket_total = count($foodbasket['items']);
  ?>    
     <div class="topright">        	 
-    <a href="#"><i class="glyphicon-shopping-cart tooltip_display"></i><span class="badge"><?php echo $foodbasket_total ?></span></a>
-		 		<!--<a href="#" class="clickTip exampleTip" >On Click Tooltip</a> -->
-	<div id="large">
-	<div class="ttip">
-	  <div class="contents">
-		  <table class="table">
-			  	<th>Produkt</th><th>Antal</th>
-			  </thead>
-			  <tbody>
-	<?php 
-		foreach ($foodbasket["items"] as $arrayitem) {
-		  		//echo $item;
-		  			echo '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td></tr>';
-		  		}
-	 ?>
-			  </tbody>
-		  </table>
-	  </div>
-  <span class="note">(click here to close the box)</span> 
-</div>
-</div>
-<div id="background"></div>
-
+	    <a href="#"  id="searchItem_" >
+	    	<i class="glyphicon glyphicon-shopping-cart carticon"></i>
+	    	<span class="badge"><?php echo $foodbasket_total ?></span>
+	    </a>
     </div>	
-    
+    <div id="content_">
+	    <table class="table">
+				  	<th>Produkt</th><th>Antal</th>
+				  </thead>
+				  <tbody>
+		<?php foreach ($foodbasket["items"] as $arrayitem) {
+	  			echo '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td></tr>';
+	  		  }
+		 ?>
+				  </tbody>
+		</table>
+	</div>
+	            <script>
+            $(document).ready(function() {
+              var div1Html = $('#content_').html();
+              console.log(div1Html);
+                $("#searchItem_").popover({
+                    html: true,
+                    animation: true,
+                    content: div1Html,
+                    placement: "bottom"
+                });
+                $('#content_').hide();
+            });
+      //$('#content_').hide();
+        </script>
         
-    

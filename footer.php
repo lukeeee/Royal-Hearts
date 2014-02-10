@@ -1,4 +1,4 @@
-		<div class="row">
+    		<div class="row">
         	<div id="footer-margin" class="col-md-12"></div>
             <div id="footer" class="col-md-12">
                 <hr />
@@ -6,7 +6,7 @@
             </div>
         </div>
         <script type="text/javascript">
-            $(function(){
+/*            $(function(){
                 $('a.clickTip').aToolTip({
                     clickIt: true,
                     tipContent: '<table><th>Varor</th><th>Antal</th><td>Tomat</td><td>Morot</td></table>'
@@ -35,6 +35,7 @@ $("#large").click(function() {
     $(this).fadeOut();
    
 });
+$(".trigger").tooltip({ position: "bottom left", opacity: 0.7});*/
         </script>
         <div id="large">
 <div class="ttip">
