@@ -5,34 +5,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-
 /**
- * Created by Lukas on 2014-01-30.
+ * Created by Lukas on 2014-02-03.
  */
-public class FruktAdapter extends BaseAdapter {
-    ArrayList<Categories> categories;
+public class JunkfoodAdapter extends BaseAdapter {
+    ArrayList<Junkfoods> junkfoods;
     Context context;
 
 
 
-    public FruktAdapter(Context context, View.OnClickListener myTurnsListener){
+    public JunkfoodAdapter(Context context, View.OnClickListener myTurnsListener){
         this.context = context;
-        this.categories = (ArrayList) JsonManager.getCategories();
+        this.junkfoods = (ArrayList) JsonManager.getJunkfoods();
     }
 
     @Override
     public int getCount() {
-        return categories.size();
+        return junkfoods.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return categories.get(i);
+        return junkfoods.get(i);
     }
 
     @Override
@@ -41,7 +40,7 @@ public class FruktAdapter extends BaseAdapter {
     }
     static class ViewHolder{
         TextView groText;
-        CheckBox cBox;
+        Button addbtn;
     }
 
     @Override
@@ -50,20 +49,19 @@ public class FruktAdapter extends BaseAdapter {
         ViewHolder holder;
         if (v == null) {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = infalInflater.inflate(R.layout.categories_adapter, null);
+            v = infalInflater.inflate(R.layout.add_adapter, null);
         }
         holder = new ViewHolder();
         v.setTag(holder);
 
         holder.groText = (TextView)v.findViewById(R.id.groText);
-        holder.cBox = (CheckBox)v.findViewById(R.id.cBox);
-        Categories cat = JsonManager.getCategories().get(i);
+        holder.addbtn = (Button)v.findViewById(R.id.addBtn);
+        Junkfoods jun = JsonManager.getJunkfoods().get(i);
 
-        holder.groText.setText(cat.getName().toString());
-        holder.cBox.setTag(cat.getName());
-        v.setTag(categories.get(i));
+        holder.groText.setText(jun.getName().toString());
+        holder.addbtn.setTag(jun.getName());
+        v.setTag(junkfoods.get(i));
 
         return v;
     }
 }
-

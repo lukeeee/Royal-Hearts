@@ -11,27 +11,27 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Lukas on 2014-02-03.
+ * Created by Lukas on 2014-02-10.
  */
-public class MejeriAdapter extends BaseAdapter {
-    ArrayList<Categories> categories;
+public class DairybasketAdapter extends BaseAdapter {
+    ArrayList<Dairybaskets> dairybaskets;
     Context context;
 
 
 
-    public MejeriAdapter(Context context, View.OnClickListener myTurnsListener){
+    public DairybasketAdapter(Context context, View.OnClickListener myTurnsListener){
         this.context = context;
-        this.categories = (ArrayList) JsonManager.getCategories();
+        this.dairybaskets = (ArrayList) JsonManager.getDairybaskets();
     }
 
     @Override
     public int getCount() {
-        return categories.size();
+        return dairybaskets.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return categories.get(i);
+        return dairybaskets.get(i);
     }
 
     @Override
@@ -56,11 +56,11 @@ public class MejeriAdapter extends BaseAdapter {
 
         holder.groText = (TextView)v.findViewById(R.id.groText);
         holder.cBox = (CheckBox)v.findViewById(R.id.cBox);
-        Categories cat = JsonManager.getCategories().get(i);
+        Dairybaskets foo = JsonManager.getDairybaskets().get(i);
 
-        holder.groText.setText(cat.getName().toString());
-        holder.cBox.setTag(cat.getName());
-        v.setTag(categories.get(i));
+        holder.groText.setText(foo.getName().toString());
+        holder.cBox.setTag(foo.getName());
+        v.setTag(dairybaskets.get(i));
 
         return v;
     }

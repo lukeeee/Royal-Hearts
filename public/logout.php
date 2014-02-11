@@ -3,6 +3,8 @@
 
   if (isset($_SESSION['is_logged_in'])) {
     unset($_SESSION['is_logged_in']);
+	unset($_SESSION['privilege']);
+	unset($_SESSION['username']);
     //set_feedback("success", "You are now logged out.");
   }
 

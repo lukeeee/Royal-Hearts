@@ -21,7 +21,7 @@ import android.widget.Toast;
  * Created by Lukas on 2014-01-20.
  */
 public class Login extends Activity implements View.OnClickListener {
-    private Button login, debug;
+    private Button login;
     private EditText usernameInput;
     private EditText passwordInput;
     private TextView username;
@@ -35,7 +35,6 @@ public class Login extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
         login = (Button)findViewById(R.id.login);
-        debug = (Button)findViewById(R.id.debug);
         login.requestFocus();
         login.getBackground().setAlpha(150);
         usernameInput = (EditText)findViewById(R.id.usernameInput);
@@ -43,7 +42,6 @@ public class Login extends Activity implements View.OnClickListener {
         username = (TextView)findViewById(R.id.username);
         password = (TextView)findViewById(R.id.password);
         login.setOnClickListener(this);
-        debug.setOnClickListener(this);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
@@ -114,11 +112,6 @@ public class Login extends Activity implements View.OnClickListener {
                 {
                     jLoginPoster.PostJson();
 
-                }
-                else if (v == debug){
-                    Intent ij = new Intent(getBaseContext(), MainActivity.class);
-                    startActivity(ij);
-                    this.finish();
                 }
 
 

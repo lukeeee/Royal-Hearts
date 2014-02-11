@@ -9,22 +9,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start"
-        android:textSize="20sp"
-        android:id="@+id/grocText"
+        android:textSize="25sp"
+        android:id="@+id/groText"
         android:gravity="left|center"
         android:textColor="#000"
         android:paddingLeft="4dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="6dp"
         android:layout_centerVertical="true"
         android:layout_alignParentTop="true" />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="260dp"
-        android:id="@+id/cBox"/>
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="240dp"
+        android:padding="0dp"
+        android:text="+"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:id="@+id/addBtn"/>
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="#000"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="36dp"/>
 </RelativeLayout>

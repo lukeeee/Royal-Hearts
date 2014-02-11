@@ -2,6 +2,7 @@ package se.group1.royalhearts;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,25 +10,24 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Lukas on 2014-02-03.
  */
-/*public class CityAdapter implements SpinnerAdapter {
-    ArrayList<> Stores;
+public class CityAdapter implements SpinnerAdapter {
+    ArrayList<Cities> cities;
     Context context;
 
 
-    public CityAdapter(Context context, ArrayList<Response> Stores){
+    public CityAdapter(Context context, ArrayList<Cities> cities){
         this.context = context;
-        this.Stores = Stores;
+        this.cities = cities;
     }
 
 
     @Override
     public int getCount() {
-        return Stores.size();
+        return cities.size();
     }
 
     @Override
@@ -67,7 +67,8 @@ import java.util.List;
             LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = vi.inflate(android.R.layout.simple_spinner_dropdown_item, null);
         }
-        ((TextView) convertView).setText(Stores.get(position).toString());
+        ((TextView) convertView).setText(cities.get(position).getName());
+        ((TextView) convertView).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
         return convertView;
 
     }
@@ -75,7 +76,8 @@ import java.util.List;
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView textView = (TextView) View.inflate(context, android.R.layout.simple_spinner_item, null);
-        textView.setText(Stores.get(position).toString());
+        textView.setText(cities.get(position).getName());
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         return textView;
     }
 
@@ -90,8 +92,8 @@ import java.util.List;
 
     }
 
-    public ArrayList<Response> getStores() {
-        return Stores;
+    public ArrayList<Cities> getCities() {
+        return cities;
     }
 
-}*/
+}
