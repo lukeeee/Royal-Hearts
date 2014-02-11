@@ -1,15 +1,21 @@
 <?php
 
     require_once('../config.php');
-    $pagetitle = "Hem | Matkassen.se";
+    $pagetitle = "Ny butik | Matkassen.se";
 
-require_once(ROOT_PATH.'/header.php'); ?>
+	require_once(ROOT_PATH.'/header.php');
+	
+	$privilege = $_SESSION['privilege'];
+	if($privilege != 1){ 
+		header("location: index.php");
+	}
+?>
 
 <div class="row">
     <div class="col-md-3 col-md-offset-5">
         <h1>Lägg till Butiker</h1>
         <div id="storeForm">
-            <form role="form" method="post" action="run.php?func=adm_adm_add">
+            <form role="form" method="post" action="run.php?"><!--TODO: Action -> run.php-function for adding store-->
                 <div class="form-group">
                     <label for="storename">Butiksnamn</label>
                     <input type="text" class="form-control" id="storename" placeholder="Butiksnamn" name="storename">
