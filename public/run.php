@@ -43,7 +43,7 @@ if($func == "adm_supp_delete"){
 	}
 }
 if($func == "adm_supp_update"){
-	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodproduct/update/".$_REQUEST['id']."/".urlencode($_REQUEST['name'])."/".$_REQUEST['cat_id']),true);
+	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodproduct/update/".$_REQUEST['prod_id']."/".urlencode($_REQUEST['name'])."/".$_REQUEST['cat_id']),true);
 	if($success == 1){
 		header("Location: /supplier.php");	
 	}else{
@@ -74,11 +74,59 @@ $success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matka
 		echo "error func adm_adm_user_update";
 	}
 }
+if($func == "adm_adm_new_store"){
+	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/new/{$_REQUEST['username']}/{$_REQUEST['password']}/2"), true);
+	if($success > 0){
+	$store_success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/new/{$_REQUEST['storename']}/{$success}"), true);
+		if($store_success >0){
+			$story_city = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/addcity/{$store_success}/{$_REQUEST['city_id']}"), true);
+			if($story_city == 1){
+				header("Location: admin_suppliers.php");	
+			}else{
+				echo "error store_city";
+			}
+			
+		}else{
+			echo "error supplier_success";	
+		}
+	}else{
+		echo " error new user";	
+	}
+}
 
+if($func == "adm_adm_new_supp"){
+	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/new/{$_REQUEST['username']}/{$_REQUEST['password']}/2"), true);
+	if($success > 0){
+	$supplier_success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/supplier/new/{$_REQUEST['suppname']}/{$success}"), true);
+		if($supplier_success == 1){
+			header("Location: admin_suppliers.php");
+		}else{
+			echo "error supplier_success";	
+		}
+	}
+}
+if($func == "adm_adm_supp_update"){
+	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/supplier/update/{$_REQUEST['id']}/{$_REQUEST['name']}"), true);
+	if($success == 1){
+		header("Location: admin_suppliers.php");
+	}else{
+		echo "error supplier update";	
+	}
+	
+}
+if($func == "adm_adm_supp_delete"){
+	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/supplier/remove/{$_REQUEST['id']}"),true);
+	if($success == 1){
+		header("Location: admin_suppliers.php");
+	}else{
+		echo "error delete supplier";
+	}
+
+}
 
 if($func == "adm_adm_user_new"){
 $success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/new/{$_REQUEST['username']}/{$_REQUEST['password']}/{$_REQUEST['privilege']}"),true);
-	if($success==1)
+	if($success>0)
 	{
 		header("Location: edit_user.php");
 	}

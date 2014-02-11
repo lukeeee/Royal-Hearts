@@ -25,13 +25,13 @@
        <h1>Redigera</h1>
       <form method="post" action="run.php?func=adm_supp_update" enctype="multipart/form-data">
         <div class="col-xs-1">
-          <input type="text" class="form-control" name="id" value="<?php echo $id?>">
+          <input type="text" class="form-control" name="prod_id" value="<?php echo $id?>">
         </div>
         <div class="col-xs-3">
           <input type="text" class="form-control" name="name" value="<?php echo $name ?>">
         </div>
         <div class="col-xs-3">
-        	<select>
+        	<select name="cat_id">
 			<?php 	foreach($cats  as $cat)
                  	{
 						if($cat["id"] == $cat_id){
