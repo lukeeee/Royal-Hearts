@@ -188,7 +188,7 @@
 				  </thead>
 				  <tbody>
 		<?php foreach ($foodbasket["items"] as $arrayitem) {
-	  			echo '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td><td><a href="run.php?func=removeitemfrombasket&userid='.$_SESSION['id'].'&itemid='.$arrayitem["id"].'"><i class="glyphicon glyphicon-trash"></i></a></td></tr>';
+	  			echo '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td><td><a href="run.php?removeitemfrombasket=yes&userid='.$_SESSION['id'].'&itemid='.$arrayitem["id"].'"><i class="glyphicon glyphicon-trash"></i></a></td></tr>';
 	  		  }
 		 ?>
 				  </tbody>

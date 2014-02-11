@@ -2,11 +2,7 @@
 
 
 if(isset($_GET["func"])){
-
 $func = $_GET["func"];	
-}
-if(isset($_GET["fun"])){
-$userid = $_GET["userid"];
 }
 
 if($func == "adm_adm_delete"){
@@ -172,17 +168,20 @@ if(isset($_POST['itemid'])){
 	}
 	header("Location: index.php");	
 }
- if(isset($_GET['itemid'])) {
+ if(isset($_GET['additemtobasket'])) {
  	$itemid = $_GET['itemid'];
 	$userid = $_GET['userid'];
 	$quantity = $_GET['quantity'];
 	json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/additem/".$userid."/".$itemid."/".$quantity),true);
 	header("Location: index.php");	
  }
-if(isset($_GET['func']) && $_GET['func'] == "removeitemfrombasket"){
+if(isset($_GET['removeitemfrombasket'])){
 	$itemid = $_GET['itemid'];
 	$userid = $_GET['userid'];
- json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/removeitem/".$userid."/".$itemid),true);
+ 	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/removeitem/".$userid."/".$itemid),true);
+ 	if($success > 0){
+ 		header("Location: index.php");		
+ 	}
 }
  
 
