@@ -20,6 +20,10 @@
                     <label for="storename">Butiksnamn</label>
                     <input type="text" class="form-control" id="storename" placeholder="Butiksnamn" name="storename">
                 </div>
+                <div class="form-group">
+                    <label for="storename">Stad</label>
+                    <input type="text" class="form-control" id="storename" placeholder="Butiksnamn" name="storename">
+                </div>
                 <div id="login" class="form-group">
                     <label for="username">Användarnamn</label>
                     <input type="text" class="form-control" id="username" placeholder="Användarnamn" name="username">
