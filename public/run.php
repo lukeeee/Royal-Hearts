@@ -5,7 +5,9 @@ if(isset($_GET["func"])){
 
 $func = $_GET["func"];	
 }
+if(isset($_GET["fun"])){
 $userid = $_GET["userid"];
+}
 
 if($func == "adm_adm_delete"){
 	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/remove/{$_REQUEST['id']}"),true);
@@ -75,7 +77,7 @@ $success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matka
 	}
 }
 if($func == "adm_adm_new_store"){
-	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/new/{$_REQUEST['username']}/{$_REQUEST['password']}/2"), true);
+	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/new/{$_REQUEST['username']}/{$_REQUEST['password']}/3"), true);
 	if($success > 0){
 	$store_success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/new/{$_REQUEST['storename']}/{$success}"), true);
 		if($store_success >0){
@@ -87,7 +89,7 @@ if($func == "adm_adm_new_store"){
 			}
 			
 		}else{
-			echo "error supplier_success";	
+			echo "error store_success";	
 		}
 	}else{
 		echo " error new user";	
