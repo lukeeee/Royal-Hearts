@@ -30,8 +30,8 @@ if($privilege == 1){
             echo "<div><h4 hidden>".$cat["id"]."</h4></div>";
             echo "<div><h4>".$cat["name"]."</h4></div>";
 
-            echo "<a class='btn btn-default' href='/edit.php?id=".$cat['id']."&name=".urlencode($cat['name'])."'>Redigera</a>";
-            echo "<a class='btn btn-danger' href='/run.php?id=".$cat['id']."&func=adm_adm_delete'>Delete</a></br>";
+            echo "<a class='btn btn-default adm' href='/edit.php?id=".$cat['id']."&name=".urlencode($cat['name'])."'>Redigera</a>";
+            echo "<a class='btn btn-danger adm' href='/run.php?id=".$cat['id']."&func=adm_adm_delete'>Delete</a></br>";
    		    }     
  
             ?>
@@ -56,8 +56,8 @@ if($privilege == 1){
             echo "<div><h4 hidden>".$store["id"]."</h4></div>";
             echo "<div><h4>".$store["name"]."</h4></div>";
 
-            echo "<a class='btn btn-default' href='/edit_store.php?id=".$store['id']."&name=".urlencode($store['name'])."'>Redigera</a>";
-            echo "<a class='btn btn-danger' href='/run.php?id=".$store['id']."&func=adm_adm_delete'>Delete</a></br>";
+            echo "<a class='btn btn-default adm' href='/edit_store.php?id=".$store['id']."&name=".urlencode($store['name'])."'>Redigera</a>";
+            echo "<a class='btn btn-danger adm' href='/run.php?id=".$store['id']."&func=adm_adm_delete'>Delete</a></br>";
 					// TODO: Function must point to run-php-funtion for deleting store
             }
  

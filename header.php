@@ -18,6 +18,8 @@
 			body {
                 background:url(img/gradient.png);
                 background-size:100%;
+				background-repeat:no-repeat;
+				background-size:cover;
 			}
 
 			.inputsam{
@@ -134,6 +136,9 @@
 			  margin-top: 1%;
 			  vertical-align: center;
 			  text-align: center;
+			}
+			.adm {
+				margin:2px;
 			}
 		</style>
     </head>
