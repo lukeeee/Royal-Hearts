@@ -4,8 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title><?php echo $pagetitle; ?></title>
         <link href="css/bootstrap.css" rel="stylesheet">
-		
-		<!-- aToolTip css -->
+		<LINK REL="SHORTCUT ICON" HREF="img/cart.png">
 		<link type="text/css" href="css/atooltip.css" rel="stylesheet"  media="screen" />
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -180,11 +179,11 @@
     <div id="content_">
 	    <?php if($foodbasket_total > 0) : ?>
 	    <table class="table">
-				  	<th>Produkt</th><th>Antal</th>
+				  	<th>Produkt</th><th>Antal</th><th></th>
 				  </thead>
 				  <tbody>
 		<?php foreach ($foodbasket["items"] as $arrayitem) {
-	  			echo '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td></tr>';
+	  			echo '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td><td><a href="run.php?func=removeitemfrombasket&userid='.$_SESSION['id'].'&itemid='.$arrayitem["id"].'"><i class="glyphicon glyphicon-trash"></i></a></td></tr>';
 	  		  }
 		 ?>
 				  </tbody>

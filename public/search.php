@@ -36,13 +36,14 @@
 	                dataType: 'json',
 		colModel : [
 		{display:  'ID', name : 'id', width : 50, sortable : true, align: 'left'},
-		{display:  'Produkt', name : 'product', width : 200, sortable : true, align: 'left'},
-			{display: 'Pris', name : 'price', width : 50, sortable : true, align: 'left'},
-			{display: 'Kategori', name : 'categoryname', width : 200, sortable : true, align: 'left'},
+		{display:  'Produkt', name : 'name', width : 200, sortable : true, align: 'left'},
+			{display: 'Pris', name : 'price', width : 50, sortable : false, align: 'left'},
+			{display: 'Kategori', name : 'category_name', width : 200, sortable : true, align: 'left'},
 			{display: '', name : 'addTobasket', width : 200, sortable : true, align: 'left'}
 			], 	
+
 		
-		sortname: "product",
+		sortname: "id",
 		sortorder: "asc",
 		usepager: true,
 		title: '',
@@ -52,13 +53,6 @@
 		width: 650,
 		height: 300
 	            });      
-
-	           $('#tirethreads option').each(function () {
-        if (($(this).attr('value')) === "BDR-W+") {
-            $(this).attr('selected', 'selected');
-        }
-        //setDefault("BDR-W+");
-    });
 
 </script>
 <?php endif ?>
