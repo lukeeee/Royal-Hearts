@@ -122,7 +122,7 @@ if($func == "adm_adm_new_supp"){
 	} else {
 		$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/new/{$_REQUEST['username']}/{$_REQUEST['password']}/2"), true);
 		if($success > 0){
-		$supplier_success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/supplier/new/{$_REQUEST['suppname']}/{$success}"), true);
+		$supplier_success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/supplier/new/".urlencode($_REQUEST['suppname'])."/{$success}"), true);
 			if($supplier_success == 1){
 				header("Location: admin_suppliers.php");
 			}else{
