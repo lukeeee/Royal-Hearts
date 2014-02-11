@@ -14,10 +14,16 @@
 
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
+
 	<form method="post" action="search.php">
-	<input id="search" name="search" type="text" placeholder="" value="" class="input-xxlarge search-query">
-	<button type="submit" class="btn">Sök</button>
+	<div class="input-group">
+      <input id="search" name="search" type="text" class="form-control" placeholder="Sök..." value="<?php echo $searchstring ?>">
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+      </span>
+    </div>
 	</form>
+
 	<table class="flexme1">
 </table>
 </div>

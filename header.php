@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title><?php echo $pagetitle; ?></title>
         <link href="css/bootstrap.css" rel="stylesheet">
-	
+		
 		<!-- aToolTip css -->
 		<link type="text/css" href="css/atooltip.css" rel="stylesheet"  media="screen" />
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
@@ -23,13 +23,26 @@
 			.inputsam{
 				width: 10%;
 			}
+
+			.cartbadge{
+				font-size: 1em;
+			  	
+			}
+
+			.carticon{
+				font-size: 2em;
+				margin-left: 1em;
+				margin-top: 1em;
+			  	
+			}
 			.topright {
-				font-size: 0.8em;
+				font-size: 1em;
 				width: 15%;
 			  	position:absolute;
 			  	margin-top: 5em;
 			  	margin-right: 5em;
-			  	max-height: 10em;
+
+			  	max-height: 5em;
 			   	top:0;
 			   	right:0;
 			   	z-index: 1;
@@ -66,10 +79,6 @@
 			#user-span {
 				font-style:italic;
 			}
-			.carticon{
-			width: 100em;
-		    height: 100em;
-    		}
 			.ttip {
 				position: absolute;
 				min-width: 10px;
@@ -165,11 +174,11 @@
  ?>    
     <div class="topright">        	 
 	    <a href="#"  id="searchItem_" >
-	    	<i class="glyphicon glyphicon-shopping-cart carticon"></i>
-	    	<span class="badge"><?php echo $foodbasket_total ?></span>
-	    </a>
+	    <i class="glyphicon glyphicon-shopping-cart carticon"></i></a>
+	    	<span class="badge cartbadge"><?php echo $foodbasket_total ?></span>
     </div>	
     <div id="content_">
+	    <?php if($foodbasket_total > 0) : ?>
 	    <table class="table">
 				  	<th>Produkt</th><th>Antal</th>
 				  </thead>
@@ -180,6 +189,9 @@
 		 ?>
 				  </tbody>
 		</table>
+	<?php else : ?>
+		Din varukorg är tom
+	<?php endif ?>
 	</div>
 	            <script>
             $(document).ready(function() {
