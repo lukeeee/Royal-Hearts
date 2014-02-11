@@ -17,7 +17,7 @@
     <div class="col-md-3 col-md-offset-5">
         <h1>Lägg till Butiker</h1>
         <div id="storeForm">
-            <form role="form" method="post" action="run.php?adm_adm_new_store"><!--TODO: Action -> run.php-function for adding store-->
+            <form role="form" method="post" action="run.php?func=adm_adm_new_store"><!--TODO: Action -> run.php-function for adding store-->
                 <div class="form-group">
                     <label for="storename">Butiksnamn</label>
                     <input type="text" class="form-control" id="storename" placeholder="Butiksnamn" name="storename">
