@@ -75,6 +75,19 @@ $success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matka
 	}
 }
 
+
+if($func == "adm_adm_user_new"){
+$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/new/{$_REQUEST['username']}/{$_REQUEST['password']}/{$_REQUEST['privilege']}"),true);
+	if($success==1)
+	{
+		header("Location: edit_user.php");
+	}
+	else
+	{
+		echo "error func adm_adm_user_new";
+	}
+}
+
 if(isset($_POST['itemid'])){
 	$itemids = $_POST['itemid'];
 	$userid = $_POST['userid'];

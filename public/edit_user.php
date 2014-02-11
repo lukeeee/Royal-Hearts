@@ -35,12 +35,38 @@
   	<div class="users-group">
     <h1>Användarens Info</h1>
     <hr>
+    <style>
+		.inputCointainer * {
+		margin:0 10px;
+		}
+		.well {
+		padding: 7px;
+		}
+	</style>
+    <script>
+		function clearText(thefield,plats){
+		if (thefield.defaultValue==thefield.value)
+		thefield.value = "";
+		}
+	</script>
   	<?php
+		echo '<h3>Lägga till en ny användare</h3>';
+		echo '<div class="row inputCointainer"><form method="post" action="run.php?func=adm_adm_user_new" enctype="multipart/form-data">';
+					
+						
+						echo "<input class='col-lg-3' type='text' name='username' value='Användarensnamn' onfocus='clearText(this);'>";
+						echo "<input class='col-lg-3' type='text' name='password' value='Lösenord' onfocus='clearText(this);'>";
+						echo "<input class='col-lg-3' type='text' name='privilege' value='0' onfocus='clearText(this);'>";
+						echo "<input class='col-lg-1' type='submit' value='Lägga till'>";
+					
+						echo "</form></div><hr>";
+						
+						echo '<h3>Uppdatera användare</h3>';
   		foreach($users  as $user)
                  {
-                    echo '<div class="row"><form method="post" action="run.php?func=adm_adm_user_update" enctype="multipart/form-data">';
+                    echo '<div class="row inputCointainer"><form method="post" action="run.php?func=adm_adm_user_update" enctype="multipart/form-data">';
 					
-						echo "<div class='col-lg-12'>User ID:".$user["id"]."</div>";
+						echo "<div class='col-lg-12 '>User ID:".$user["id"]."</div>";
 						echo "<input type='hidden' name='id' value='".$user["id"]."'>";
 						echo "<input class='col-lg-3' type='text' name='username' value='".$user["username"]."'>";
 						echo "<input class='col-lg-3' type='text' name='password'>";
@@ -49,7 +75,8 @@
 					
 						echo "</form></div><hr>";
 						
-    			}?>
+    			}
+				?>
   
 	</div>
 
