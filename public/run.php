@@ -109,13 +109,25 @@ if($func == "adm_adm_new_store"){
 }
 
 if($func == "adm_adm_new_supp"){
-	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/new/{$_REQUEST['username']}/{$_REQUEST['password']}/2"), true);
-	if($success > 0){
-	$supplier_success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/supplier/new/{$_REQUEST['suppname']}/{$success}"), true);
-		if($supplier_success == 1){
-			header("Location: admin_suppliers.php");
-		}else{
-			echo "error supplier_success";	
+	$db = new Db();
+	if($_POST['suppname'] == null || $_POST['username'] == null || $_POST['password'] == null || $_POST['password2'] == null) {
+		set_feedback("danger", "Du måste fylla i alla fälten."); 
+		header('location: new_store.php');
+	} elseif($db->getUsername($_POST['username']) != null) {
+		set_feedback("danger", "Användarnamn finns redan."); 
+		header('location: new_store.php');
+	} elseif($_POST['password'] != $_POST['password2']) {
+		set_feedback("danger", "Dina lösenord matchar inte."); 
+		header('location: new_store.php');
+	} else {
+		$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/new/{$_REQUEST['username']}/{$_REQUEST['password']}/2"), true);
+		if($success > 0){
+		$supplier_success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/supplier/new/{$_REQUEST['suppname']}/{$success}"), true);
+			if($supplier_success == 1){
+				header("Location: admin_suppliers.php");
+			}else{
+				echo "error supplier_success";	
+			}
 		}
 	}
 }
