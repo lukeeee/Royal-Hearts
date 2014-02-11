@@ -35,7 +35,7 @@
  			echo "<div><h4 hidden>".$supplier["id"]."</h4></div>";
 			echo "<div><h4>".$supplier["name"]."</h4></div>";
 			echo "<a class='btn btn-default' href='/admin_edit_supp.php?id=".$supplier['id']."&name=".$supplier['name']."'>Redigera</a>";
-   			echo "<a class='btn btn-danger' href='/run.php?id=".$supplier['id']."&func=adm_supp_delete'>Delete</a></br>";
+   			echo "<a class='btn btn-danger' href='/run.php?id=".$supplier['id']."&func=adm_adm_supp_delete'>Delete</a></br>";
 		}
  
 ?>
