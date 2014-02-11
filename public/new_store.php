@@ -21,8 +21,8 @@
                     <input type="text" class="form-control" id="storename" placeholder="Butiksnamn" name="storename">
                 </div>
                 <div class="form-group">
-                    <label for="storename">Stad</label>
-                    <input type="text" class="form-control" id="storename" placeholder="Butiksnamn" name="storename">
+                    <label for="city">Stad</label>
+                    <input type="text" class="form-control" id="city" placeholder="Stad" name="city">
                 </div>
                 <div id="login" class="form-group">
                     <label for="username">Användarnamn</label>
