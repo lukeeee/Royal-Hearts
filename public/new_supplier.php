@@ -18,7 +18,7 @@
             <form role="form" method="post" action="run.php?func=adm_adm_new_supp"><!--TODO: Action -> run.php-function for adding store-->
                 <div class="form-group">
                     <label for="storename">Grossistnamn</label>
-                    <input type="text" class="form-control" id="suppname" placeholder="Butiksnamn" name="suppname">
+                    <input type="text" class="form-control" id="suppname" placeholder="Grossistsnamn" name="suppname">
                 </div>
                 <div id="login" class="form-group">
                     <label for="username">Användarnamn</label>

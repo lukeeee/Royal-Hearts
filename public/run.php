@@ -112,13 +112,13 @@ if($func == "adm_adm_new_supp"){
 	$db = new Db();
 	if($_POST['suppname'] == null || $_POST['username'] == null || $_POST['password'] == null || $_POST['password2'] == null) {
 		set_feedback("danger", "Du måste fylla i alla fälten."); 
-		header('location: new_store.php');
+		header('location: new_supplier.php');
 	} elseif($db->getUsername($_POST['username']) != null) {
 		set_feedback("danger", "Användarnamn finns redan."); 
-		header('location: new_store.php');
+		header('location: new_supplier.php');
 	} elseif($_POST['password'] != $_POST['password2']) {
 		set_feedback("danger", "Dina lösenord matchar inte."); 
-		header('location: new_store.php');
+		header('location: new_supplier.php');
 	} else {
 		$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/new/{$_REQUEST['username']}/{$_REQUEST['password']}/2"), true);
 		if($success > 0){
