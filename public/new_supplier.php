@@ -9,27 +9,16 @@
 	if($privilege != 1){ 
 		header("location: index.php");
 	}
-	
-	$cities = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/city/getall"),true);
 ?>
 
 <div class="row">
     <div class="col-md-3 col-md-offset-5">
         <h1>Lägg till Butiker</h1>
         <div id="storeForm">
-            <form role="form" method="post" action="run.php?func=adm_adm_new_store">
+            <form role="form" method="post" action="run.php?func=adm_adm_new_supp"><!--TODO: Action -> run.php-function for adding store-->
                 <div class="form-group">
-                    <label for="storename">Butiksnamn</label>
-                    <input type="text" class="form-control" id="storename" placeholder="Butiksnamn" name="storename">
-                </div>
-                <div class="form-group">
-                	<select name="city_id">
-                    <?php
-                    	foreach($cities as $city){
-                        	echo '<option value="'.$city["id"].'">'.$city["name"].'</option>';
-                        }
-					?>
-                    </select>
+                    <label for="storename">Grossistnamn</label>
+                    <input type="text" class="form-control" id="suppname" placeholder="Grossistsnamn" name="suppname">
                 </div>
                 <div id="login" class="form-group">
                     <label for="username">Användarnamn</label>

@@ -20,11 +20,11 @@
 
 <div class="row">
 	<div class="col-md-3 col-md-offset-5">
-    	<h1>Redigera Butiker</h1>
+    	<h1>Redigera Butik</h1>
         <form method="post" action="run.php?" enctype="multipart/form-data"><!--TODO: Action -> run.php-function for updating store-->
             <div class="form-group">
                 <label for="storename">Butiksnamn</label>
-                <input type="text" class="form-control" id="storename" name="storename" value="<?php //echo $name ?>">
+                <input type="text" class="form-control" id="storename" name="storename" value="<?php echo $name ?>">
             </div>
             <button type="submit" class="btn btn-default">Redigera</button>                             
         </form>                          
