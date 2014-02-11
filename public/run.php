@@ -77,22 +77,34 @@ $success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matka
 	}
 }
 if($func == "adm_adm_new_store"){
-	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/new/{$_REQUEST['username']}/{$_REQUEST['password']}/3"), true);
-	if($success > 0){
-	$store_success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/new/{$_REQUEST['storename']}/{$success}"), true);
-		if($store_success >0){
-			$story_city = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/addcity/{$store_success}/{$_REQUEST['city_id']}"), true);
-			if($story_city == 1){
-				header("Location: admin_suppliers.php");	
+	$db = new Db();
+	if($_POST['storename'] == null || $_POST['username'] == null || $_POST['password'] == null || $_POST['password2'] == null) {
+		set_feedback("danger", "Du måste fylla i alla fälten."); 
+		header('location: new_store.php');
+	} elseif($db->getUsername($_POST['username']) != null) {
+		set_feedback("danger", "Användarnamn finns redan."); 
+		header('location: new_store.php');
+	} elseif($_POST['password'] != $_POST['password2']) {
+		set_feedback("danger", "Dina lösenord matchar inte."); 
+		header('location: new_store.php');
+	} else {
+		$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/new/{$_REQUEST['username']}/{$_REQUEST['password']}/3"), true);
+		if($success > 0){
+		$store_success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/new/{$_REQUEST['storename']}/{$success}"), true);
+			if($store_success >0){
+				$story_city = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/addcity/{$store_success}/{$_REQUEST['city_id']}"), true);
+				if($story_city == 1){
+					header("Location: administrator.php");	
+				}else{
+					echo "error store_city";
+				}
+				
 			}else{
-				echo "error store_city";
+				echo "error store_success";	
 			}
-			
 		}else{
-			echo "error store_success";	
+			echo " error new user";	
 		}
-	}else{
-		echo " error new user";	
 	}
 }
 
