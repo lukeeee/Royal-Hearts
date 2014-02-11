@@ -26,7 +26,7 @@
                 	<select name="city_id">
                     <?php
                     	foreach($cities as $city){
-                        	echo '<option value="'.$city["id"].'>'.$city["name"].'</option>';
+                        	echo '<option value="'.$city["id"].'">'.$city["name"].'</option>';
                         }
 					?>
                     </select>
