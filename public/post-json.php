@@ -24,7 +24,7 @@ $items = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkass
 					'name'=>$item['name'],
 					'price'=>"10",
 					'category_name'=>$item['cat_name'],
-					'addTobasket'=>'<input id="quantity_'.$item["id"].'" type="text" class="inputsam" name="quantity_'.$item["id"].'" value="1"></input><a href="#" id="item_'.$item["id"].'"><i class="glyphicon glyphicon-plus"></i></a>
+					'addTobasket'=>'<input id="quantity_'.$item["id"].'" type="text" class="inputsam" name="quantity_'.$item["id"].'" value="1"></input> <a href="#" id="item_'.$item["id"].'"><i class="glyphicon glyphicon-plus"></i></a>
 					<script>
 						$(\'#item_'.$item["id"].'\').click(function(){
 						var text = $(\'#quantity_'.$item["id"].'\').val();

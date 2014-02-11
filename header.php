@@ -184,7 +184,7 @@
     <div id="content_">
 	    <?php if($foodbasket_total > 0) : ?>
 	    <table class="table">
-				  	<th>Produkt</th><th>Antal</th><th></th>
+				  	<th>Produkt</th><th>Antal</th><th><a href="run.php?removeentirefrombasket=yes&userid=<?php echo $_SESSION['id'] ?>"><i class="glyphicon glyphicon-trash"></i></a></th>
 				  </thead>
 				  <tbody>
 		<?php foreach ($foodbasket["items"] as $arrayitem) {

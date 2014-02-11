@@ -182,6 +182,12 @@ if(isset($_GET['removeitemfrombasket'])){
  	if($success > 0){
  		header("Location: index.php");		
  	}
+} if(isset($_GET['removeentirefrombasket'])){
+	$userid = $_GET['userid'];
+	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/delete/".$userid),true);
+	if($success > 0){
+ 		header("Location: index.php");		
+ 	}
 }
  
 
