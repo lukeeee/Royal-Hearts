@@ -7,10 +7,11 @@ public class HelperClass {
         // This class stores all needed user data. Name, Email, Identifier and ID.
 
         public static String userName;
+        public static int userId;
 
-
-
-
+    }
+    public static class Cities{
+        public static int cityId;
     }
 
 

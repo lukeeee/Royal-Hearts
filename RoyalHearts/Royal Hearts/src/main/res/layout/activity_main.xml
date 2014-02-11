@@ -21,24 +21,53 @@
             android:layout_height="2dp"
             android:background="#fff"
             android:layout_marginBottom="10dp"/>
-        <Spinner
+        <RelativeLayout
             android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center">
+        <Spinner
+            android:layout_width="200dp"
             android:layout_height="40dp"
             android:background="@drawable/button"
             android:layout_gravity="center"
             android:gravity="center"
+            android:layout_marginLeft="100dp"
             android:id="@+id/CitySpinner"
             android:dropDownSelector="@drawable/arrow_down"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Välj Stad"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"/>
+        </RelativeLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="5dp"/>
-        <Spinner
+        <RelativeLayout
             android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center">
+        <Spinner
+            android:layout_width="200dp"
             android:layout_height="40dp"
             android:background="@drawable/button"
             android:layout_gravity="center"
             android:gravity="center"
+            android:layout_marginLeft="100dp"
             android:id="@+id/StoreSpinner"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Välj Butik"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"/>
+    </RelativeLayout>
 
         <View
             android:layout_width="match_parent"

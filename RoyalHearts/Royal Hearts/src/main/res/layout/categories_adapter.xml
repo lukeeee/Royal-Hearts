@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="Start"
         android:textSize="20sp"
-        android:id="@+id/groText"
+        android:id="@+id/grocText"
         android:gravity="left|center"
         android:textColor="#000"
         android:paddingLeft="4dp"

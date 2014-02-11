@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title><?php echo $pagetitle; ?></title>
         <link href="css/bootstrap.css" rel="stylesheet">
-	
+		
 		<!-- aToolTip css -->
 		<link type="text/css" href="css/atooltip.css" rel="stylesheet"  media="screen" />
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
@@ -23,17 +23,29 @@
 			.inputsam{
 				width: 10%;
 			}
+
+			.cartbadge{
+				font-size: 1em;
+			  	
+			}
+
+			.carticon{
+				font-size: 2em;
+				margin-left: 1em;
+				margin-top: 1em;
+			  	
+			}
 			.topright {
-				font-size: 0.8em;
+				font-size: 1em;
 				width: 15%;
 			  	position:absolute;
 			  	margin-top: 5em;
 			  	margin-right: 5em;
+
+			  	max-height: 5em;
 			   	top:0;
 			   	right:0;
 			   	z-index: 1;
-			   	opacity:0.8;
-				filter:alpha(opacity=80); /* For IE8 and earlier */
 			}
 			#header {
 				display:block;
@@ -67,10 +79,6 @@
 			#user-span {
 				font-style:italic;
 			}
-			.carticon{
-			width: 100em;
-		    height: 100em;
-    		}
 			.ttip {
 				position: absolute;
 				min-width: 10px;
@@ -120,6 +128,13 @@
 				min-width: 0px;
 				color: #336699;
 			}
+			.centered {
+			  top:10%;
+			  left:8%;
+			  margin-top: 1%;
+			  vertical-align: center;
+			  text-align: center;
+			}
 		</style>
     </head>
     <header>
@@ -142,6 +157,7 @@
                 <div class="btn-toolbar" role="toolbar">
                     <div class="btn-group btn-group-lg btn-group-justified">
                         <a class="btn btn-default <?php if(strpos($pagetitle, "Varor") !== false) { echo "active"; } else { echo ""; } ?>" role="button" href="products.php">Varor</a>
+                        <a class="btn btn-default <?php if(strpos($pagetitle, "Sök") !== false) { echo "active"; } else { echo ""; } ?>" role="button" href="search.php">Sök</a>
                         <a class="btn btn-default <?php if(strpos($pagetitle, "Om") !== false) { echo "active"; } else { echo ""; } ?>" role="button" href="about.php">Om</a>
                         <a class="btn btn-default <?php if(strpos($pagetitle, "Logga") !== false) { echo "active"; } else { echo ""; } ?>" role="button" <?php if (isset($_SESSION['is_logged_in'])) { echo 'href="logout.php">Logga ut'; } else { echo 'href="login.php">Logga in'; } ?></a>
                     </div>
@@ -158,11 +174,11 @@
  ?>    
     <div class="topright">        	 
 	    <a href="#"  id="searchItem_" >
-	    	<i class="glyphicon glyphicon-shopping-cart carticon"></i>
-	    	<span class="badge"><?php echo $foodbasket_total ?></span>
-	    </a>
+	    <i class="glyphicon glyphicon-shopping-cart carticon"></i></a>
+	    	<span class="badge cartbadge"><?php echo $foodbasket_total ?></span>
     </div>	
     <div id="content_">
+	    <?php if($foodbasket_total > 0) : ?>
 	    <table class="table">
 				  	<th>Produkt</th><th>Antal</th>
 				  </thead>
@@ -173,6 +189,9 @@
 		 ?>
 				  </tbody>
 		</table>
+	<?php else : ?>
+		Din varukorg är tom
+	<?php endif ?>
 	</div>
 	            <script>
             $(document).ready(function() {

@@ -72,8 +72,6 @@ public class Settings extends Activity implements View.OnClickListener {
         }
         else if (v == logout){
             logout.setTextColor(getResources().getColor(R.color.colorWhite));
-            Intent i = new Intent(getApplicationContext(), Login.class);
-            startActivity(i);
             this.finish();
         }
         else if (v == version){
