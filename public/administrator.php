@@ -36,7 +36,7 @@ if($privilege == 1){
  
             ?>
 
-            <div><h3><a href='/new.php'>Ny Kategori</a></h3></div>
+            <div><h3><a href='new.php'>Ny Kategori</a></h3></div>
 
         </section>
 
@@ -63,7 +63,7 @@ if($privilege == 1){
  
             ?>
 
-            <div><h3><a href='/new_store.php'>Ny Butik</a></h3></div>
+            <div><h3><a href='new_store.php'>Ny Butik</a></h3></div>
         
         </section>
     </div>
