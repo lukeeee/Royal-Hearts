@@ -184,11 +184,38 @@
     <div id="content_">
 	    <?php if($foodbasket_total > 0) : ?>
 	    <table class="table">
-				  	<th>Produkt</th><th>Antal</th><th><a href="run.php?removeentirefrombasket=yes&userid=<?php echo $_SESSION['id'] ?>"><i class="glyphicon glyphicon-trash"></i></a></th>
+				  	<th>Produkt</th><th>Antal</th><th><a id="basketuser_<?php echo $_SESSION['id'] ?>"><i class="glyphicon glyphicon-trash"></i></a></th>
+				  	 <script>
+        $('#basketuser_<?php echo $_SESSION['id'] ?>').click(function(){
+            	
+							var answer = confirm('Vill du verkligen ta bort hela matkassen?');
+							if (answer)
+							{
+							  	window.location = "run.php?removeentirefrombasket=yes&userid=<?php echo $_SESSION['id'] ?>";
+
+							}else{
+							  console.log('cancel');
+							}
+					});
+        </script>
 				  </thead>
 				  <tbody>
 		<?php foreach ($foodbasket["items"] as $arrayitem) {
-	  			echo '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td><td><a href="run.php?removeitemfrombasket=yes&userid='.$_SESSION['id'].'&itemid='.$arrayitem["id"].'"><i class="glyphicon glyphicon-trash"></i></a></td></tr>';
+	  			echo '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td><td><a id="basketitem_'.$arrayitem["id"].'"><i class="glyphicon glyphicon-trash"></i></a></td></tr>';
+	  			/*echo '<script>
+						$(\'#basketitem_'.$arrayitem["id"].'\').click(function(){
+							var answer = confirm(\'Vill du verkligen ta bort '.$arrayitem["name"].'?\');
+							if (answer)
+							{
+							  	window.location = "run.php?removeitemfrombasket=yes&userid='.$_SESSION['id'].'&itemid='.$arrayitem["id"].'";
+
+							}else{
+							  console.log(\'cancel\');
+							}
+						console.log("run.php?removeitemfrombasket=yes&userid='.$_SESSION['id'].'&itemid='.$arrayitem["id"].'");
+					  	
+					});
+					</script>';*/
 	  		  }
 		 ?>
 				  </tbody>
@@ -208,7 +235,7 @@
                     placement: "bottom"
                 });
                 $('#content_').hide();
+
             });
-      //$('#content_').hide();
         </script>
         
