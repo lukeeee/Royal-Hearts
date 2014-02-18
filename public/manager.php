@@ -12,7 +12,6 @@
 	//$_SESSION['store'] = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true);
 	
 	
-
  ?>
 
 <br/>
