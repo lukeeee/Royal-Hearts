@@ -41,32 +41,6 @@ if($privilege == 1){
         </section>
 
     </div>
-
-
-    <div class="col-md-6 col-md-offset-0">
-
-            <div><h3>Redigera Butiker</h3></div>
- 
-        <section>
-        
-            <?php
-            foreach($stores  as $store)
-            {
- 
-            echo "<div><h4 hidden>".$store["id"]."</h4></div>";
-            echo "<div><h4>".$store["name"]."</h4></div>";
-
-            echo "<a class='btn btn-default adm' href='/edit_store.php?id=".$store['id']."&name=".urlencode($store['name'])."'>Redigera</a>";
-            echo "<a class='btn btn-danger adm' href='/run.php?id=".$store['id']."&func=adm_adm_delete'>Delete</a></br>";
-					// TODO: Function must point to run-php-funtion for deleting store
-            }
- 
-            ?>
-
-            <div><h3><a href='new_store.php'>Ny Butik</a></h3></div>
-        
-        </section>
-    </div>
 </div>
 
 <?php require_once(ROOT_PATH.'/footer.php'); ?>

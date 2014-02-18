@@ -48,7 +48,7 @@
 	</thead>
 	<tbody>
 
-	<input type="hidden" name="userid" id="userid" value="<?php echo $_SESSION['id'] ?>">
+	<input type="hidden" name="userid" id="userid" value="<?php if(isset($_SESSION['id']))echo $_SESSION['id'] ?>">
 	<?php  foreach ($itemsbycat as $itembycat) : ?>
 	  			<tr>
 		  			<td><?php echo checkbox('checkbox', 'itemid[]', $itembycat['id']); ?></td>
