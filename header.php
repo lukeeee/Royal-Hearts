@@ -152,7 +152,7 @@
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
           <div id="title"><a href="index.php">MATKASSEN.SE</a></div>
-      </div>
+      </div> 
     </div>
     
     <div class="row">
@@ -169,23 +169,46 @@
             </div>
         </div>
     </div>
-    
+   
+
     </header>
     <body>
 <?php
  $foodbasket = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/".$_SESSION['id']),true); 
  $foodbasket_total = count($foodbasket['items']);
- if($foodbasket_total > 0){
- 	$carticon = "img/fullcart.png";	
- } else {
- 	$carticon = "img/emptycart.png";	
- }
+ echo $_SESSION['foodbasket_total'];
+ 
+ $script = '';
+ if($foodbasket_total > $_SESSION['foodbasket_total']){
+ 	$script = "$(\"#b\").fadeOut(2000);
+	$(\"#carticon\").attr('src','img/fullcart.png');";	
+	$_SESSION['foodbasket_total'] = $foodbasket_total;
+ } else if($foodbasket_total > 0) {
+ 	$script = "$(\"#b\").hide();
+ 	$(\"#carticon\").attr('src','img/fullcart.png');";	
+	}
+	else {
+		$script = "$(\"#b\").hide();
+	$(\"#carticon\").attr('src','img/emptycart.png');";		
+ 
+	}
+ 	
  
  ?>    
     <div class="topright">        	 
+    <img id="b" src="img/flying.png" id="b" style="position:absolute; top:1"/>
+
 	    <a href="#"  id="searchItem_" >
-	    <img src="<?php echo $carticon ?>"></a>
+	    <img id="carticon" src=""></a>
 	    	<span class="badge cartbadge"><?php echo $foodbasket_total ?></span>
+	    	<script>
+				function moveRight(){
+					<?php echo $script ?>
+					}
+				$(document).ready(function() {
+				       moveRight();
+				});
+			</script>
     </div>	
     <div id="content_">
 	    <?php if($foodbasket_total > 0) : ?>

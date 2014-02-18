@@ -4,7 +4,6 @@
 	$pagetitle = "Hem | Matkassen.se";
 ?>
 <?php require_once(ROOT_PATH.'/header.php'); ?>
-
 <br/>
 <div class="row">
     <div class="col-md-3 col-md-offset-4">
