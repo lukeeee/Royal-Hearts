@@ -3,8 +3,16 @@
 	$pagetitle = "Edit User | Matkassen.se";
 	$categoryID = null;	
 	$itemsbycat = null;
+	if($_SESSION["is_logged_in"]){
+		if($_SESSION["privilege"] == 1){
+			$users = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/getall"),true);	
+		}else{
+			header("Location: index.php");
+		}
+	}else{
+		header("Location: login.php");
+	}
 	
-	$users = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/getall"),true);
 	/*$users = array(
 				array("id"=>12,"username"=>"luis sanchez","privilege"=>100),
 				array("id"=>12,"username"=>"luis sanchez","privilege"=>100),
