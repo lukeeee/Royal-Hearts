@@ -19,7 +19,7 @@ if($privilege == 1){
 ?>
 
 <div class="row">
-    <div class="col-md-4 col-md-offset-2">
+    <div class="col-md-4 col-md-offset-4">
     <div><h3>Redigera Kategorier</h3></div>
   	    <section>
         
@@ -39,37 +39,7 @@ if($privilege == 1){
             <div><h3><a href='new.php'>Ny Kategori</a></h3></div>
 
         </section>
-
     </div>
-<<<<<<< HEAD
-
-
-    <div class="col-md-6 col-md-offset-0">
-
-            <div><h3>Redigera Butiker</h3></div>
- 
-        <section>
-        
-            <?php
-            foreach($stores  as $store)
-            {
- 
-            echo "<div><h4 hidden>".$store["id"]."</h4></div>";
-            echo "<div><h4>".$store["name"]."</h4></div>";
-
-            echo "<a class='btn btn-default adm' href='/edit_store.php?id=".$store['id']."&name=".urlencode($store['name'])."'>Redigera</a>";
-            echo "<a class='btn btn-danger adm' href='/run.php?id=".$store['id']."&func=adm_adm_delete'>Ta bort</a></br>";
-					// TODO: Function must point to run-php-funtion for deleting store
-            }
- 
-            ?>
-
-            <div><h3><a href='new_store.php'>Ny Butik</a></h3></div>
-        
-        </section>
-    </div>
-=======
->>>>>>> b67d8dc91385d9839aac786101c15ce828ec2220
 </div>
 
 <?php require_once(ROOT_PATH.'/footer.php'); ?>
