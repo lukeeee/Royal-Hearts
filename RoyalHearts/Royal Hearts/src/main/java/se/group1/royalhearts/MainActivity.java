@@ -21,10 +21,10 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private ProgressDialog progressDialog;
-    private TextView kasse,cat1text,cat2text,cat3text,cat4text,store;
+    private TextView kasse,cat1text,cat2text,cat3text,cat4text,store,city;
     private Spinner storeSpinner;
     private Spinner citySpinner;
     private ArrayList<Categories> categories;
@@ -37,7 +37,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
     private Button btnKasse;
     private LinearLayout cat1,cat2,cat3,cat4;
     private View line_one,line_two,line_three;
-    Animation move_in, move_out;
+    Animation move_out,fade_in,fade_out;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +50,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         cat3text = (TextView)findViewById(R.id.cat3text);
         cat4text = (TextView)findViewById(R.id.cat4text);
         store = (TextView)findViewById(R.id.store);
+        city = (TextView)findViewById(R.id.city);
         cat1 = (LinearLayout)findViewById(R.id.cat1);
         cat2 = (LinearLayout)findViewById(R.id.cat2);
         cat3 = (LinearLayout)findViewById(R.id.cat3);
@@ -73,12 +74,11 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         StoreAdapter storeAdapter = new StoreAdapter(this, stores);
         storeSpinner.setAdapter(storeAdapter);
 
-
-        storeSpinner.setVisibility(View.INVISIBLE);
+        btnKasse.setVisibility(View.INVISIBLE);
         store.setVisibility(View.INVISIBLE);
-        btnKasse.setVisibility(View.GONE);
+        city.setVisibility(View.INVISIBLE);
 
-        move_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_in);
+        fade_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fading_in);
         move_out = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_out);
 
         categories = JsonManager.getCategories();
@@ -87,25 +87,14 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         dbags = JsonManager.getDBags();
         mbags = JsonManager.getMBags();
 
-        for(Categories cat : categories){
-            Log.i("hej", cat.getName().toString());
-            cat1text.setText(categories.get(0).getName().toString());
-            cat2text.setText(categories.get(1).getName().toString());
-            cat3text.setText(categories.get(3).getName().toString());
-            cat4text.setText(categories.get(2).getName().toString());
-        }
-
 
         Log.i("userid", Integer.toString(HelperClass.User.userId));
         Log.i("userid", HelperClass.User.userName);
 
         citySpinner.setOnItemSelectedListener(this);
         storeSpinner.setOnItemSelectedListener(this);
+        btnKasse.setOnClickListener(this);
 
-        fruits();
-        meats();
-        dairys();
-        snacks();
         setInvisible();
 
 
@@ -170,73 +159,66 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         //Log.i("svaleklev", Integer.toString(cities.get(position).getId()));
         if(parent == citySpinner) {
             Log.i("anna", "anna");
+            if (cities.get(position).getId() == 0){
+
+            }else{
 
             try {
                 JsonManager.updateStores(cities.get(position).getId());
                 String svaleklev = String.valueOf(citySpinner.getSelectedItem());
                 Log.i("beatbox", svaleklev);
 
-                storeSpinner.setVisibility(View.VISIBLE);
-                store.setVisibility(View.VISIBLE);
-                storeSpinner.startAnimation(move_out);
-                store.startAnimation(move_in);
+                city.setText(cities.get(position).getName());
+
+
 
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            }
         } else if(parent == storeSpinner) {
-            setVisible();
+
+            if(stores.get(position).getId() == 0){
+
+            } else if(stores.get(position).getId() == 1){
+                willys();
+                setVisible();
+                store.setText(stores.get(position).getName());
+                animation();
+            } else if(stores.get(position).getId() == 2){
+                maxi();
+                setVisible();
+                store.setText(stores.get(position).getName());
+                animation();
+            } else if(stores.get(position).getId() == 3){
+                citygross();
+                setVisible();
+                store.setText(stores.get(position).getName());
+                animation();
+            } else if(stores.get(position).getId() == 4){
+                citygross();
+                setVisible();
+                store.setText(stores.get(position).getName());
+                animation();
+            } else if(stores.get(position).getId() == 15){
+                lidl();
+                setVisible();
+                store.setText(stores.get(position).getName());
+                animation();
+            }else if(stores.get(position).getId() == 9){
+                lidl();
+                setVisible();
+                store.setText(stores.get(position).getName());
+                animation();
+            }
+
         }
 
 
     }
-    public void refresh(){
-        Intent intent = getIntent();
-        overridePendingTransition(0, 0);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        overridePendingTransition(0, 0);
-        startActivity(intent);
-        showProgressDialog();
-    }
 
-    public void fruits(){
-        FBagAdapter fbagAdapter = new FBagAdapter(getApplicationContext());
-        final int adapterCount = fbagAdapter.getCount();
-        for (int i = 0; i < adapterCount; i++) {
-            View item = fbagAdapter.getView(i, null, null);
-            cat1.addView(item);
-        }
-
-    }
-    public void meats(){
-        MBagAdapter mbagAdapter = new MBagAdapter(getApplicationContext());
-        final int madapterCount = mbagAdapter.getCount();
-        for (int i = 0; i < madapterCount; i++) {
-            View item = mbagAdapter.getView(i, null, null);
-            cat2.addView(item);
-        }
-
-    }
-    public void dairys(){
-        DBagAdapter dbagAdapter = new DBagAdapter(getApplicationContext());
-        final int dadapterCount = dbagAdapter.getCount();
-        for (int i = 0; i < dadapterCount; i++) {
-            View item = dbagAdapter.getView(i, null, null);
-            cat3.addView(item);
-        }
-
-    }
-    public void snacks(){
-        JBagAdapter jbagAdapter = new JBagAdapter(getApplicationContext());
-        final int jadapterCount = jbagAdapter.getCount();
-        for (int i = 0; i < jadapterCount; i++) {
-            View item = jbagAdapter.getView(i, null, null);
-            cat4.addView(item);
-        }
-
-    }
     public void setInvisible(){
         cat1text.setVisibility(View.INVISIBLE);
         cat1.setVisibility(View.INVISIBLE);
@@ -263,11 +245,168 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         line_two.setVisibility(View.VISIBLE);
         line_three.setVisibility(View.VISIBLE);
     }
+    public void animation(){
+        storeSpinner.startAnimation(move_out);
+        store.setVisibility(View.VISIBLE);
+        store.startAnimation(fade_in);
+        btnKasse.setVisibility(View.VISIBLE);
+        btnKasse.startAnimation(fade_in);
+        city.setVisibility(View.VISIBLE);
+        city.startAnimation(fade_in);
+        citySpinner.startAnimation(move_out);
+
+    }
+    public void willys(){
+        for(Categories cat : categories){
+            Log.i("hej", cat.getName().toString());
+            cat1text.setText(categories.get(0).getName().toString());
+            cat2text.setText(categories.get(1).getName().toString());
+            cat3text.setText(categories.get(3).getName().toString());
+            cat4text.setText(categories.get(2).getName().toString());
+        }
+        JBagAdapter jbagAdapter = new JBagAdapter(getApplicationContext());
+        final int jadapterCount = jbagAdapter.getCount();
+        for (int i = 0; i < jadapterCount; i++) {
+            View item = jbagAdapter.getView(i, null, null);
+            cat4.addView(item);
+        }
+        DBagAdapter dbagAdapter = new DBagAdapter(getApplicationContext());
+        final int dadapterCount = dbagAdapter.getCount();
+        for (int i = 0; i < dadapterCount; i++) {
+            View item = dbagAdapter.getView(i, null, null);
+            cat3.addView(item);
+        }
+        MBagAdapter mbagAdapter = new MBagAdapter(getApplicationContext());
+        final int madapterCount = mbagAdapter.getCount();
+        for (int i = 0; i < madapterCount; i++) {
+            View item = mbagAdapter.getView(i, null, null);
+            cat2.addView(item);
+        }
+        FBagAdapter fbagAdapter = new FBagAdapter(getApplicationContext());
+        final int adapterCount = fbagAdapter.getCount();
+        for (int i = 0; i < adapterCount; i++) {
+            View item = fbagAdapter.getView(i, null, null);
+            cat1.addView(item);
+        }
+    }
+    public void maxi(){
+        for(Categories cat : categories){
+            Log.i("hej", cat.getName().toString());
+            cat1text.setText(categories.get(3).getName().toString());
+            cat2text.setText(categories.get(0).getName().toString());
+            cat3text.setText(categories.get(1).getName().toString());
+            cat4text.setText(categories.get(2).getName().toString());
+        }
+        JBagAdapter jbagAdapter = new JBagAdapter(getApplicationContext());
+        final int jadapterCount = jbagAdapter.getCount();
+        for (int i = 0; i < jadapterCount; i++) {
+            View item = jbagAdapter.getView(i, null, null);
+            cat4.addView(item);
+        }
+        DBagAdapter dbagAdapter = new DBagAdapter(getApplicationContext());
+        final int dadapterCount = dbagAdapter.getCount();
+        for (int i = 0; i < dadapterCount; i++) {
+            View item = dbagAdapter.getView(i, null, null);
+            cat1.addView(item);
+        }
+        MBagAdapter mbagAdapter = new MBagAdapter(getApplicationContext());
+        final int madapterCount = mbagAdapter.getCount();
+        for (int i = 0; i < madapterCount; i++) {
+            View item = mbagAdapter.getView(i, null, null);
+            cat3.addView(item);
+        }
+        FBagAdapter fbagAdapter = new FBagAdapter(getApplicationContext());
+        final int adapterCount = fbagAdapter.getCount();
+        for (int i = 0; i < adapterCount; i++) {
+            View item = fbagAdapter.getView(i, null, null);
+            cat2.addView(item);
+        }
+    }
+    public void citygross(){
+        for(Categories cat : categories){
+            Log.i("hej", cat.getName().toString());
+            cat1text.setText(categories.get(2).getName().toString());
+            cat2text.setText(categories.get(0).getName().toString());
+            cat3text.setText(categories.get(1).getName().toString());
+            cat4text.setText(categories.get(3).getName().toString());
+        }
+        JBagAdapter jbagAdapter = new JBagAdapter(getApplicationContext());
+        final int jadapterCount = jbagAdapter.getCount();
+        for (int i = 0; i < jadapterCount; i++) {
+            View item = jbagAdapter.getView(i, null, null);
+            cat1.addView(item);
+        }
+        DBagAdapter dbagAdapter = new DBagAdapter(getApplicationContext());
+        final int dadapterCount = dbagAdapter.getCount();
+        for (int i = 0; i < dadapterCount; i++) {
+            View item = dbagAdapter.getView(i, null, null);
+            cat4.addView(item);
+        }
+        MBagAdapter mbagAdapter = new MBagAdapter(getApplicationContext());
+        final int madapterCount = mbagAdapter.getCount();
+        for (int i = 0; i < madapterCount; i++) {
+            View item = mbagAdapter.getView(i, null, null);
+            cat3.addView(item);
+        }
+        FBagAdapter fbagAdapter = new FBagAdapter(getApplicationContext());
+        final int adapterCount = fbagAdapter.getCount();
+        for (int i = 0; i < adapterCount; i++) {
+            View item = fbagAdapter.getView(i, null, null);
+            cat2.addView(item);
+        }
+    }
+    public void lidl(){
+        for(Categories cat : categories){
+            Log.i("hej", cat.getName().toString());
+            cat1text.setText(categories.get(2).getName().toString());
+            cat2text.setText(categories.get(0).getName().toString());
+            cat3text.setText(categories.get(3).getName().toString());
+            cat4text.setText(categories.get(1).getName().toString());
+        }
+        JBagAdapter jbagAdapter = new JBagAdapter(getApplicationContext());
+        final int jadapterCount = jbagAdapter.getCount();
+        for (int i = 0; i < jadapterCount; i++) {
+            View item = jbagAdapter.getView(i, null, null);
+            cat1.addView(item);
+        }
+        DBagAdapter dbagAdapter = new DBagAdapter(getApplicationContext());
+        final int dadapterCount = dbagAdapter.getCount();
+        for (int i = 0; i < dadapterCount; i++) {
+            View item = dbagAdapter.getView(i, null, null);
+            cat3.addView(item);
+        }
+        MBagAdapter mbagAdapter = new MBagAdapter(getApplicationContext());
+        final int madapterCount = mbagAdapter.getCount();
+        for (int i = 0; i < madapterCount; i++) {
+            View item = mbagAdapter.getView(i, null, null);
+            cat4.addView(item);
+        }
+        FBagAdapter fbagAdapter = new FBagAdapter(getApplicationContext());
+        final int adapterCount = fbagAdapter.getCount();
+        for (int i = 0; i < adapterCount; i++) {
+            View item = fbagAdapter.getView(i, null, null);
+            cat2.addView(item);
+        }
+    }
 
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == btnKasse){
+            Intent intent = getIntent();
+            overridePendingTransition(0, 0);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(intent);
+            showProgressDialog();
+
+        }
     }
 }
 
