@@ -175,10 +175,16 @@
 <?php
  $foodbasket = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/".$_SESSION['id']),true); 
  $foodbasket_total = count($foodbasket['items']);
+ if($foodbasket_total > 0){
+ 	$carticon = "img/fullcart.png";	
+ } else {
+ 	$carticon = "img/emptycart.png";	
+ }
+ 
  ?>    
     <div class="topright">        	 
 	    <a href="#"  id="searchItem_" >
-	    <i class="glyphicon glyphicon-shopping-cart carticon"></i></a>
+	    <img src="<?php echo $carticon ?>"></a>
 	    	<span class="badge cartbadge"><?php echo $foodbasket_total ?></span>
     </div>	
     <div id="content_">
@@ -200,6 +206,7 @@
 				  <tbody>
 		<?php foreach ($foodbasket["items"] as $arrayitem) {
 	  			echo '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td><td><a id="basketitem_'.$arrayitem["id"].'"><i class="glyphicon glyphicon-trash"></i></a></td></tr>';
+	  			//echo '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td><td><a id="basketitem_'.$arrayitem["id"].'"><img src="img/emptycart.png"></a></td></tr>';
 	  			echo '<script>
 						$(\'#basketitem_'.$arrayitem["id"].'\').click(function(){
 							/*var answer = confirm(\'Vill du verkligen ta bort '.$arrayitem["name"].'?\');
