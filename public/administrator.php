@@ -41,6 +41,7 @@ if($privilege == 1){
         </section>
 
     </div>
+<<<<<<< HEAD
 
 
     <div class="col-md-6 col-md-offset-0">
@@ -67,6 +68,8 @@ if($privilege == 1){
         
         </section>
     </div>
+=======
+>>>>>>> b67d8dc91385d9839aac786101c15ce828ec2220
 </div>
 
 <?php require_once(ROOT_PATH.'/footer.php'); ?>

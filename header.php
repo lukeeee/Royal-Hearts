@@ -173,30 +173,34 @@
     </header>
     <body>
 <?php
- $foodbasket = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/".$_SESSION['id']),true); 
- $foodbasket_total = count($foodbasket['items']);
- if($foodbasket_total > 0){
- 	$carticon = "img/fullcart.png";	
- } else {
- 	$carticon = "img/emptycart.png";	
- }
+if(isset($_SESSION["id"])){
+	$foodbasket = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/".$_SESSION['id']),true); 
+ 	$foodbasket_total = count($foodbasket['items']);
+ 	if($foodbasket_total > 0){
+ 		$carticon = "img/fullcart.png";	
+ 	} else {
+ 		$carticon = "img/emptycart.png";	
+	}
+}else{
+	$carticon = "img/emptycart.png";	
+}
  
  ?>    
     <div class="topright">        	 
 	    <a href="#"  id="searchItem_" >
 	    <img src="<?php echo $carticon ?>"></a>
-	    	<span class="badge cartbadge"><?php echo $foodbasket_total ?></span>
+	    	<span class="badge cartbadge"><?php if(isset($foodbasket_total))echo $foodbasket_total ?></span>
     </div>	
     <div id="content_">
-	    <?php if($foodbasket_total > 0) : ?>
+	    <?php if(isset($foodbasket_total))if($foodbasket_total > 0) : ?>
 	    <table class="table">
-				  	<th>Produkt</th><th>Antal</th><th><a id="basketuser_<?php echo $_SESSION['id'] ?>"><i class="glyphicon glyphicon-trash"></i></a></th>
+				  	<th>Produkt</th><th>Antal</th><th><a id="basketuser_<?php if(isset($_SESSION['id']))echo $_SESSION['id'] ?>"><i class="glyphicon glyphicon-trash"></i></a></th>
 				  	 <script>
-        $('#basketuser_<?php echo $_SESSION['id'] ?>').click(function(){
+        $('#basketuser_<?php if(isset($_SESSION['id']))echo $_SESSION['id'] ?>').click(function(){
 							var answer = confirm('Vill du verkligen ta bort hela matkassen?');
 							if (answer)
 							{
-							  	window.location = "run.php?removeentirefrombasket=yes&userid=<?php echo $_SESSION['id'] ?>";
+							  	window.location = "run.php?removeentirefrombasket=yes&userid=<?php if(isset($_SESSION['id'])) echo $_SESSION['id'] ?>";
 							}else{
 							  console.log('cancel');
 							}
@@ -204,7 +208,9 @@
         </script>
 				  </thead>
 				  <tbody>
-		<?php foreach ($foodbasket["items"] as $arrayitem) {
+		<?php 
+		if(isset($foodbasket)){
+		foreach ($foodbasket["items"] as $arrayitem) {
 	  			echo '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td><td><a id="basketitem_'.$arrayitem["id"].'"><i class="glyphicon glyphicon-trash"></i></a></td></tr>';
 	  			//echo '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td><td><a id="basketitem_'.$arrayitem["id"].'"><img src="img/emptycart.png"></a></td></tr>';
 	  			echo '<script>
@@ -222,6 +228,8 @@
 					});
 					</script>';
 	  		  }
+			  
+		}
 		 ?>
 				  </tbody>
 		</table>
