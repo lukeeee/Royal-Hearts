@@ -48,7 +48,7 @@
             android:hint="tex. pelle_85"
             android:singleLine="true"
             android:maxLength="30"
-            android:background="@drawable/shape"
+            android:background="@drawable/plain_white"
             android:ems="10"
             android:id="@+id/usernameInput"
             android:layout_gravity="center_horizontal" />
@@ -68,16 +68,13 @@
             android:layout_height="45dp"
             android:paddingLeft="10dp"
             android:inputType="textPassword"
-            android:hint="5-10 bokstäver"
+            android:hint="skriv lösenord"
             android:singleLine="true"
             android:maxLength="30"
-            android:background="@drawable/shape"
+            android:background="@drawable/plain_white"
             android:ems="10"
             android:id="@+id/passwordInput"
             android:layout_gravity="center_horizontal" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="30dp"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="75dp"
@@ -85,7 +82,9 @@
             android:textSize="25dp"
             android:background="@drawable/button"
             android:text="Logga In"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"/>
 
         </LinearLayout>
     </LinearLayout>

@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import se.group1.royalhearts.Json.GetAllCategories;
 import se.group1.royalhearts.Json.GetAllCities;
 import se.group1.royalhearts.Json.GetAllDairies;
-import se.group1.royalhearts.Json.GetAllDairybaskets;
-import se.group1.royalhearts.Json.GetAllJunkbaskets;
 import se.group1.royalhearts.Json.GetAllJunkfoods;
-import se.group1.royalhearts.Json.GetAllMeatbaskets;
 import se.group1.royalhearts.Json.GetAllMeats;
-import se.group1.royalhearts.Json.GetAllVeglists;
 import se.group1.royalhearts.Json.GetAllVegetables;
+import se.group1.royalhearts.Json.GetDBagByUser;
+import se.group1.royalhearts.Json.GetFBagByUser;
+import se.group1.royalhearts.Json.GetJBagByUser;
+import se.group1.royalhearts.Json.GetMBagByUser;
 import se.group1.royalhearts.Json.GetStoresByCity;
 
 
@@ -29,10 +29,10 @@ public class JsonManager {
     public static ArrayList<Junkfoods> junkfoods = new ArrayList<Junkfoods>();
     public static ArrayList<Cities> cities = new ArrayList<Cities>();
     public static ArrayList<Stores> stores = new ArrayList<Stores>();
-    public static ArrayList<Dairybaskets> dairybaskets = new ArrayList<Dairybaskets>();
-    public static ArrayList<Meatbaskets> meatbaskets = new ArrayList<Meatbaskets>();
-    public static ArrayList<Junkfoodbaskets> junkfoodbaskets = new ArrayList<Junkfoodbaskets>();
-    public static ArrayList<Veglists> veglists = new ArrayList<Veglists>();
+    public static ArrayList<FBags> fbags = new ArrayList<FBags>();
+    public static ArrayList<JBags> jbags = new ArrayList<JBags>();
+    public static ArrayList<DBags> dbags = new ArrayList<DBags>();
+    public static ArrayList<MBags> mbags = new ArrayList<MBags>();
 
     public static void updateEverything() {
         try {
@@ -43,10 +43,10 @@ public class JsonManager {
             updateJunkfoods();
             updateCities();
             updateStores(1);
-            updateDairybaskets(1);
-            updateMeatbaskets(1);
-            updateJunkfoodbaskets(1);
-            updateVeglists();
+            updateFBags(1);
+            updateJBags(1);
+            updateDBags(1);
+            updateMBags(1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -81,21 +81,21 @@ public class JsonManager {
         GetStoresByCity task = new GetStoresByCity();
         task.execute("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/getbycity/" + cityId);
     }
-    public static void updateDairybaskets(int userId) throws IOException, JSONException {
-        GetAllDairybaskets task = new GetAllDairybaskets();
-        task.execute("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/5/" + userId);
+    public static void updateFBags(int userId) throws IOException, JSONException {
+        GetFBagByUser task = new GetFBagByUser();
+        task.execute("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/2/" + HelperClass.User.userId);
     }
-    public static void updateMeatbaskets(int userId) throws IOException, JSONException {
-        GetAllMeatbaskets task = new GetAllMeatbaskets();
-        task.execute("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/3/" + userId);
+    public static void updateJBags(int userId) throws IOException, JSONException {
+        GetJBagByUser task = new GetJBagByUser();
+        task.execute("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/4/" + HelperClass.User.userId);
     }
-    public static void updateJunkfoodbaskets(int userId) throws IOException, JSONException {
-        GetAllJunkbaskets task = new GetAllJunkbaskets();
-        task.execute("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/4/" + userId);
+    public static void updateDBags(int userId) throws IOException, JSONException {
+        GetDBagByUser task = new GetDBagByUser();
+        task.execute("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/5/" + HelperClass.User.userId);
     }
-    public static void updateVeglists() throws IOException, JSONException {
-        GetAllVeglists task = new GetAllVeglists();
-        task.execute("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/2/18");
+    public static void updateMBags(int userId) throws IOException, JSONException {
+        GetMBagByUser task = new GetMBagByUser();
+        task.execute("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/3/" + HelperClass.User.userId);
     }
 
 
@@ -155,37 +155,37 @@ public class JsonManager {
         }
         return stores;
     }
-    public static ArrayList<Dairybaskets> getDairybaskets() {
+    public static ArrayList<FBags> getFBags() {
         try {
-            updateDairybaskets(1);
+            updateFBags(1);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return dairybaskets;
+        return fbags;
     }
-    public static ArrayList<Meatbaskets> getMeatbaskets() {
+    public static ArrayList<JBags> getJBags() {
         try {
-            updateMeatbaskets(1);
+            updateJBags(1);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return meatbaskets;
+        return jbags;
     }
-    public static ArrayList<Junkfoodbaskets> getJunkfoodbaskets() {
+    public static ArrayList<DBags> getDBags() {
         try {
-            updateJunkfoodbaskets(1);
+            updateDBags(1);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return junkfoodbaskets;
+        return dbags;
     }
-    public static ArrayList<Veglists> getVeglists() {
+    public static ArrayList<MBags> getMBags() {
         try {
-            updateVeglists();
+            updateMBags(1);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return veglists;
+        return mbags;
     }
 
 
@@ -342,19 +342,18 @@ public class JsonManager {
         }
         return null;
     }
-    public static ArrayList<Dairybaskets> getDairybasketsFromJson(String json) {
+    public static ArrayList<FBags> getFBagsFromJson(String json) {
         try {
+            JSONObject Bagsobj = new JSONObject(json);
+            JSONArray BagsArr = Bagsobj.getJSONArray("items");
+            ArrayList<FBags> listToReturn = new ArrayList<FBags>();
 
-            JSONArray daibasketsArr = new JSONArray(json);
-            ArrayList<Dairybaskets> listToReturn = new ArrayList<Dairybaskets>();
-
-            for (int i = 0; i < daibasketsArr.length(); i++) {
-                JSONObject royalHeartObj = daibasketsArr.getJSONObject(i);
-
+            for (int i = 0; i < BagsArr.length(); i++) {
+                JSONObject royalHeartObj = BagsArr.getJSONObject(i);
 
                 int id = royalHeartObj.getInt("id");
                 String name = royalHeartObj.getString("name");
-                listToReturn.add(new Dairybaskets(id, name));
+                listToReturn.add(new FBags(id, name));
                 ;
             }
             return listToReturn;
@@ -364,19 +363,18 @@ public class JsonManager {
         }
         return null;
     }
-    public static ArrayList<Meatbaskets> getMeatbasketsFromJson(String json) {
+    public static ArrayList<JBags> getJBagsFromJson(String json) {
         try {
+            JSONObject Bagsobj = new JSONObject(json);
+            JSONArray BagsArr = Bagsobj.getJSONArray("items");
+            ArrayList<JBags> listToReturn = new ArrayList<JBags>();
 
-            JSONArray MeatbasketsArr = new JSONArray(json);
-            ArrayList<Meatbaskets> listToReturn = new ArrayList<Meatbaskets>();
-
-            for (int i = 0; i < MeatbasketsArr.length(); i++) {
-                JSONObject royalHeartObj = MeatbasketsArr.getJSONObject(i);
-
+            for (int i = 0; i < BagsArr.length(); i++) {
+                JSONObject royalHeartObj = BagsArr.getJSONObject(i);
 
                 int id = royalHeartObj.getInt("id");
                 String name = royalHeartObj.getString("name");
-                listToReturn.add(new Meatbaskets(id, name));
+                listToReturn.add(new JBags(id, name));
                 ;
             }
             return listToReturn;
@@ -386,19 +384,18 @@ public class JsonManager {
         }
         return null;
     }
-    public static ArrayList<Junkfoodbaskets> getJunkfoodbasketsFromJson(String json) {
+    public static ArrayList<DBags> getDBagsFromJson(String json) {
         try {
+            JSONObject Bagsobj = new JSONObject(json);
+            JSONArray BagsArr = Bagsobj.getJSONArray("items");
+            ArrayList<DBags> listToReturn = new ArrayList<DBags>();
 
-            JSONArray JunkbasketsArr = new JSONArray(json);
-            ArrayList<Junkfoodbaskets> listToReturn = new ArrayList<Junkfoodbaskets>();
-
-            for (int i = 0; i < JunkbasketsArr.length(); i++) {
-                JSONObject royalHeartObj = JunkbasketsArr.getJSONObject(i);
-
+            for (int i = 0; i < BagsArr.length(); i++) {
+                JSONObject royalHeartObj = BagsArr.getJSONObject(i);
 
                 int id = royalHeartObj.getInt("id");
                 String name = royalHeartObj.getString("name");
-                listToReturn.add(new Junkfoodbaskets(id, name));
+                listToReturn.add(new DBags(id, name));
                 ;
             }
             return listToReturn;
@@ -408,19 +405,18 @@ public class JsonManager {
         }
         return null;
     }
-    public static ArrayList<Veglists> getVeglistsFromJson(String json) {
+    public static ArrayList<MBags> getMBagsFromJson(String json) {
         try {
+            JSONObject Bagsobj = new JSONObject(json);
+            JSONArray BagsArr = Bagsobj.getJSONArray("items");
+            ArrayList<MBags> listToReturn = new ArrayList<MBags>();
 
-            JSONArray VeglistsArr = new JSONArray(json);
-            ArrayList<Veglists> listToReturn = new ArrayList<Veglists>();
-
-            for (int i = 0; i < VeglistsArr.length(); i++) {
-                JSONObject royalHeartObj = VeglistsArr.getJSONObject(i);
-
+            for (int i = 0; i < BagsArr.length(); i++) {
+                JSONObject royalHeartObj = BagsArr.getJSONObject(i);
 
                 int id = royalHeartObj.getInt("id");
                 String name = royalHeartObj.getString("name");
-                listToReturn.add(new Veglists(id, name));
+                listToReturn.add(new MBags(id, name));
                 ;
             }
             return listToReturn;

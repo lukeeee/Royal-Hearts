@@ -8,10 +8,13 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,6 +32,8 @@ public class Login extends Activity implements View.OnClickListener {
     private ProgressDialog progressDialog;
     private JSONLogin jLoginPoster = null;
     String userName;
+    Animation jiggle, blink;
+    private static int BLINK = 60000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +41,6 @@ public class Login extends Activity implements View.OnClickListener {
         setContentView(R.layout.login_layout);
         login = (Button)findViewById(R.id.login);
         login.requestFocus();
-        login.getBackground().setAlpha(150);
         usernameInput = (EditText)findViewById(R.id.usernameInput);
         passwordInput = (EditText)findViewById(R.id.passwordInput);
         username = (TextView)findViewById(R.id.username);
@@ -44,6 +48,19 @@ public class Login extends Activity implements View.OnClickListener {
         login.setOnClickListener(this);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        jiggle = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.jiggle);
+        blink = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink);
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                username.startAnimation(blink);
+                usernameInput.startAnimation(blink);
+                password.startAnimation(blink);
+                passwordInput.startAnimation(blink);
+            }}, BLINK);
+
 
         try{
             Intent intent = getIntent();
@@ -65,6 +82,13 @@ public class Login extends Activity implements View.OnClickListener {
         startActivity(i);
         HelperClass.User.userName = userName;
         this.finish();
+
+    }
+    public void failed() {
+        username.setText("*** Användarnamn");
+        username.setTextColor(getResources().getColor(R.color.colorRed));
+        password.setText("*** Lösenord");
+        password.setTextColor(getResources().getColor(R.color.colorRed));
 
     }
 
@@ -105,7 +129,8 @@ public class Login extends Activity implements View.OnClickListener {
         userName = usernameInput.getText().toString();
         String userPass = passwordInput.getText().toString();
         if (v == login){
-
+            login.startAnimation(jiggle);
+            SoundHelper.vibrate(this);
                 jLoginPoster = new JSONLogin(getApplicationContext(), this, userName, userPass);
                 // if we are connected
                 if(jLoginPoster.isConnected() != false)
@@ -117,10 +142,7 @@ public class Login extends Activity implements View.OnClickListener {
 
             } else {
                 Toast.makeText(this, "Ditt Användarnamn eller Lösenord är Fel", 1000);
-                username.setTextColor(getResources().getColor(R.color.colorRed));
-                username.setText("*** Användarnamn");
-                password.setTextColor(getResources().getColor(R.color.colorRed));
-                password.setText("*** Lösenord");
+
 
             }
 

@@ -26,48 +26,52 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center">
-        <Spinner
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:background="@drawable/button"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginLeft="100dp"
-            android:id="@+id/CitySpinner"
-            android:dropDownSelector="@drawable/arrow_down"/>
+            <Spinner
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginLeft="100dp"
+                android:id="@+id/CitySpinner"
+                android:dropDownSelector="@drawable/arrow_down"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Välj Stad"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"/>
-        </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Välj Stad"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="5dp"/>
-        <RelativeLayout
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center">
-        <Spinner
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:background="@drawable/button"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginLeft="100dp"
-            android:id="@+id/StoreSpinner"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Välj Butik"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"/>
-    </RelativeLayout>
+            <Spinner
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="100dp"
+                android:id="@+id/StoreSpinner"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Välj Butik"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="60dp"
+                android:id="@+id/store"/>
+
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="90dp"
+                android:text="Hämta min kasse"
+                android:background="@drawable/button"
+                android:textSize="30dp"
+                android:id="@+id/btnKasse"/>
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
@@ -89,8 +93,7 @@
             android:layout_alignParentTop="true"/>
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#fff"/>
+            android:layout_height="2dp"/>
         <LinearLayout
             android:layout_marginTop="4dp"
             android:layout_width="300dp"
@@ -102,7 +105,8 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="#fff"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:id="@+id/line_one"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -118,8 +122,7 @@
             android:layout_alignParentTop="true"/>
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#fff"/>
+            android:layout_height="2dp"/>
         <LinearLayout
             android:layout_marginTop="4dp"
             android:layout_width="300dp"
@@ -131,7 +134,8 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="#fff"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:id="@+id/line_two"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -147,8 +151,7 @@
             android:layout_alignParentTop="true"/>
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#fff"/>
+            android:layout_height="2dp"/>
         <LinearLayout
             android:layout_marginTop="4dp"
             android:layout_width="300dp"
@@ -160,7 +163,8 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="#fff"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:id="@+id/line_three"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -176,8 +180,7 @@
             android:layout_alignParentTop="true"/>
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#fff"/>
+            android:layout_height="2dp"/>
         <LinearLayout
             android:layout_marginTop="4dp"
             android:layout_width="300dp"

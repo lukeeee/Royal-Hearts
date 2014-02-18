@@ -15,9 +15,9 @@ import java.nio.charset.Charset;
 import se.group1.royalhearts.JsonManager;
 
 /**
- * Created by Lukas on 2014-02-10.
+ * Created by Lukas on 2014-02-17.
  */
-public class GetAllDairybaskets extends AsyncTask<String, Void, String> {
+public class GetDBagByUser  extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... strings) {
@@ -32,8 +32,8 @@ public class GetAllDairybaskets extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         try {
-            JsonManager.dairybaskets.clear();
-            JsonManager.dairybaskets.addAll(JsonManager.getDairybasketsFromJson(result));
+            JsonManager.dbags.clear();
+            JsonManager.dbags.addAll(JsonManager.getDBagsFromJson(result));
         } catch (Exception e) {}
     }
 
@@ -56,3 +56,4 @@ public class GetAllDairybaskets extends AsyncTask<String, Void, String> {
         return sb.toString();
     }
 }
+

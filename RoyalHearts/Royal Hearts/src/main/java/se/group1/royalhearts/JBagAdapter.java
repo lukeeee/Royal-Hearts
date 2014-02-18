@@ -1,6 +1,7 @@
 package se.group1.royalhearts;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,27 +12,27 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Lukas on 2014-02-10.
+ * Created by Lukas on 2014-02-11.
  */
-public class MeatbasketAdapter extends BaseAdapter {
-    ArrayList<Junkfoodbaskets> meatbaskets;
+public class JBagAdapter extends BaseAdapter {
+    ArrayList<JBags> jbags;
     Context context;
 
 
 
-    public MeatbasketAdapter(Context context, View.OnClickListener myTurnsListener){
+    public JBagAdapter(Context context){
         this.context = context;
-        this.meatbaskets = (ArrayList) JsonManager.getMeatbaskets();
+        this.jbags = (ArrayList) JsonManager.getJBags();
     }
 
     @Override
     public int getCount() {
-        return meatbaskets.size();
+        return jbags.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return meatbaskets.get(i);
+        return jbags.get(i);
     }
 
     @Override
@@ -53,14 +54,19 @@ public class MeatbasketAdapter extends BaseAdapter {
         }
         holder = new ViewHolder();
         v.setTag(holder);
+        for(JBags ba : jbags){
+            Log.i("sillar", ba.getName().toString());
+            Log.i("sillar", Integer.toString(ba.getId()));
+        }
 
-        holder.groText = (TextView)v.findViewById(R.id.groText);
+        holder.groText = (TextView)v.findViewById(R.id.grocText);
         holder.cBox = (CheckBox)v.findViewById(R.id.cBox);
-        Meatbaskets meat = JsonManager.getMeatbaskets().get(i);
+        JBags baga = JsonManager.getJBags().get(i);
 
-        holder.groText.setText(meat.getName().toString());
-        holder.cBox.setTag(meat.getName());
-        v.setTag(meatbaskets.get(i));
+
+        holder.groText.setText(baga.getName());
+        holder.cBox.setTag(baga.getName());
+        v.setTag(jbags.get(i));
 
         return v;
     }

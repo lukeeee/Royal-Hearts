@@ -27,7 +27,6 @@ import java.net.SocketTimeoutException;
 
 public class JSONLogin {
     private Context context;
-    private User user;
     private String username;
     private String password;
     private Login callback;
@@ -138,79 +137,32 @@ public class JSONLogin {
             } else if(result.contains("Did not work!")){
                 callback.hideProgressDialog();
             } else {
-                 int userId = 0;
-                // String userIdentifier = null;
-                 //String userCountryCode = null;
-
                  try {
                      JSONObject jsonObject = new JSONObject(result);
 
                      HelperClass.User.userId = Integer.parseInt(jsonObject.getString("id"));
-                     Log.i("alban", Integer.toString(HelperClass.User.userId));
-
-                     //userIdentifier = jsonObject.getString("identifier");
-                     //userCountryCode = jsonObject.getString("country");
-
-                 } catch (JSONException e) {
-                     Log.e("Exception JSON: ", e.getMessage());
-                 }
+                     Log.i("albann", Integer.toString(HelperClass.User.userId));
 
 
-                 if(userId == -1){
+                 if(HelperClass.User.userId == -1){
                      //wrong username or password
                      callback.hideProgressDialog();
-                     //callback.showFeedbackToast("Wrong username or password!, Please try again.");
-                 } else if (userId != -1){
+                     callback.failed();
+                     callback.showErrorDialog("Login failed, wrong email or password!");
+
+                 }else if (HelperClass.User.userId != -1){
                      // user logged in
 
                      callback.hideProgressDialog();
                      callback.sucess();
                  }
+                 } catch (JSONException e) {
+                     Log.e("Exception JSON: ", e.getMessage());
+                 }
 
             }
         }
     }
-
-    /* if(result.contains("Did not work!")){
-                callback.hideProgressDialog();
-                callback.showErrorDialog("A error has occurred! Please try again.");
-            } else if (result.contains("Server Error")){
-                callback.hideProgressDialog();
-                callback.showErrorDialog("A server error has occurred! Please try again.");
-            } else if (result.contains("Server Timeout")){
-                callback.hideProgressDialog();
-                callback.showErrorDialog("The server is not responding! Please try again.");
-            } else {
-                int userId = 0;
-                String userIdentifier = null;
-                String userCountryCode = null;
-
-                try {
-                    JSONObject jsonObject = new JSONObject(result);
-
-                    userId = Integer.parseInt(jsonObject.getString("userid"));
-                    userIdentifier = jsonObject.getString("identifier");
-                    userCountryCode = jsonObject.getString("country");
-
-                } catch (JSONException e) {
-                    Log.e("Exception JSON: ", e.getMessage());
-                }
-
-
-                if(userId == -1){
-                    // wrong username or password
-                    callback.hideProgressDialog();
-                    callback.showFeedbackToast("Wrong username or password!, Please try again.");
-                } else if (userId != -1 && userId != 0 && userIdentifier != null
-                        && userCountryCode != null){
-                    // user logged in
-
-                    User.UserDetails.setIdentifier(userIdentifier);
-                    User.UserDetails.setUserId(userId);
-                    User.UserDetails.setUserCountryCode(userCountryCode);
-                    callback.googleRegister();
-                }
-            }*/
 
 
 

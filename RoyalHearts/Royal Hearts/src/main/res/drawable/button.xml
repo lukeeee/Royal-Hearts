@@ -3,4 +3,5 @@
     <item android:state_pressed="true"
         android:drawable="@drawable/shape_pressed" />
     <item android:drawable="@drawable/shape" />
+    <item android:drawable="@drawable/shadow"/>
 </selector>

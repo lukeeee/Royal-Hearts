@@ -3,34 +3,34 @@ package se.group1.royalhearts;
 import java.util.ArrayList;
 
 /**
- * Created by Lukas on 2014-02-10.
+ * Created by Lukas on 2014-02-17.
  */
-public class Veglists {
+public class DBags {
     private int id;
     private String name;
-    private ArrayList<Veglists> vegBasList;
+    private ArrayList<DBags> dbagList;
 
 
-    public Veglists(int id, String name, ArrayList<Veglists> vegBasList){
+    public DBags(int id, String name, ArrayList<DBags> dbagList){
         this.id = id;
         this.name = name;
-        this.vegBasList = vegBasList;
+        this.dbagList = dbagList;
     }
 
-    public Veglists(int id, String name){
+    public DBags(int id, String name){
         this.id = id;
         this.name = name;
     }
 
-    public Veglists(){
+    public DBags(){
     }
 
-    public ArrayList<Veglists> getVegBasList() {
-        return vegBasList;
+    public ArrayList<DBags> getdbagList() {
+        return dbagList;
     }
 
-    public void setVegBasList(ArrayList<Veglists> vegBasList) {
-        this.vegBasList = vegBasList;
+    public void setdbagList(ArrayList<DBags> dbagList) {
+        this.dbagList = dbagList;
     }
 
     public int getId() {
@@ -49,3 +49,4 @@ public class Veglists {
         this.name = name;
     }
 }
+

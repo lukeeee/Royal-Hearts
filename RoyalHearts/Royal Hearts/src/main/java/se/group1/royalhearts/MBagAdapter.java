@@ -12,27 +12,27 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Lukas on 2014-02-10.
+ * Created by Lukas on 2014-02-17.
  */
-public class VegbasketAdapter extends BaseAdapter {
-    ArrayList<Veglists> veglists;
+public class MBagAdapter extends BaseAdapter {
+    ArrayList<MBags> mbags;
     Context context;
 
 
 
-    public VegbasketAdapter(Context context, View.OnClickListener myTurnsListener){
+    public MBagAdapter(Context context){
         this.context = context;
-        this.veglists = (ArrayList) JsonManager.getVeglists();
+        this.mbags = (ArrayList) JsonManager.getMBags();
     }
 
     @Override
     public int getCount() {
-        return veglists.size();
+        return mbags.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return veglists.get(i);
+        return mbags.get(i);
     }
 
     @Override
@@ -54,15 +54,19 @@ public class VegbasketAdapter extends BaseAdapter {
         }
         holder = new ViewHolder();
         v.setTag(holder);
+        for(MBags ba : mbags){
+            Log.i("sillar", ba.getName().toString());
+            Log.i("sillar", Integer.toString(ba.getId()));
+        }
 
         holder.groText = (TextView)v.findViewById(R.id.grocText);
         holder.cBox = (CheckBox)v.findViewById(R.id.cBox);
-        Veglists vege = JsonManager.getVeglists().get(i);
+        MBags baga = JsonManager.getMBags().get(i);
 
-        holder.groText.setText(vege.getName().toString());
-        Log.i("dream", vege.getName().toString());
-        holder.cBox.setTag(vege.getName());
-        v.setTag(veglists.get(i));
+
+        holder.groText.setText(baga.getName());
+        holder.cBox.setTag(baga.getName());
+        v.setTag(mbags.get(i));
 
         return v;
     }

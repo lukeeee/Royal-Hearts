@@ -1,6 +1,7 @@
 package se.group1.royalhearts;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,27 +12,27 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Lukas on 2014-02-10.
+ * Created by Lukas on 2014-02-17.
  */
-public class DairybasketAdapter extends BaseAdapter {
-    ArrayList<Dairybaskets> dairybaskets;
+public class DBagAdapter extends BaseAdapter {
+    ArrayList<DBags> dbags;
     Context context;
 
 
 
-    public DairybasketAdapter(Context context, View.OnClickListener myTurnsListener){
+    public DBagAdapter(Context context){
         this.context = context;
-        this.dairybaskets = (ArrayList) JsonManager.getDairybaskets();
+        this.dbags = (ArrayList) JsonManager.getDBags();
     }
 
     @Override
     public int getCount() {
-        return dairybaskets.size();
+        return dbags.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return dairybaskets.get(i);
+        return dbags.get(i);
     }
 
     @Override
@@ -53,16 +54,20 @@ public class DairybasketAdapter extends BaseAdapter {
         }
         holder = new ViewHolder();
         v.setTag(holder);
+        for(DBags ba : dbags){
+            Log.i("sillar", ba.getName().toString());
+            Log.i("sillar", Integer.toString(ba.getId()));
+        }
 
-        holder.groText = (TextView)v.findViewById(R.id.groText);
+        holder.groText = (TextView)v.findViewById(R.id.grocText);
         holder.cBox = (CheckBox)v.findViewById(R.id.cBox);
-        Dairybaskets foo = JsonManager.getDairybaskets().get(i);
+        DBags baga = JsonManager.getDBags().get(i);
 
-        holder.groText.setText(foo.getName().toString());
-        holder.cBox.setTag(foo.getName());
-        v.setTag(dairybaskets.get(i));
+
+        holder.groText.setText(baga.getName());
+        holder.cBox.setTag(baga.getName());
+        v.setTag(dbags.get(i));
 
         return v;
     }
 }
-

@@ -1,6 +1,7 @@
 package se.group1.royalhearts;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,27 +12,27 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Lukas on 2014-02-10.
+ * Created by Lukas on 2014-02-11.
  */
-public class JunkbasketAdapter extends BaseAdapter {
-    ArrayList<Junkfoodbaskets> junkfoodbaskets;
+public class FBagAdapter extends BaseAdapter {
+    ArrayList<FBags> bags;
     Context context;
 
 
 
-    public JunkbasketAdapter(Context context, View.OnClickListener myTurnsListener){
+    public FBagAdapter(Context context){
         this.context = context;
-        this.junkfoodbaskets = (ArrayList) JsonManager.getJunkfoodbaskets();
+        this.bags = (ArrayList) JsonManager.getFBags();
     }
 
     @Override
     public int getCount() {
-        return junkfoodbaskets.size();
+        return bags.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return junkfoodbaskets.get(i);
+        return bags.get(i);
     }
 
     @Override
@@ -53,14 +54,19 @@ public class JunkbasketAdapter extends BaseAdapter {
         }
         holder = new ViewHolder();
         v.setTag(holder);
+        for(FBags ba : bags){
+            Log.i("sillar", ba.getName().toString());
+            Log.i("sillar", Integer.toString(ba.getId()));
+        }
 
-        holder.groText = (TextView)v.findViewById(R.id.groText);
+        holder.groText = (TextView)v.findViewById(R.id.grocText);
         holder.cBox = (CheckBox)v.findViewById(R.id.cBox);
-        Junkfoodbaskets junk = JsonManager.getJunkfoodbaskets().get(i);
+        FBags baga = JsonManager.getFBags().get(i);
 
-        holder.groText.setText(junk.getName().toString());
-        holder.cBox.setTag(junk.getName());
-        v.setTag(junkfoodbaskets.get(i));
+
+        holder.groText.setText(baga.getName());
+        holder.cBox.setTag(baga.getName());
+        v.setTag(bags.get(i));
 
         return v;
     }

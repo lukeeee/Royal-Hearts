@@ -15,9 +15,9 @@ import java.nio.charset.Charset;
 import se.group1.royalhearts.JsonManager;
 
 /**
- * Created by Lukas on 2014-02-10.
+ * Created by Lukas on 2014-02-11.
  */
-public class GetAllVeglists extends AsyncTask<String, Void, String> {
+public class GetFBagByUser extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... strings) {
@@ -32,8 +32,8 @@ public class GetAllVeglists extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         try {
-            JsonManager.veglists.clear();
-            JsonManager.veglists.addAll(JsonManager.getVeglistsFromJson(result));
+            JsonManager.fbags.clear();
+            JsonManager.fbags.addAll(JsonManager.getFBagsFromJson(result));
         } catch (Exception e) {}
     }
 
