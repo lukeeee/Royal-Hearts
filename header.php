@@ -137,7 +137,7 @@
 			  text-align: center;
 			}
 			.adm {
-				margin:2px;
+				margin-right:4px;
 			}
 		</style>
     </head>
