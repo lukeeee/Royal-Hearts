@@ -23,12 +23,12 @@ if($privilege == 1){
  	<div class="col-md-2">
   	<div class="list-group">
     <a href="administrator.php" class="list-group-item active">Kategorier</a>
-  	<a href="admin_edit_store" class="list-group-item">Butiker</a>				
+  	<a href="admin_edit_store.php" class="list-group-item">Butiker</a>				
   	<a href="edit_user.php" class="list-group-item">Användare</a>
     <a href="admin_suppliers.php" class="list-group-item">Grossister</a>
 	</div>
   	</div>
-    <div class="col-md-4 col-md-offset-4">
+    <div class="col-md-4 col-md-offset-2">
     <div><h3>Redigera Kategorier</h3></div>
   	    <section>
         

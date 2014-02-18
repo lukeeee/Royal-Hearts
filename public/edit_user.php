@@ -40,8 +40,17 @@
 <br/>
 
 <div class="row">
+	<div class="col-md-1"></div>
+ 	<div class="col-md-2">
+  	<div class="list-group">
+    <a href="administrator.php" class="list-group-item">Kategorier</a>
+  	<a href="admin_edit_store.php" class="list-group-item">Butiker</a>				
+  	<a href="edit_user.php" class="list-group-item active">Användare</a>
+    <a href="admin_suppliers.php" class="list-group-item">Grossister</a>
+	</div>
+  	</div>	
   <div class="col-md-1"></div>
-  <div class="col-md-12">
+  <div class="col-md-8">
   	<div class="users-group">
     <h1>Användarens Info</h1>
     <hr>
@@ -64,9 +73,9 @@
 		echo '<div class="row inputCointainer"><form method="post" action="run.php?func=adm_adm_user_new" enctype="multipart/form-data">';
 					
 						
-						echo "<div  class='col-lg-3'><input class='form-control' type='text' name='username' placeholder='Användarensnamn' value='Användarensnamn' onfocus='clearText(this);'></div>";
-						echo "<div  class='col-lg-3'><input class='form-control' type='text' name='password' value='Lösenord' onfocus='clearText(this);'></div>";
-						echo "<div  class='col-lg-3'><input class='form-control col-lg-3' type='text' name='privilege' value='0' onfocus='clearText(this);'></div>";
+						echo "<div  class='col-lg-2'><input class='form-control' type='text' name='username' placeholder='Användarensnamn' value='Användarensnamn' onfocus='clearText(this);'></div>";
+						echo "<div  class='col-lg-2'><input class='form-control' type='text' name='password' value='Lösenord' onfocus='clearText(this);'></div>";
+						echo "<div  class='col-lg-2'><input class='form-control col-lg-3' type='text' name='privilege' value='0' onfocus='clearText(this);'></div>";
 						echo "<div  class='col-lg-2'><input class='btn btn-primary' type='submit' value='Lägga till'></div>";
 					
 						echo "</form></div><hr>";
@@ -76,11 +85,11 @@
                  {
                     echo '<div class="row inputCointainer"><form method="post" action="run.php?func=adm_adm_user_update" enctype="multipart/form-data">';
 					
-						echo "<div class='col-lg-12 '>User ID:".$user["id"]."</div>";
+						echo "<div class='col-lg-1 '>User ID:".$user["id"]."</div>";
 						echo "<input type='hidden' name='id' value='".$user["id"]."'>";
-						echo "<div  class='col-lg-3'><input class='form-control' type='text' name='username' value='".$user["username"]."'></div>";
-						echo "<div  class='col-lg-3'><input class='form-control' type='text' name='password'></div>";
-						echo "<div  class='col-lg-3'><input class='form-control' type='text' name='privilege' value='".$user["privilege"]."'></div>";
+						echo "<div  class='col-lg-2'><input class='form-control' type='text' name='username' value='".$user["username"]."'></div>";
+						echo "<div  class='col-lg-2'><input class='form-control' type='text' name='password'></div>";
+						echo "<div  class='col-lg-2'><input class='form-control' type='text' name='privilege' value='".$user["privilege"]."'></div>";
 						echo "<div  class='col-lg-1'><input class='btn btn-primary' type='submit' value='uppdatera'></div>";
 					
 						echo "</form></div><hr>";

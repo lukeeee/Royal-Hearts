@@ -23,12 +23,19 @@
  ?>
 
 <div class="row">
-      <div class="col-md-7 col-md-offset-4">
+	<div class="col-md-1"></div>
+ 	<div class="col-md-2">
+  	<div class="list-group">
+    <a href="administrator.php" class="list-group-item">Kategorier</a>
+  	<a href="admin_edit_store.php" class="list-group-item">Butiker</a>				
+  	<a href="edit_user.php" class="list-group-item">Användare</a>
+    <a href="admin_suppliers.php" class="list-group-item active">Grossister</a>
+	</div>
+  	</div>
+      <div class="col-md-6 col-md-offset-2">
           <div><h3>Redigera Suppliers</h3></div>
       </div>
-</div>
-
-<div class="col-md-3 col-md-offset-4">
+<div class="col-md-3 col-md-offset-2">
      <section>
      <?php
 		foreach($suppliers  as $supplier){
@@ -42,6 +49,7 @@
 
 		<div><a href="new_supplier.php">Ny Grossist</a></div>
      </section>
+</div>
 </div>
 
 <?php require_once(ROOT_PATH.'/footer.php'); ?>
