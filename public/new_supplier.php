@@ -13,7 +13,7 @@
 
 <div class="row">
     <div class="col-md-3 col-md-offset-5">
-        <h1>Lägg till Butiker</h1>
+        <h1>Lägg till Grossist</h1>
         <div id="storeForm">
             <form role="form" method="post" action="run.php?func=adm_adm_new_supp"><!--TODO: Action -> run.php-function for adding store-->
                 <div class="form-group">

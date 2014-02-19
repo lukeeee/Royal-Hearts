@@ -16,10 +16,6 @@
 		header("Location: /index.php");	
 	}
 	
-	
-	//$_SESSION['store'] = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true);
-	
-	
  ?>
 
 <div class="row">
@@ -33,7 +29,7 @@
 	</div>
   	</div>
       <div class="col-md-6 col-md-offset-2">
-          <div><h3>Redigera Suppliers</h3></div>
+          <div><h3>Redigera Grossister</h3></div>
       </div>
 <div class="col-md-3 col-md-offset-2">
      <section>
@@ -41,13 +37,12 @@
 		foreach($suppliers  as $supplier){
  			echo "<div><h4 hidden>".$supplier["id"]."</h4></div>";
 			echo "<div><h4>".$supplier["name"]."</h4></div>";
-			echo "<a class='btn btn-default' href='/admin_edit_supp.php?id=".$supplier['id']."&name=".$supplier['name']."'>Redigera</a>";
-   			echo "<a class='btn btn-danger' href='/run.php?id=".$supplier['id']."&func=adm_adm_supp_delete'>Delete</a></br>";
+			echo "<a class='btn btn-default adm' href='/admin_edit_supp.php?id=".$supplier['id']."&name=".$supplier['name']."'>Redigera</a>";
+   			echo "<a id='supp_delete_".$supplier['id']."' class='btn btn-danger adm' href='/run.php?id=".$supplier['id']."&func=adm_adm_supp_delete' onclick='return confirm(\"Är du säker på att du vill ta bort grossisten?\")'>Ta bort</a></br>";
 		}
- 
-?>
+	?>
 
-		<div><a href="new_supplier.php">Ny Grossist</a></div>
+		<div><h3><a href="new_supplier.php">Ny Grossist</a></h3></div>
      </section>
 </div>
 </div>
