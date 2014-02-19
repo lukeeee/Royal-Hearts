@@ -139,6 +139,12 @@
 			.adm {
 				margin-right:4px;
 			}
+			.cat-order-row {
+				padding-bottom:5px;
+			}
+			.cat-order-input {
+				width:150%;
+			}
 		</style>
     </head>
     <header>
