@@ -37,7 +37,7 @@
   </div>
   <div class="col-md-6">
   <?php if($itemsbycat != null || count($itemsbycat) != 0) : ?>
-  	<form class="form-horizontal" method="post" action="run.php">
+  	<form class="form-horizontal" method="post" action="run.php?func=addtobasket">
 <table class="table">
 <thead>
 	<tr>
@@ -51,6 +51,7 @@
 	<input type="hidden" name="userid" id="userid" value="<?php if(isset($_SESSION['id']))echo $_SESSION['id'] ?>">
 	<?php  foreach ($itemsbycat as $itembycat) : ?>
 	  			<tr>
+	  			<input type="hidden" name="item_<?php echo $itembycat['id'] ?>_catid" id="item_<?php echo $itembycat['id'] ?>_catid" value="<?php echo $itembycat['categoryID'] ?>">
 		  			<td><?php echo checkbox('checkbox', 'itemid[]', $itembycat['id']); ?></td>
 		  			<td><?php echo $itembycat["name"] ?></td>
 		  			<td><input id="quantity_<?php echo $itembycat['id'] ?>" name="quantity_<?php echo $itembycat['id'] ?>" class="inputsam" value="1"></td>

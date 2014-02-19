@@ -175,20 +175,34 @@
     <body>
 <?php
  
- $script = '';	
+ 
 if(isset($_SESSION["id"])){
 	$foodbasket = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/".$_SESSION['id']),true); 
  	$foodbasket_total = count($foodbasket['items']);
+
  	$script = '';
+
+ 	if($_SESSION['cat_id'] == 2){
+ 		$catimg = 'img/flying.png';
+ 	} else if ($_SESSION['cat_id'] == 3){
+ 		$catimg = 'img/chark.png';
+ 	} else if($_SESSION['cat_id'] == 4){
+ 		$catimg = 'img/snacks.png';
+ 	} else if($_SESSION['cat_id'] == 5){
+ 		$catimg = 'img/dairy.png';
+ 	} 
+
  	if($foodbasket_total > $_SESSION['foodbasket_total']){
- 	$script = "$(\"#b\").fadeOut(2000);
+ 	$script = "$(\"#b\").attr('src','".$catimg."');
+ 	$(\"#b\").fadeOut(2000);
 	$(\"#carticon\").attr('src','img/fullcart.png');";	
 	$_SESSION['foodbasket_total'] = $foodbasket_total;
  } else if($foodbasket_total > 0) {
  	$script = "$(\"#b\").hide();
  	$(\"#carticon\").attr('src','img/fullcart.png');";	
-	}
-	else {
+ 	$_SESSION['foodbasket_total'] = $foodbasket_total;
+	} else {
+		$_SESSION['foodbasket_total'] = 0;
 		$script = "$(\"#b\").hide();
 	$(\"#carticon\").attr('src','img/emptycart.png');";		
  
@@ -200,7 +214,7 @@ if(isset($_SESSION["id"])){
  
  ?>    
     <div class="topright">        	 
-    <img id="b" src="img/flying.png" id="b" style="position:absolute; top:1"/>
+    <img id="b" src="" id="b" style="position:absolute; top:1"/>
 
 	    <a href="#"  id="searchItem_" >
 	    <img id="carticon" src=""></a>

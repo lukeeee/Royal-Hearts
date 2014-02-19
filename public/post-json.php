@@ -28,8 +28,8 @@ $items = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkass
 					<script>
 						$(\'#item_'.$item["id"].'\').click(function(){
 						var text = $(\'#quantity_'.$item["id"].'\').val();
-						console.log("run.php?additemtobasket=yes&itemid='.$item["id"].'&userid='.$_SESSION['id'].'&quantity="+text);
-					  	window.location = "run.php?additemtobasket=yes&itemid='.$item["id"].'&userid='.$_SESSION['id'].'&quantity="+text;
+						
+					  	window.location = "run.php?additemtobasket=yes&itemid='.$item["id"].'&userid='.$_SESSION['id'].'&catid='.$item["categoryID"].'&quantity="+text;
 					});
 					</script>'
 				),
