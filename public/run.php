@@ -104,18 +104,6 @@ if($func == "adm_adm_new_store"){
 	}
 }
 
-if($func == "addtobasket"){
-		$itemids = $_POST['itemid'];
-		$userid = $_POST['userid'];
-		foreach($itemids as $itemid){
-			$quantity = $_POST["quantity_".$itemid];
-			json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/additem/".$userid."/".$itemid."/".$quantity),true);	
-			$_SESSION['cat_id'] = $_POST["item_".$itemid."_catid"];
-		}
-
-		header("Location: index.php");	
-	}
-
 if($func == "adm_adm_new_supp"){
 	$db = new Db();
 	if($_POST['suppname'] == null || $_POST['username'] == null || $_POST['password'] == null || $_POST['password2'] == null) {
@@ -168,16 +156,35 @@ $success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matka
 	{
 		echo "error func adm_adm_user_new";
 	}
-
-
 }
 
+if($func == "manager_update_products"){
+$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/manager/new/{$_REQUEST['city_storeID']}/{$_REQUEST['price']}/{$_REQUEST['itemid']}"),true);
+	if($success>0)
+	{
+		header("Location: edit_user.php");
+	}
+	else
+	{
+		echo "error func adm_adm_user_new";
+	}
+}
+
+if(isset($_POST['itemid'])){
+	$itemids = $_POST['itemid'];
+	$userid = $_POST['userid'];
+	foreach($itemids as $itemid){
+		$quantity = $_POST["quantity_".$itemid];
+		json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/additem/".$userid."/".$itemid."/".$quantity),true);
+		
+	}
+	header("Location: index.php");	
+}
  if(isset($_GET['additemtobasket'])) {
  	$itemid = $_GET['itemid'];
 	$userid = $_GET['userid'];
 	$quantity = $_GET['quantity'];
 	json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/additem/".$userid."/".$itemid."/".$quantity),true);
-	$_SESSION['cat_id'] = $_GET['catid'];
 	header("Location: index.php");	
  }
 if(isset($_GET['removeitemfrombasket'])){
