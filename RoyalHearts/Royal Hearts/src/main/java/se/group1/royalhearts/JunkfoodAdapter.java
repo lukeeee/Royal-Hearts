@@ -1,12 +1,15 @@
 package se.group1.royalhearts;
 
 import android.content.Context;
+import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -53,14 +56,27 @@ public class JunkfoodAdapter extends BaseAdapter {
         }
         holder = new ViewHolder();
         v.setTag(holder);
-
+        Typeface tf = Typeface.createFromAsset(context.getAssets(),
+                "fonts/Locked.ttf");
+        // holder.groText.setTypeface(tf);
         holder.groText = (TextView)v.findViewById(R.id.groText);
+        holder.groText.setTypeface(tf);
         holder.addbtn = (Button)v.findViewById(R.id.addBtn);
-        Junkfoods jun = JsonManager.getJunkfoods().get(i);
+        final Junkfoods jun = JsonManager.getJunkfoods().get(i);
 
         holder.groText.setText(jun.getName().toString());
         holder.addbtn.setTag(jun.getName());
         v.setTag(junkfoods.get(i));
+        holder.addbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //CabinetManager.AddIngredient(getGroup(groupPosition) + ", " + ingredientName);
+                JsonManager.addToBag();
+                Log.i("Spenat", Integer.toString(jun.getId()));
+                Toast.makeText(context, jun.getName() + ", har lagts till i din lista", 1000).show();
+                SoundManager.start(R.raw.stapler, context);
+            }
+        });
 
         return v;
     }

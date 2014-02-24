@@ -3,19 +3,24 @@ package se.group1.royalhearts;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+import android.widget.ToggleButton;
 
 /**
  * Created by Lukas on 2014-01-20.
  */
-public class Settings extends Activity implements View.OnClickListener {
+public class Settings extends Activity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     private Button mydata;
     private Button aboutUs;
     private Button logout;
     private Button version;
+    private ToggleButton sound;
+    private TextView ljud;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,17 @@ public class Settings extends Activity implements View.OnClickListener {
         aboutUs.setOnClickListener(this);
         logout.setOnClickListener(this);
         version.setOnClickListener(this);
+        sound = (ToggleButton)findViewById(R.id.sounds);
+        ljud = (TextView)findViewById(R.id.ljud);
+        sound.setOnCheckedChangeListener(this);
+        Typeface tf = Typeface.createFromAsset(getAssets(),
+                "fonts/Locked.ttf");
+        version.setTypeface(tf);
+        logout.setTypeface(tf);
+        aboutUs.setTypeface(tf);
+        mydata.setTypeface(tf);
+        ljud.setTypeface(tf);
+        sound.setTypeface(tf);
     }
 
     @Override
@@ -89,5 +105,18 @@ public class Settings extends Activity implements View.OnClickListener {
             dialog.show();
 
         }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if(buttonView == sound){
+            if(isChecked){
+                // sound for game is on
+                User.setSound(true);
+            } else {
+                // sound for game off
+                User.setSound(false);
+            }
         }
+    }
 }

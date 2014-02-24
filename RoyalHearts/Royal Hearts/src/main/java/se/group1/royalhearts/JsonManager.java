@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import se.group1.royalhearts.Json.AddToBag;
 import se.group1.royalhearts.Json.GetAllCategories;
 import se.group1.royalhearts.Json.GetAllCities;
 import se.group1.royalhearts.Json.GetAllDairies;
@@ -186,6 +187,11 @@ public class JsonManager {
             e.printStackTrace();
         }
         return mbags;
+    }
+    public static void addToBag() {
+        AddToBag addaToBag = new AddToBag();
+        addaToBag.execute("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/additem/" +
+                HelperClass.User.userId + "/" +HelperClass.Item.item_id + "/1");
     }
 
 

@@ -16,9 +16,9 @@ public class HelperClass {
     }
     public static class CategoryId{
         public static int CatId;
-
-
-
+    }
+    public static class Item{
+        public static int item_id;
     }
 
 

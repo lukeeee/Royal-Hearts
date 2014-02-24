@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -27,7 +28,7 @@ public class Login extends Activity implements View.OnClickListener {
     private Button login;
     private EditText usernameInput;
     private EditText passwordInput;
-    private TextView username;
+    private TextView username,logintext;
     private TextView password;
     private ProgressDialog progressDialog;
     private JSONLogin jLoginPoster = null;
@@ -45,11 +46,20 @@ public class Login extends Activity implements View.OnClickListener {
         passwordInput = (EditText)findViewById(R.id.passwordInput);
         username = (TextView)findViewById(R.id.username);
         password = (TextView)findViewById(R.id.password);
+        logintext = (TextView)findViewById(R.id.logintext);
         login.setOnClickListener(this);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         jiggle = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.jiggle);
         blink = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink);
+        Typeface tf = Typeface.createFromAsset(getAssets(),
+                "fonts/Locked.ttf");
+        login.setTypeface(tf);
+        usernameInput.setTypeface(tf);
+        username.setTypeface(tf);
+        passwordInput.setTypeface(tf);
+        password.setTypeface(tf);
+        logintext.setTypeface(tf);
 
 
         new Handler().postDelayed(new Runnable() {

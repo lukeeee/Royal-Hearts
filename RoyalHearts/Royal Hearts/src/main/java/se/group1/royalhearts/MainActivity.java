@@ -3,6 +3,7 @@ package se.group1.royalhearts;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -37,7 +38,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
     private Button btnKasse;
     private LinearLayout cat1,cat2,cat3,cat4;
     private View line_one,line_two,line_three;
-    Animation move_out,fade_in,fade_out;
+    Animation move_out,fade_in,zoom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,12 +61,22 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         line_two = (View)findViewById(R.id.line_two);
         line_three = (View)findViewById(R.id.line_three);
         btnKasse = (Button)findViewById(R.id.btnKasse);
+        Typeface tf = Typeface.createFromAsset(getAssets(),
+                "fonts/Locked.ttf");
 
         if (HelperClass.User.userName.endsWith("s")){
             kasse.setText(HelperClass.User.userName + " Inköpslista");
         } else {
             kasse.setText(HelperClass.User.userName + "'s Inköpslista");
         }
+        kasse.setTypeface(tf);
+        cat4text.setTypeface(tf);
+        cat3text.setTypeface(tf);
+        cat2text.setTypeface(tf);
+        cat1text.setTypeface(tf);
+        btnKasse.setTypeface(tf);
+        city.setTypeface(tf);
+        store.setTypeface(tf);
 
         cities = JsonManager.getCities();
         CityAdapter cityAdapter = new CityAdapter(this, cities);
@@ -80,6 +92,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 
         fade_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fading_in);
         move_out = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_out);
+        zoom = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom);
 
         categories = JsonManager.getCategories();
         fbags = JsonManager.getFBags();
@@ -234,28 +247,39 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
     }
     public void setVisible(){
         cat1text.setVisibility(View.VISIBLE);
+        cat1text.startAnimation(zoom);
         cat1.setVisibility(View.VISIBLE);
+        cat1.startAnimation(zoom);
         cat2text.setVisibility(View.VISIBLE);
+        cat2text.startAnimation(zoom);
         cat2.setVisibility(View.VISIBLE);
+        cat2.startAnimation(zoom);
         cat3text.setVisibility(View.VISIBLE);
+        cat3text.startAnimation(zoom);
         cat3.setVisibility(View.VISIBLE);
+        cat3.startAnimation(zoom);
         cat4text.setVisibility(View.VISIBLE);
+        cat4text.startAnimation(zoom);
         cat4.setVisibility(View.VISIBLE);
+        cat4.startAnimation(zoom);
         line_one.setVisibility(View.VISIBLE);
+        line_one.startAnimation(zoom);
         line_two.setVisibility(View.VISIBLE);
+        line_two.startAnimation(zoom);
         line_three.setVisibility(View.VISIBLE);
+        line_three.startAnimation(zoom);
     }
     public void animation(){
-        storeSpinner.startAnimation(move_out);
+        storeSpinner.setVisibility(View.GONE);
+        citySpinner.setVisibility(View.GONE);
         store.setVisibility(View.VISIBLE);
         store.startAnimation(fade_in);
         btnKasse.setVisibility(View.VISIBLE);
         btnKasse.startAnimation(fade_in);
         city.setVisibility(View.VISIBLE);
         city.startAnimation(fade_in);
-        citySpinner.startAnimation(move_out);
-
     }
+
     public void willys(){
         for(Categories cat : categories){
             Log.i("hej", cat.getName().toString());

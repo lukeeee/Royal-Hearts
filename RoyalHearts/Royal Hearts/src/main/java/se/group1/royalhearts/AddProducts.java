@@ -3,6 +3,7 @@ package se.group1.royalhearts;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 public class AddProducts extends Activity {
 
     private ProgressDialog progressDialog;
-    private TextView pro1text,pro2text,pro3text,pro4text;
+    private TextView pro1text,pro2text,pro3text,pro4text,kassa;
     private ArrayList<Categories> categories;
     private ArrayList<Vegetables> vegetables;
     private ArrayList<Dairies> dairies;
@@ -43,6 +44,15 @@ public class AddProducts extends Activity {
         pro2 = (LinearLayout)findViewById(R.id.pro2);
         pro3 = (LinearLayout)findViewById(R.id.pro3);
         pro4 = (LinearLayout)findViewById(R.id.pro4);
+        kassa = (TextView)findViewById(R.id.kassa);
+
+        Typeface tf = Typeface.createFromAsset(getAssets(),
+                "fonts/Locked.ttf");
+        pro1text.setTypeface(tf);
+        pro2text.setTypeface(tf);
+        pro3text.setTypeface(tf);
+        pro4text.setTypeface(tf);
+        kassa.setTypeface(tf);
 
         categories = JsonManager.getCategories();
         vegetables = JsonManager.getVegetables();
@@ -59,7 +69,7 @@ public class AddProducts extends Activity {
             pro4text.setText(categories.get(2).getName().toString());
         }
         for(Vegetables veg : vegetables){
-            Log.i("svaleklev", veg.getName().toString());
+            Log.i("svalk", veg.getName().toString());
         }
         createVegetableAdapter();
         createMeatAdapter();
