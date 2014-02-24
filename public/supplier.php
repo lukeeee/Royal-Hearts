@@ -9,11 +9,11 @@
 
 	$admId = $_SESSION['id'];
 	$privilege = $_SESSION['privilege'];
-	//if($privilege == 2){
+	if($privilege == 2){
 		$products = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodproduct/getbysupplier/".$admId),true);
-	/*}else{
+	}else{
 		header("Location: /index.php");	
-	}*/
+	}
 		
 ?>
 

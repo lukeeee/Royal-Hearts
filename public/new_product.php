@@ -6,15 +6,15 @@
 	require_once(ROOT_PATH.'/header.php');
 	
 	$privilege = $_SESSION['privilege'];
-	if($privilege == 0 || $privilege == 3){ 
+	if($privilege != 2){ 
 		header("location: index.php");
+	} else {
+		$user_id = $_SESSION['id'];
+		$db = new Db();
+		$supplier_id = $db->getSupplierID($user_id);
+		
+		$categories = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true); 
 	}
-	
-	$user_id = $_SESSION['id'];
-	$db = new Db();
-	$supplier_id = $db->getSupplierID($user_id);
-	
-	$categories = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true); 
 ?>
 
 <div class="row">
