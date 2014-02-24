@@ -170,31 +170,32 @@ $success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matka
 	}
 }
 
-if(isset($_POST['itemid'])){
-	$itemids = $_POST['itemid'];
-	$userid = $_POST['userid'];
-	foreach($itemids as $itemid){
-		$quantity = $_POST["quantity_".$itemid];
-		json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/additem/".$userid."/".$itemid."/".$quantity),true);
-		
+if($func == "addtobasket"){
+		$itemids = $_POST['itemid'];
+		$userid = $_POST['userid'];
+		foreach($itemids as $itemid){
+			$quantity = $_POST["quantity_".$itemid];
+			json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/additem/".$userid."/".$itemid."/".$quantity),true);	
+			$_SESSION['cat_id'] = $_POST["item_".$itemid."_catid"];
+		}
+		header("Location: index.php");	
 	}
-	header("Location: index.php");	
-}
- if(isset($_GET['additemtobasket'])) {
+
+ if($func == 'additemtobasket') {
  	$itemid = $_GET['itemid'];
 	$userid = $_GET['userid'];
 	$quantity = $_GET['quantity'];
 	json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/additem/".$userid."/".$itemid."/".$quantity),true);
 	header("Location: index.php");	
  }
-if(isset($_GET['removeitemfrombasket'])){
+if($func ==  'removeitemfrombasket'){
 	$itemid = $_GET['itemid'];
 	$userid = $_GET['userid'];
  	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/removeitem/".$userid."/".$itemid),true);
  	if($success > 0){
  		header("Location: index.php");		
  	}
-} if(isset($_GET['removeentirefrombasket'])){
+} if($func == 'removeentirefrombasket'){
 	$userid = $_GET['userid'];
 	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/delete/".$userid),true);
 	if($success > 0){
