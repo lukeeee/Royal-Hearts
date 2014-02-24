@@ -6,9 +6,13 @@
 	require_once(ROOT_PATH.'/header.php');
 	
 	$privilege = $_SESSION['privilege'];
-	if($privilege != 1){ 
+	if($privilege == 0 || $privilege == 3){ 
 		header("location: index.php");
 	}
+	
+	$user_id = $_SESSION['id'];
+	$db = new Db();
+	$supplier_id = $db->getSupplierID($user_id);
 	
 	$categories = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true); 
 ?>
@@ -18,13 +22,17 @@
         <h1>Lägg till Varor</h1>
         <div id="storeForm">
         <!--rätt runfuction   -->
-            <form role="form" method="post" action="run.php?func=adm_adm_new_store">
-                <div class="form-group">
-                    <label for="storename">Namn</label>
-                    <input type="text" class="form-control" id="storename" placeholder="Namn" name="storename">
+            <form role="form" method="post" action="run.php?func=adm_supp_new">
+            	<div class="form-group">
+                	<label for="supp_id" class="sr-only">Supplier ID</label>
+                	<input type="text" class="form-control hidden" id="supplierID" name="supplierID" value="<?php echo $supplier_id['id']; ?>">
                 </div>
                 <div class="form-group">
-                	<select class="form-control" name="city_id">
+                    <label for="name">Namn</label>
+                    <input type="text" class="form-control" id="name" placeholder="Namn" name="name">
+                </div>
+                <div class="form-group">
+                	<select class="form-control" name="cat_id">
                     <?php
                     	foreach($categories as $category){
                         	echo '<option value="'.$category["id"].'">'.$category["name"].'</option>';

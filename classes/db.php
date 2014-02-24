@@ -13,6 +13,7 @@
 		private $users_sql = "SELECT * FROM users";
 		private $users_salt_sql = "SELECT salt FROM users";
 		private $users_privilege_sql = "SELECT privilege FROM users";
+		private $supplier_id_sql = "SELECT id FROM suppliers";
 		/*private $create_order = "set @unixtime = unix_timestamp(now());
 		set @lastorderid = (SELECT id FROM  `foodbasket_order` ORDER BY  `foodbasket_order`.`id` DESC LIMIT 0 , 1);
 		set @orderid = CONCAT(@unixtime, @lastorderid);";*/
@@ -125,6 +126,25 @@
 
 			if($sth->rowCount() > 0) {
 				return $this->dbh->lastInsertId();
+			} else {
+				return null;
+			}
+		}
+		
+		public function getSupplierID($user_id) {
+			$sql = $this->supplier_id_sql." WHERE userID = :user_id";
+			$sth = $this->dbh->prepare($sql);
+			$sth->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+			$sth->setFetchMode(PDO::FETCH_CLASS, 'Suppliers');
+			$sth->execute();
+
+			$objects = array();
+
+			while($obj = $sth->fetch()) {
+				$objects[] = $obj;
+			}
+			if (count($objects) > 0) {
+				return $objects[0];
 			} else {
 				return null;
 			}

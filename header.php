@@ -187,17 +187,18 @@ if(isset($_SESSION["id"])){
  	$foodbasket_total = count($foodbasket['items']);
 
  	$script = '';
-
- 	if($_SESSION['cat_id'] == 2){
- 		$catimg = 'img/flying.png';
- 	} else if ($_SESSION['cat_id'] == 3){
- 		$catimg = 'img/chark.png';
- 	} else if($_SESSION['cat_id'] == 4){
- 		$catimg = 'img/snacks.png';
- 	} else if($_SESSION['cat_id'] == 5){
- 		$catimg = 'img/dairy.png';
- 	} 
-
+	if(isset($_SESSION['cat_id'])) {
+		if($_SESSION['cat_id'] == 2){
+			$catimg = 'img/flying.png';
+		} else if ($_SESSION['cat_id'] == 3){
+			$catimg = 'img/chark.png';
+		} else if($_SESSION['cat_id'] == 4){
+			$catimg = 'img/snacks.png';
+		} else if($_SESSION['cat_id'] == 5){
+			$catimg = 'img/dairy.png';
+		} 
+	}
+	
  	if($foodbasket_total > $_SESSION['foodbasket_total']){
  	$script = "$(\"#b\").attr('src','".$catimg."');
  	$(\"#b\").fadeOut(2000);
