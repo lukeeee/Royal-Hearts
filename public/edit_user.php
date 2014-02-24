@@ -31,13 +31,6 @@
 	
 
 </style>
-<br/>
-<div class="row">
-<div class="col-md-6 col-md-offset-4">
-  <div><h2>Redigera användare</h2></div>
-</div> 
-</div> 
-<br/>
 
 <div class="row">
  	<div class="col-md-2 col-md-offset-1">
@@ -50,8 +43,8 @@
   	</div>	
   <div class="col-md-6 col-md-offset-1">
   	<div class="users-group">
-    <h1>Användarens Info</h1>
-    <hr>
+    <h3>Redigera användare</h3>
+    <br />
     <style>
 		.inputCointainer * {
 		margin:0 0px;
@@ -67,7 +60,7 @@
 		}
 	</script>
   	<?php
-		echo '<h3>Lägg till en ny användare</h3>';
+		echo '<h4>Lägg till en ny användare</h4>';
 		echo '<div class="row inputCointainer"><form method="post" action="run.php?func=adm_adm_user_new" enctype="multipart/form-data">';
 					
 						
@@ -78,7 +71,7 @@
 					
 						echo "</form></div><hr>";
 						
-						echo '<h3>Uppdatera användare</h3>';
+						echo '<h4>Uppdatera användare</h4>';
   		foreach($users  as $user)
                  {
                     echo '<div class="row inputCointainer"><form method="post" action="run.php?func=adm_adm_user_update" enctype="multipart/form-data">';

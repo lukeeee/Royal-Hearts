@@ -89,6 +89,10 @@
 				} 
 				if($_SESSION['privilege'] == 1) {
 					header("location: administrator.php");
+				} elseif($_SESSION['privilege'] == 2) {
+					header("location: supplier.php");
+				} elseif($_SESSION['privilege'] == 3) {
+					header("location: manager.php");
 				} else {
 					header('location: index.php');
 				}
