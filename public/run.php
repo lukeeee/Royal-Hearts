@@ -159,10 +159,10 @@ $success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matka
 }
 
 if($func == "manager_update_products"){
-$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/manager/new/{$_REQUEST['city_storeID']}/{$_REQUEST['price']}/{$_REQUEST['itemid']}"),true);
+$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/manager/new/{$_REQUEST['city_storeID']}/".urldecode(json_encode($_REQUEST['price']))."/".urldecode(json_encode($_REQUEST['itemid']))),true);
 	if($success>0)
 	{
-		header("Location: edit_user.php");
+		header("Location: manager.php");
 	}
 	else
 	{
