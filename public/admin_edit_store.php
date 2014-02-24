@@ -39,7 +39,7 @@ if($privilege == 1){
             echo "<div><h4>".$store["name"]."</h4></div>";
 
             echo "<a class='btn btn-default adm' href='/edit_store.php?id=".$store['id']."&name=".urlencode($store['name'])."'>Redigera</a>";
-            echo "<a class='btn btn-danger adm' href='/run.php?id=".$store['id']."&func=adm_adm_delete_store'>Ta bort</a></br>";
+            echo "<a class='btn btn-danger adm' href='/run.php?id=".$store['id']."&func=adm_adm_delete_store' onclick='return confirm(\"Är du säker på att du vill ta bort butiken?\")'>Ta bort</a></br>";
    		    }    
             ?>
 

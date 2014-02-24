@@ -40,7 +40,7 @@ if($privilege == 1){
             echo "<div><h4>".$cat["name"]."</h4></div>";
 
             echo "<a class='btn btn-default adm' href='/edit.php?id=".$cat['id']."&name=".urlencode($cat['name'])."'>Redigera</a>";
-            echo "<a class='btn btn-danger adm' href='/run.php?id=".$cat['id']."&func=adm_adm_delete'>Ta bort</a></br>";
+            echo "<a class='btn btn-danger adm' href='/run.php?id=".$cat['id']."&func=adm_adm_delete' onclick='return confirm(\"Är du säker på att du vill ta bort kategorin?\")'>Ta bort</a></br>";
    		    }     
  
             ?>
