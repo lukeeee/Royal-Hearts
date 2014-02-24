@@ -1,7 +1,7 @@
 <?php
 
     require_once('../config.php');
-    $pagetitle = "Ny butik | Matkassen.se";
+    $pagetitle = "Ny Butik | Matkassen.se";
 
 	require_once(ROOT_PATH.'/header.php');
 	

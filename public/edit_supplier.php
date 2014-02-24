@@ -1,6 +1,6 @@
 <?php
   require_once('../config.php');
-  $pagetitle = "Hem | Matkassen.se";
+  $pagetitle = "Redigera Vara | Matkassen.se";
 
   if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -20,7 +20,7 @@
 
 <div id="content_wrap" class="row">                   
     <div class="col-md-7 col-md-offset-4">
-    	<h1>Redigera</h1>
+    	<h1>Redigera Vara</h1>
         <form method="post" class="form-inline" action="run.php?func=adm_supp_update" enctype="multipart/form-data">
             <div hidden="hidden">
             	<input type="text" class="form-control" name="prod_id" value="<?php echo $id?>">

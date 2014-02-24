@@ -1,7 +1,7 @@
 <?php
 
   	require_once('../config.php');
-	$pagetitle = "Hem | Matkassen.se";
+	$pagetitle = "Ny Kategori | Matkassen.se";
 
 require_once(ROOT_PATH.'/header.php'); ?>
 
@@ -10,9 +10,9 @@ require_once(ROOT_PATH.'/header.php'); ?>
     <form method="post" action="run.php?func=adm_adm_add" enctype="multipart/form-data">
       <div class="row">
       	<div class="col-md-7 col-md-offset-5">
-        <h1>Skapa ny kategori</h1>
+        <h1>Skapa ny Kategori</h1>
           <div class="col-xs-3">
-          	<input type="text" class="form-control" name="name" value="Kategorinamn">
+          	<input type="text" class="form-control" name="name" placeholder="Kategorinamn">
           </div>
           <button type="submit" class="btn btn-default">Create</button>
       	</div>

@@ -1,7 +1,7 @@
 <?php
     require_once('../config.php');
     
-    $pagetitle = "Skapa användare | Matkassen.se";
+    $pagetitle = "Skapa Användare | Matkassen.se";
     require_once(ROOT_PATH.'/header.php'); 
 
 ?>
