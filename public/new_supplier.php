@@ -1,7 +1,7 @@
 <?php
 
     require_once('../config.php');
-    $pagetitle = "Ny butik | Matkassen.se";
+    $pagetitle = "Ny Grossist | Matkassen.se";
 
 	require_once(ROOT_PATH.'/header.php');
 	
@@ -15,7 +15,7 @@
     <div class="col-md-3 col-md-offset-5">
         <h1>Lägg till Grossist</h1>
         <div id="storeForm">
-            <form role="form" method="post" action="run.php?func=adm_adm_new_supp"><!--TODO: Action -> run.php-function for adding store-->
+            <form role="form" method="post" action="run.php?func=adm_adm_new_supp">
                 <div class="form-group">
                     <label for="storename">Grossistnamn</label>
                     <input type="text" class="form-control" id="suppname" placeholder="Grossistsnamn" name="suppname">

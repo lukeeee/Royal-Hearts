@@ -1,6 +1,6 @@
 <?php
 require_once('../config.php');
-$pagetitle = "Ordna kategorier | Matkassen.se";
+$pagetitle = "Ordna Kategorier | Matkassen.se";
 ?>
 <?php require_once(ROOT_PATH.'/header.php'); ?>
 
@@ -27,7 +27,7 @@ $privilege = $_SESSION['privilege'];
 <div class="container">
     <div class="row">
         <div class="col-md-offset-4">
-            <h3>Ändra ordning</h3>
+            <h3>Ändra Kategoriordning</h3>
             <form class="form-inline" method="post" action="">
 				<?php
                     foreach($cats  as $cat)

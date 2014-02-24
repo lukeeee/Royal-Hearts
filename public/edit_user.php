@@ -1,6 +1,6 @@
 <?php
 	require_once('../config.php');
-	$pagetitle = "Edit User | Matkassen.se";
+	$pagetitle = "Användare | Matkassen.se";
 	$categoryID = null;	
 	$itemsbycat = null;
 	if($_SESSION["is_logged_in"]){
@@ -43,7 +43,7 @@
   	</div>	
   <div class="col-md-6 col-md-offset-1">
   	<div class="users-group">
-    <h3>Redigera användare</h3>
+    <h3>Redigera Användare</h3>
     <br />
     <style>
 		.inputCointainer * {
@@ -60,7 +60,7 @@
 		}
 	</script>
   	<?php
-		echo '<h4>Lägg till en ny användare</h4>';
+		echo '<h4>Lägg till en ny Användare</h4>';
 		echo '<div class="row inputCointainer"><form method="post" action="run.php?func=adm_adm_user_new" enctype="multipart/form-data">';
 					
 						
@@ -71,7 +71,7 @@
 					
 						echo "</form></div><hr>";
 						
-						echo '<h4>Uppdatera användare</h4>';
+						echo '<h4>Uppdatera Användare</h4>';
   		foreach($users  as $user)
                  {
                     echo '<div class="row inputCointainer"><form method="post" action="run.php?func=adm_adm_user_update" enctype="multipart/form-data">';

@@ -1,6 +1,6 @@
 <?php
 require_once('../config.php');
-$pagetitle = "Hem | Matkassen.se";
+$pagetitle = "Butiker | Matkassen.se";
 ?>
 <?php require_once(ROOT_PATH.'/header.php'); ?>
 

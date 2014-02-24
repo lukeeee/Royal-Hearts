@@ -1,6 +1,6 @@
 <?php
   require_once('../config.php');
-  $pagetitle = "Hem | Matkassen.se";
+  $pagetitle = "Redigera Kategori | Matkassen.se";
 
   if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -18,7 +18,7 @@
                
   <div id="cv" class="col span_12">                           
     <section class="col-md-8 col-md-offset-4">
-       <h1>Redigera</h1>
+       <h1>Redigera Kategori</h1>
       <form method="post" action="run.php?func=adm_adm_update" enctype="multipart/form-data">
         <div class="col-xs-1">
           <input type="text" class="form-control" name="id" value="<?php echo $id?>">
