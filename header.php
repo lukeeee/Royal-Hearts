@@ -181,108 +181,22 @@
     <body>
 <?php
  
- 
+ //Hindrar errors där den gnäller på att värden inte är satta
+ $foodbasket_total = 0;
+ $script = '';
+
 if(isset($_SESSION["id"])){
 	$foodbasket = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/".$_SESSION['id']),true); 
  	$foodbasket_total = count($foodbasket['items']);
-
- 	$script = '';
-	if(isset($_SESSION['cat_id'])) {
-		if($_SESSION['cat_id'] == 2){
-			$catimg = 'img/flying.png';
-		} else if ($_SESSION['cat_id'] == 3){
-			$catimg = 'img/chark.png';
-		} else if($_SESSION['cat_id'] == 4){
-			$catimg = 'img/snacks.png';
-		} else if($_SESSION['cat_id'] == 5){
-			$catimg = 'img/dairy.png';
-		} 
-	}
-	
- 	if($foodbasket_total > $_SESSION['foodbasket_total']){
- 	$script = "$(\"#b\").attr('src','".$catimg."');
- 	$(\"#b\").fadeOut(2000);
-	$(\"#carticon\").attr('src','img/fullcart.png');";	
-	$_SESSION['foodbasket_total'] = $foodbasket_total;
- } else if($foodbasket_total > 0) {
- 	$script = "$(\"#b\").hide();
- 	$(\"#carticon\").attr('src','img/fullcart.png');";	
- 	$_SESSION['foodbasket_total'] = $foodbasket_total;
-	} else {
-		$_SESSION['foodbasket_total'] = 0;
-		$script = "$(\"#b\").hide();
-	$(\"#carticon\").attr('src','img/emptycart.png');";		
- 
-	}
-}else{
-	$script = "$(\"#b\").hide();
-	$(\"#carticon\").attr('src','img/emptycart.png');";	
+ 	$script = itemAdded($foodbasket_total, $_SESSION['foodbasket_total'], $_SESSION['cat_id'], $_SESSION['id']);	
 }
  
  ?>    
     <div class="topright">        	 
-    <img id="b" src="" id="b" style="position:absolute; top:1"/>
-
-	    <a href="#"  id="searchItem_" >
-	    <img id="carticon" src=""></a>
-	    	
-	    	
-	    <img src=""></a>
-	    	<span class="badge cartbadge"><?php if(isset($foodbasket_total))echo $foodbasket_total ?></span>
-	    	<script>
-				function moveRight(){
-					<?php echo $script ?>
-					}
-				$(document).ready(function() {
-				       moveRight();
-				});
-			</script>
+    <?php echo foodbasketDiv($script, $foodbasket_total) ?>
     </div>	
     <div id="content_">
-	    <?php if(isset($foodbasket_total))if($foodbasket_total > 0) : ?>
-	    <table class="table">
-				  	<th>Produkt</th><th>Antal</th><th><a id="basketuser_<?php if(isset($_SESSION['id']))echo $_SESSION['id'] ?>"><i class="glyphicon glyphicon-trash"></i></a></th>
-				  	 <script>
-        $('#basketuser_<?php if(isset($_SESSION['id']))echo $_SESSION['id'] ?>').click(function(){
-							var answer = confirm('Vill du verkligen ta bort hela matkassen?');
-							if (answer)
-							{
-							  	window.location = "run.php?func=removeentirefrombasket&userid=<?php if(isset($_SESSION['id'])) echo $_SESSION['id'] ?>";
-							}else{
-							  console.log('cancel');
-							}
-					});
-        </script>
-				  </thead>
-				  <tbody>
-		<?php 
-		if(isset($foodbasket)){
-		foreach ($foodbasket["items"] as $arrayitem) {
-	  			echo '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td><td><a id="basketitem_'.$arrayitem["id"].'"><i class="glyphicon glyphicon-trash"></i></a></td></tr>';
-	  			
-	  			echo '<script>
-						$(\'#basketitem_'.$arrayitem["id"].'\').click(function(){
-							/*var answer = confirm(\'Vill du verkligen ta bort '.$arrayitem["name"].'?\');
-							if (answer)
-							{*/
-							  	window.location = "run.php?func=removeitemfrombasket&userid='.$_SESSION['id'].'&itemid='.$arrayitem["id"].'";
-
-							//}else{
-							  //console.log(\'cancel\');
-							//}
-						//console.log("run.php?removeitemfrombasket=yes&userid='.$_SESSION['id'].'&itemid='.$arrayitem["id"].'");
-					  	
-					});
-					</script>';
-	  		  }
-			  
-		}
-		 ?>
-				  </tbody>
-		</table>
-	<?php else : ?>
-		Din varukorg är tom
-	<?php endif ?>
+<?php echo foodbasketPopup($foodbasket_total, $_SESSION['id'], $foodbasket) ?>
 	</div>
 	            <script>
             $(document).ready(function() {

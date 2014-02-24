@@ -28,7 +28,7 @@
 </table>
 </div>
 </div> 
-<?php if(isset($_POST['search'])) : ?>
+<?php if($searchstring != '') : ?>
 
 <script>
 	        	$(".flexme1").flexigrid({
@@ -53,7 +53,8 @@
 		width: 650,
 		height: 300
 	            });      
-
+						
+					</script>
 </script>
 <?php endif ?>
 
