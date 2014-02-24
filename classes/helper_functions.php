@@ -131,7 +131,7 @@
   return $html;
 }
 function foodbasketDiv($script, $foodbasket_total){
-    $html .= '<img id="b" src="" id="b" style="position:absolute; top:1"/>';
+    $html = '<img id="b" src="" id="b" style="position:absolute; top:1"/>';
     $html .= '<a href="#"  id="searchItem_" >';
     $html .= '<img id="carticon" src=""></a>';
     $html .= '<span class="badge cartbadge">'.$foodbasket_total.'</span>';
