@@ -230,7 +230,7 @@ if($func == "addtobasket"){
 			json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/additem/".$userid."/".$itemid."/".$quantity),true);	
 			$_SESSION['cat_id'] = $_POST["item_".$itemid."_catid"];
 		}
-		header("Location: index.php");	
+		header("Location: products.php");	
 	}
 
  if($func == 'additemtobasket') {
@@ -253,7 +253,7 @@ if($func ==  'removeitemfrombasket'){
 	$userid = $_GET['userid'];
 	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/delete/".$userid),true);
 	if($success > 0){
- 		header("Location: index.php");		
+ 		header("Location: products.php");		
  	}
 }
  
