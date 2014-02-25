@@ -1,22 +1,25 @@
 <?php
-  require_once('../config.php');
-  $pagetitle = "Redigera Vara | Matkassen.se";
-
-  if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-  }
+	require_once('../config.php');
+	$pagetitle = "Redigera Vara | Matkassen.se";
   
-   if (isset($_GET['name'])) {
-    $name = urldecode($_GET['name']);
-  }
-  
-  if(isset($_GET['cat_id'])){
-	$cat_id = $_GET['cat_id'];	  
-  }
+  	$privilege = $_SESSION['privilege'];
+	if($privilege != 2){ 
+		header("location: index.php");
+	} else {
+		if (isset($_GET['id'])) {
+			$id = $_GET['id'];
+		}  
+		if (isset($_GET['name'])) {
+			$name = urldecode($_GET['name']);
+		}
+		if(isset($_GET['cat_id'])){
+			$cat_id = $_GET['cat_id'];	  
+		}
 
-
-	$cats = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true);
- require_once(ROOT_PATH.'/header.php'); ?>
+		$cats = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true);
+	}
+ 	require_once(ROOT_PATH.'/header.php'); 
+?>
 
 <div id="content_wrap" class="row">                   
     <div class="col-md-7 col-md-offset-4">

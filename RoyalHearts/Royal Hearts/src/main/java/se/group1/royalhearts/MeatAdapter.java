@@ -1,6 +1,7 @@
 package se.group1.royalhearts;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,8 +54,11 @@ public class MeatAdapter extends BaseAdapter {
         }
         holder = new ViewHolder();
         v.setTag(holder);
+        Typeface tf = Typeface.createFromAsset(context.getAssets(),
+                "fonts/Locked.ttf");
 
         holder.groText = (TextView)v.findViewById(R.id.groText);
+        holder.groText.setTypeface(tf);
         holder.addbtn = (Button)v.findViewById(R.id.addBtn);
         Meats mea = JsonManager.getMeats().get(i);
 

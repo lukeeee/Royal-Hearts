@@ -12,20 +12,24 @@
         android:textSize="25sp"
         android:id="@+id/groText"
         android:gravity="left|center"
-        android:textColor="#000"
+        android:textColor="#464646"
         android:paddingLeft="4dp"
         android:layout_marginTop="6dp"
         android:layout_centerVertical="true"
         android:layout_alignParentTop="true" />
     <Button
         android:layout_width="70dp"
-        android:layout_height="35dp"
+        android:layout_height="33dp"
         android:layout_marginLeft="240dp"
+        android:layout_marginTop="1dp"
         android:padding="0dp"
         android:text="+"
         android:textStyle="bold"
+        android:background="@drawable/button"
         android:textSize="25sp"
-        android:id="@+id/addBtn"/>
+        android:textColor="#000"
+        android:id="@+id/addBtn"
+        android:alpha="0.9"/>
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"

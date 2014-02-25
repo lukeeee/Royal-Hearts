@@ -15,7 +15,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="Inställningar"
-            android:textSize="25dp"
+            android:textSize="40dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:textStyle="bold"/>
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:text="Mina Uppgifter"
-            android:textSize="20dp"
+            android:textSize="30dp"
             android:textStyle="bold"
             android:background="@drawable/button"
             android:paddingLeft="15dp"
@@ -46,7 +46,7 @@
             android:text="About"
             android:background="@drawable/button"
             android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="30dp"
             android:gravity="left|center"
             android:paddingLeft="15dp"
             android:id="@+id/about"/>
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:text="Logga Ut"
             android:background="@drawable/button"
-            android:textSize="20dp"
+            android:textSize="30dp"
             android:textStyle="bold"
             android:id="@+id/logout"
             android:gravity="left|center"
@@ -73,11 +73,36 @@
             android:layout_width="match_parent"
             android:text="Version"
             android:background="@drawable/button"
-            android:textSize="20dp"
+            android:textSize="30dp"
             android:textStyle="bold"
             android:paddingLeft="15dp"
             android:gravity="left|center"
             android:id="@+id/version"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ljud"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:id="@+id/ljud"/>
+        <ToggleButton
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="280dp"
+            android:id="@+id/sounds"
+            android:textSize="30dp"/>
+        </RelativeLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

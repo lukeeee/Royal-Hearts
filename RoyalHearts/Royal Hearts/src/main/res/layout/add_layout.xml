@@ -9,13 +9,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:textSize="25dp"
+            android:textSize="30dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:text="Lägg till varor i Kassen"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:id="@+id/kassa"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
@@ -24,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:textSize="35sp"
             android:textStyle="bold"
             android:id="@+id/pro1Text"
             android:gravity="center"
@@ -34,10 +36,6 @@
             android:layout_marginBottom="1dp"
             android:layout_centerVertical="true"
             android:layout_alignParentTop="true"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#fff"/>
         <LinearLayout
             android:layout_marginTop="4dp"
             android:layout_width="300dp"
@@ -53,7 +51,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:textSize="35sp"
             android:textStyle="bold"
             android:id="@+id/pro2Text"
             android:gravity="center"
@@ -63,10 +61,6 @@
             android:layout_marginBottom="1dp"
             android:layout_centerVertical="true"
             android:layout_alignParentTop="true"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#fff"/>
         <LinearLayout
             android:layout_marginTop="4dp"
             android:layout_width="300dp"
@@ -82,7 +76,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:textSize="35sp"
             android:textStyle="bold"
             android:id="@+id/pro3text"
             android:gravity="center"
@@ -92,10 +86,6 @@
             android:layout_marginBottom="1dp"
             android:layout_centerVertical="true"
             android:layout_alignParentTop="true"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#fff"/>
         <LinearLayout
             android:layout_marginTop="4dp"
             android:layout_width="300dp"
@@ -111,7 +101,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:textSize="35sp"
             android:textStyle="bold"
             android:gravity="center"
             android:layout_gravity="center"
@@ -121,10 +111,6 @@
             android:layout_marginBottom="1dp"
             android:layout_centerVertical="true"
             android:layout_alignParentTop="true"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#fff"/>
         <LinearLayout
             android:layout_marginTop="4dp"
             android:layout_width="300dp"

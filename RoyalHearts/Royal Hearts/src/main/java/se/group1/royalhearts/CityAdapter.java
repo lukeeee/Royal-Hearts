@@ -2,6 +2,7 @@ package se.group1.royalhearts;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.graphics.Typeface;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,6 +70,9 @@ public class CityAdapter implements SpinnerAdapter {
         }
         ((TextView) convertView).setText(cities.get(position).getName());
         ((TextView) convertView).setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+        Typeface tf = Typeface.createFromAsset(context.getAssets(),
+                "fonts/Locked.ttf");
+        ((TextView) convertView).setTypeface(tf);
         return convertView;
 
     }
@@ -78,7 +82,11 @@ public class CityAdapter implements SpinnerAdapter {
         TextView textView = (TextView) View.inflate(context, android.R.layout.simple_spinner_item, null);
         textView.setText(cities.get(position).getName());
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        Typeface tf = Typeface.createFromAsset(context.getAssets(),
+                "fonts/Locked.ttf");
+        textView.setTypeface(tf);
         return textView;
+
     }
 
 

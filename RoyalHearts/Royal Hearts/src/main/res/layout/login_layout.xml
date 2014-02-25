@@ -13,14 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"/>
     <TextView
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Logga in till din matkasse"
-        android:textSize="25dp"
+        android:textSize="29dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:id="@+id/logintext"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="60dp"/>
@@ -79,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:id="@+id/login"
-            android:textSize="25dp"
+            android:textSize="35dp"
             android:background="@drawable/button"
             android:text="Logga In"
             android:textStyle="bold"
