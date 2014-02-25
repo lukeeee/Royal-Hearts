@@ -8,9 +8,12 @@ $func = $_GET["func"];
 if($func == "adm_adm_delete"){
 	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/remove/{$_REQUEST['id']}"),true);
 	if($success == 1){
-		header("Location: /administrator.php");
+		header("Location: administrator.php");
+	}else if($success == 2){
+		header("Location: admin_error.php");	
 	}else{
 		echo "Något gick fel!";
+		var_dump($success);
 	}
 }
 
@@ -104,6 +107,18 @@ if($func == "adm_adm_new_store"){
 	}
 }
 
+if($func == "adm_adm_update_store"){
+	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/update/{$_REQUEST['storeID']}/{$_REQUEST['name']}/{$_REQUEST['cityID']}"),true);
+	if($success==1)
+	{
+		header("Location: admin_edit_store.php");
+	}
+	else
+	{
+		echo "error update store";
+	}
+}
+
 if($func == "adm_adm_new_supp"){
 	$db = new Db();
 	if($_POST['suppname'] == null || $_POST['username'] == null || $_POST['password'] == null || $_POST['password2'] == null) {
@@ -159,14 +174,51 @@ $success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matka
 }
 
 if($func == "manager_update_products"){
-$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/manager/new/{$_REQUEST['city_storeID']}/".urldecode(json_encode($_REQUEST['price']))."/".urldecode(json_encode($_REQUEST['itemid']))),true);
+	$array = array();
+	$prices = $_REQUEST["price"];
+	$ids = $_REQUEST["itemid"];
+	//create arrays for the products with price and id
+	for($i = 0; $i < count($_REQUEST['price']);$i++){
+		array_push($array, array("product" => array("price" => 0, "id" => 0)));
+	}
+	
+	for($i = 0; $i < count($array);$i++){
+		$array[$i]["product"]["price"] = $prices[$i];
+	}
+		
+	for($i = 0; $i < count($array);$i++){
+		$array[$i]["product"]["id"] = $ids[$i];
+	}
+	//loop throught he products and check which ones have a corresponding checked box
+	for($i = 0; $i < (count($array)-1);$i++){
+		if(isset($_REQUEST["checkboxes"])){
+			$array["checked"] = $_REQUEST['checkboxes'];
+		}
+		if(isset($array["checked"])){
+				$for_sale = 0;
+				foreach($array["checked"] as $checked){
+					if($checked == $array[$i]["product"]["id"]){
+						
+						$for_sale = 1;
+						
+					}
+				}
+				
+			$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/manager/update/{$_REQUEST['city_storeID']}/".$array[$i]["product"]["price"]."/".$array[$i]["product"]["id"]."/".$for_sale),true);
+			
+		}else{
+			$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/manager/update/{$_REQUEST['city_storeID']}/".$array[$i]["product"]["price"]."/".$array[$i]["product"]["id"]."/0"),true);
+		}
+	}
+	
 	if($success>0)
 	{
 		header("Location: manager.php");
 	}
 	else
 	{
-		echo "error func adm_adm_user_new";
+		echo "error";
+		var_dump($array);
 	}
 }
 
@@ -178,7 +230,7 @@ if($func == "addtobasket"){
 			json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/additem/".$userid."/".$itemid."/".$quantity),true);	
 			$_SESSION['cat_id'] = $_POST["item_".$itemid."_catid"];
 		}
-		header("Location: index.php");	
+		header("Location: products.php");	
 	}
 
  if($func == 'additemtobasket') {
@@ -187,7 +239,7 @@ if($func == "addtobasket"){
 	$quantity = $_GET['quantity'];
 	$_SESSION['cat_id'] = $_GET['cat_id'];
 	json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/additem/".$userid."/".$itemid."/".$quantity),true);
-	header("Location: index.php");	
+	header("Location: products.php");	
  }
 if($func ==  'removeitemfrombasket'){
 	$itemid = $_GET['itemid'];
@@ -195,13 +247,13 @@ if($func ==  'removeitemfrombasket'){
  	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/removeitem/".$userid."/".$itemid),true);
  	if($success > 0){
  		
- 		header("Location: index.php");		
+ 		header("Location: products.php");		
  	}
 } if($func == 'removeentirefrombasket'){
 	$userid = $_GET['userid'];
 	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/delete/".$userid),true);
 	if($success > 0){
- 		header("Location: index.php");		
+ 		header("Location: products.php");		
  	}
 }
  

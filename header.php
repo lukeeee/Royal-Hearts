@@ -68,6 +68,10 @@
 				width: 80%;               
 				background-color:#333;
 				height: 1px;
+			}
+
+			#cat_id{
+				width: 120%;
 			}	
 
 			#footer {
