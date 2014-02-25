@@ -159,14 +159,51 @@ $success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matka
 }
 
 if($func == "manager_update_products"){
-$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/manager/new/{$_REQUEST['city_storeID']}/".urldecode(json_encode($_REQUEST['price']))."/".urldecode(json_encode($_REQUEST['itemid']))),true);
+	$array = array();
+	$prices = $_REQUEST["price"];
+	$ids = $_REQUEST["itemid"];
+	//create arrays for the products with price and id
+	for($i = 0; $i < count($_REQUEST['price']);$i++){
+		array_push($array, array("product" => array("price" => 0, "id" => 0)));
+	}
+	
+	for($i = 0; $i < count($array);$i++){
+		$array[$i]["product"]["price"] = $prices[$i];
+	}
+		
+	for($i = 0; $i < count($array);$i++){
+		$array[$i]["product"]["id"] = $ids[$i];
+	}
+	//loop throught he products and check which ones have a corresponding checked box
+	for($i = 0; $i < (count($array)-1);$i++){
+		if(isset($_REQUEST["checkboxes"])){
+			$array["checked"] = $_REQUEST['checkboxes'];
+		}
+		if(isset($array["checked"])){
+				$for_sale = 0;
+				foreach($array["checked"] as $checked){
+					if($checked == $array[$i]["product"]["id"]){
+						
+						$for_sale = 1;
+						
+					}
+				}
+				
+			$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/manager/update/{$_REQUEST['city_storeID']}/".$array[$i]["product"]["price"]."/".$array[$i]["product"]["id"]."/".$for_sale),true);
+			
+		}else{
+			$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/manager/update/{$_REQUEST['city_storeID']}/".$array[$i]["product"]["price"]."/".$array[$i]["product"]["id"]."/0"),true);
+		}
+	}
+	
 	if($success>0)
 	{
 		header("Location: manager.php");
 	}
 	else
 	{
-		echo "error func adm_adm_user_new";
+		echo "error";
+		var_dump($array);
 	}
 }
 
