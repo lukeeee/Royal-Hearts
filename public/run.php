@@ -9,6 +9,8 @@ if($func == "adm_adm_delete"){
 	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/remove/{$_REQUEST['id']}"),true);
 	if($success == 1){
 		header("Location: /administrator.php");
+	}else if($success == 2){
+		header("Location: /admin_error.php");	
 	}else{
 		echo "Något gick fel!";
 	}
