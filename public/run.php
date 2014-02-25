@@ -175,6 +175,7 @@ $success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matka
 
 if($func == "manager_update_products"){
 	$array = array();
+	$success = 0;
 	$prices = $_REQUEST["price"];
 	$ids = $_REQUEST["itemid"];
 	//create arrays for the products with price and id
@@ -218,7 +219,10 @@ if($func == "manager_update_products"){
 	else
 	{
 		echo "error";
+		var_dump($array[0]["product"]["price"]);
+		var_dump($array[0]["product"]["id"]);
 		var_dump($array);
+		var_dump($success);
 	}
 }
 
