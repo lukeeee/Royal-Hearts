@@ -23,7 +23,7 @@
                     <input type="text" class="form-control" id="storename" placeholder="Butiksnamn" name="storename">
                 </div>
                 <div class="form-group">
-                	<select name="city_id">
+                	<select class="form-control" name="city_id">
                     <?php
                     	foreach($cities as $city){
                         	echo '<option value="'.$city["id"].'">'.$city["name"].'</option>';

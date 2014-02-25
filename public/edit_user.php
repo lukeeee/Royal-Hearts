@@ -64,8 +64,8 @@
 		echo '<div class="row inputCointainer"><form method="post" action="run.php?func=adm_adm_user_new" enctype="multipart/form-data">';
 					
 						
-						echo "<div  class='col-lg-3'><label class='sr-only' for='username'>Användarnamn</label><input class='form-control' type='text' name='username' placeholder='Användarnamn' value='Användarnamn' onfocus='clearText(this);'></div>";
-						echo "<div  class='col-lg-3'><label class='sr-only' for='password'>Lösenord</label><input class='form-control' type='text' name='password' placeholder='Lösenord' value='Lösenord' onfocus='clearText(this);'></div>";
+						echo "<div  class='col-lg-3'><label class='sr-only' for='username'>Användarnamn</label><input class='form-control' type='text' name='username' placeholder='Användarnamn' onfocus='clearText(this);'></div>";
+						echo "<div  class='col-lg-3'><label class='sr-only' for='password'>Lösenord</label><input class='form-control' type='text' name='password' placeholder='Lösenord' onfocus='clearText(this);'></div>";
 						echo "<div  class='col-lg-2'><label class='sr-only' for='privilege'>Privilege</label><input class='form-control col-lg-3' type='text' name='privilege' value='0' onfocus='clearText(this);'></div>";
 						echo "<div  class='col-lg-2'><input class='btn btn-primary' type='submit' value='Lägg till'></div>";
 					
