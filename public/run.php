@@ -65,14 +65,25 @@ json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/
 }
 
 if($func == "adm_adm_user_update"){
-$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/update/{$_REQUEST['id']}/{$_REQUEST['username']}/{$_REQUEST['password']}/{$_REQUEST['privilege']}"),true);
-	if($success==1)
-	{
-		header("Location: edit_user.php");
-	}
-	else
-	{
-		echo "error func adm_adm_user_update";
+	$db = new Db();
+	if($_POST['username'] == null || $_POST['privilege'] == null) {
+		set_feedback("danger", "Du måste fylla i användarnamn och privilegium."); 
+		header('location: edit_user.php');
+	} else {
+		$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/update/{$_REQUEST['id']}/{$_REQUEST['username']}/{$_REQUEST['password']}/{$_REQUEST['privilege']}"),true);
+		if($success == 1) {
+			if(count($db->getUsernames($_POST['username'])) > 1) {
+				set_feedback("warning", "Användaren uppdaterades, men användarnamnet finns redan."); 
+				header("Location: edit_user.php");
+			} else {
+				set_feedback("success", "Användaren uppdaterades!");
+				var_dump($_SESSION['userdump']);
+				header("Location: edit_user.php");
+			}
+		}
+		else {
+			echo "error func adm_adm_user_update";
+		}
 	}
 }
 if($func == "adm_adm_new_store"){
@@ -162,14 +173,22 @@ if($func == "adm_adm_supp_delete"){
 }
 
 if($func == "adm_adm_user_new"){
-$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/new/{$_REQUEST['username']}/{$_REQUEST['password']}/{$_REQUEST['privilege']}"),true);
-	if($success>0)
-	{
-		header("Location: edit_user.php");
-	}
-	else
-	{
-		echo "error func adm_adm_user_new";
+	$db = new Db();
+	if($_POST['username'] == null || $_POST['password'] == null || $_POST['privilege'] == null) {
+		set_feedback("danger", "Du måste fylla i alla fälten."); 
+		header('location: edit_user.php');
+	} elseif($db->getUsername($_POST['username']) != null) {
+		set_feedback("danger", "Användarnamn finns redan."); 
+		header('location: edit_user.php');
+	} else {
+		$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/new/{$_REQUEST['username']}/{$_REQUEST['password']}/{$_REQUEST['privilege']}"),true);
+		if($success > 0) {
+			set_feedback("success", "Användaren skapades!");
+			header("Location: edit_user.php");
+		}
+		else {
+			echo "error func adm_adm_user_new";
+		}
 	}
 }
 
