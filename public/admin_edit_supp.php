@@ -24,7 +24,7 @@
           <input type="text" class="form-control" name="name" value="<?php echo $name ?>">
         </div>
        
-         <button type="submit" class="btn btn-default">Update</button>                             
+         <button type="submit" class="btn btn-default">Uppdatera</button>                             
       </form>
     </section>                          
   </div>                       
