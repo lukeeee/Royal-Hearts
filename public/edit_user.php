@@ -12,7 +12,8 @@
 	}else{
 		header("Location: login.php");
 	}
-	
+	//$db = new Db();
+	//var_dump(count($db->getUsernames("dill")));
 	/*$users = array(
 				array("id"=>12,"username"=>"luis sanchez","privilege"=>100),
 				array("id"=>12,"username"=>"luis sanchez","privilege"=>100),
@@ -61,35 +62,27 @@
 	</script>
   	<?php
 		echo '<h4>Lägg till en ny Användare</h4>';
-		echo '<div class="row inputCointainer"><form method="post" action="run.php?func=adm_adm_user_new" enctype="multipart/form-data">';
-					
-						
-						echo "<div  class='col-lg-3'><label class='sr-only' for='username'>Användarnamn</label><input class='form-control' type='text' name='username' placeholder='Användarnamn' value='Användarnamn' onfocus='clearText(this);'></div>";
-						echo "<div  class='col-lg-3'><label class='sr-only' for='password'>Lösenord</label><input class='form-control' type='text' name='password' placeholder='Lösenord' value='Lösenord' onfocus='clearText(this);'></div>";
-						echo "<div  class='col-lg-2'><label class='sr-only' for='privilege'>Privilege</label><input class='form-control col-lg-3' type='text' name='privilege' value='0' onfocus='clearText(this);'></div>";
-						echo "<div  class='col-lg-2'><input class='btn btn-primary' type='submit' value='Lägg till'></div>";
-					
-						echo "</form></div><hr>";
-						
-						echo '<h4>Uppdatera Användare</h4>';
-  		foreach($users  as $user)
-                 {
-                    echo '<div class="row inputCointainer"><form method="post" action="run.php?func=adm_adm_user_update" enctype="multipart/form-data">';
-					
-						echo "<div class='col-lg-1 '>User ID:".$user["id"]."</div>";
-						echo "<input type='hidden' name='id' value='".$user["id"]."'>";
-						echo "<div  class='col-lg-3'><label class='sr-only' for='username'>Användarnamn</label><input class='form-control' type='text' name='username' value='".$user["username"]."'></div>";
-						echo "<div  class='col-lg-3'><label class='sr-only' for='password'>Lösenord</label><input class='form-control' type='text' name='password' placeholder='Nytt lösenord'></div>";
-						echo "<div  class='col-lg-2'><label class='sr-only' for='privilege'>Privilege</label><input class='form-control' type='text' name='privilege' value='".$user["privilege"]."'></div>";
-						echo "<div  class='col-lg-1'><input class='btn btn-primary' type='submit' value='Uppdatera'></div>";
-					
-						echo "</form></div><hr>";
-						
-    			}
-				?>
+		echo '<div class="row inputCointainer"><form method="post" action="run.php?func=adm_adm_user_new" enctype="multipart/form-data">';		
+		echo "<div  class='col-lg-3'><label class='sr-only' for='username'>Användarnamn</label><input class='form-control' type='text' name='username' placeholder='Användarnamn' onfocus='clearText(this);'></div>";
+		echo "<div  class='col-lg-3'><label class='sr-only' for='password'>Lösenord</label><input class='form-control' type='text' name='password' placeholder='Lösenord' onfocus='clearText(this);'></div>";
+		echo "<div  class='col-lg-2'><label class='sr-only' for='privilege'>Privilege</label><input class='form-control col-lg-3' type='text' name='privilege' value='0' onfocus='clearText(this);'></div>";
+		echo "<div  class='col-lg-2'><input class='btn btn-primary' type='submit' value='Lägg till'></div>";
+		echo "</form></div><hr>";
+		
+		echo '<h4>Uppdatera Användare</h4>';
+		foreach($users  as $user) {
+			echo '<div class="row inputCointainer"><form method="post" action="run.php?func=adm_adm_user_update" enctype="multipart/form-data">';
+			echo "<div class='col-lg-1 '>User ID:".$user["id"]."</div>";
+			echo "<input type='hidden' name='id' value='".$user["id"]."'>";
+			echo "<div  class='col-lg-3'><label class='sr-only' for='username'>Användarnamn</label><input class='form-control' type='text' name='username' value='".$user["username"]."'></div>";
+			echo "<div  class='col-lg-3'><label class='sr-only' for='password'>Lösenord</label><input class='form-control' type='text' name='password' placeholder='Nytt lösenord'></div>";
+			echo "<div  class='col-lg-2'><label class='sr-only' for='privilege'>Privilege</label><input class='form-control' type='text' name='privilege' value='".$user["privilege"]."'></div>";
+			echo "<div  class='col-lg-1'><input class='btn btn-primary' type='submit' value='Uppdatera'></div>";
+			echo "</form></div><hr>";	
+		}
+	?>
   
 	</div>
-
   
 </div>
 

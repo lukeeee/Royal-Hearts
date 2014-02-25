@@ -1,13 +1,13 @@
 <?php
 	require_once('../config.php');
-	$pagetitle = "Varor | Matkassen.se";
+	$pagetitle = "priceTotal | Matkassen.se";
 	$categoryID = null;	
 	$itemsbycat = null;
 	
 	
 	if($_SESSION['is_logged_in'])
 	{
-		if($_SESSION['privilege']==3)
+		if($_SESSION['privilege']==0)
 		{
 			$manInfo = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/manager/getInfo/".$_SESSION['id']),true);
 			//storeName, sotreId, userId, city_storeID
@@ -25,12 +25,12 @@
 	
 	
 	
-	if(isset($_GET['catid'])){
-		$categoryID = $_GET['catid'];	
-		$itemsbycat = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/manager/getProductsByCat/".$categoryID."/".$manInfo['city_storeID']),true); 
+	if(isset($_GET['cityid'])){
+		$cityID = $_GET['cityid'];	
+		$itemsbycity = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/getbycity/".$cityID),true); 
 	}
 	
-	$categories = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true); 
+	$cities = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/city/getall" ),true); 
 	
 ?>
 <?php require_once(ROOT_PATH.'/header.php'); ?>
@@ -56,12 +56,12 @@
 	//$_SESSION['id'] = $user['id'];	//stores user id in session
 	
 	
-	foreach ($categories as $category) 
+	foreach ($cities as $city) 
 	{
-  		if($categoryID == $category["id"]){
-  			echo '<a href="manager.php?catid='.$category["id"].'" class="list-group-item active">'.$category["name"].'</a>';				
+  		if($cityID == $category["id"]){
+  			echo '<a href="price_total.php?catid='.$category["id"].'" class="list-group-item active">'.$category["name"].'</a>';				
   		} else {
-  			echo '<a href="manager.php?catid='.$category["id"].'" class="list-group-item">'.$category["name"].'</a>';				
+  			echo '<a href="price_total.php?catid='.$category["id"].'" class="list-group-item">'.$category["name"].'</a>';				
   		}
 	} ?>
   
@@ -99,8 +99,7 @@
 
 					}
 					
-					echo checkbox('checkbox', 'checkboxes[]', $itembycat['id'],$checked);
-					echo '<input type="hidden" name="itemid[]" id="itemid[]" value="'.$itembycat["id"].'">'; 
+					echo checkbox('checkbox', 'itemid[]', $itembycat['id'],$checked); 
 					?></td>
 		  			<td><?php echo $itembycat["name"] ?></td>
 		  			<td><input id="quantity_<?php echo $itembycat['id'] ?>" name="price[]" class="inputsam" value="<?php echo $itembycat['price'] ?>"><h7>Kr</h7></td>
