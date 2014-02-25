@@ -14,7 +14,7 @@ require_once(ROOT_PATH.'/header.php'); ?>
           <div class="col-xs-3">
           	<input type="text" class="form-control" name="name" placeholder="Kategorinamn">
           </div>
-          <button type="submit" class="btn btn-default">Create</button>
+          <button type="submit" class="btn btn-default">Skapa</button>
       	</div>
 		  </div>
     </form>
