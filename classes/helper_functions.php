@@ -121,7 +121,11 @@
         foreach ($foodbasket["items"] as $arrayitem) {
           $html .= '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td>';
           $html .= '<td><a id="basketitem_'.$arrayitem["id"].'"><i class="glyphicon glyphicon-trash"></i></a>';
-          $html .= '</td></tr>';        
+          $html .= '</td></tr>'; 
+          $html .= '<script>';
+          $html .=  '$(\'#basketitem_'.$arrayitem["id"].'\').click(function(){';
+          $html .=  'window.location = "run.php?func=removeitemfrombasket&userid='.$userid.'&itemid='.$arrayitem["id"].'";';
+          $html .= '});</script>';       
         } 
       }
      $html .= '</tbody></table>';
