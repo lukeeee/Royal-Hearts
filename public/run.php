@@ -233,6 +233,16 @@ if($func == "addtobasket"){
 		header("Location: products.php");	
 	}
 
+if($func == "changecategoryorder"){
+	$pieces = explode(",", $_GET['catarray']);
+	foreach ($pieces as $piece) {
+		if($piece != ''){
+			//json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/additem/".$userid."/".$itemid."/".$quantity),true);	
+			echo $piece."->";
+		}
+	}
+}
+
  if($func == 'additemtobasket') {
  	$itemid = $_GET['itemid'];
 	$userid = $_GET['userid'];

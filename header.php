@@ -21,6 +21,17 @@
 				background-size:cover;
 			}
 
+			.floatright {
+		  
+		  float: right;
+		  font-size: 1em;
+		}
+
+
+			.nopadding {
+		  padding-right: 0;
+		}
+
 			.inputsam{
 				width: 10%;
 			}
@@ -68,10 +79,6 @@
 				width: 80%;               
 				background-color:#333;
 				height: 1px;
-			}
-
-			#cat_id{
-				width: 120%;
 			}	
 
 			#footer {
