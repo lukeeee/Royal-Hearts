@@ -191,6 +191,7 @@
 
 if(isset($_SESSION["id"])){
 	$foodbasket = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/".$_SESSION['id']),true); 
+	$_SESSION['foodbasket'] = $foodbasket;
  	$foodbasket_total = count($foodbasket['items']);
  	$script = itemAdded($foodbasket_total, $_SESSION['foodbasket_total'], $catid, $_SESSION['id']);	
 }
