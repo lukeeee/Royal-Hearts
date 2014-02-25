@@ -18,7 +18,7 @@
        <h1>Redigera Grossist</h1>
       <form method="post" action="run.php?func=adm_adm_supp_update" enctype="multipart/form-data">
         <div class="col-xs-1">
-          <input type="text" class="form-control" name="id" value="<?php echo $id?>">
+          <input type="text" class="form-control" name="id" id="cat_id" value="<?php echo $id?>">
         </div>
         <div class="col-xs-3">
           <input type="text" class="form-control" name="name" value="<?php echo $name ?>">
