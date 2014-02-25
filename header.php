@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -184,11 +184,15 @@
  //Hindrar errors där den gnäller på att värden inte är satta
  $foodbasket_total = 0;
  $script = '';
+ $catid = 0;
+ if(isset($_SESSION['cat_id'])){
+ 	$catid = $_SESSION['cat_id'];
+ }
 
 if(isset($_SESSION["id"])){
 	$foodbasket = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/".$_SESSION['id']),true); 
  	$foodbasket_total = count($foodbasket['items']);
- 	$script = itemAdded($foodbasket_total, $_SESSION['foodbasket_total'], $_SESSION['cat_id'], $_SESSION['id']);	
+ 	$script = itemAdded($foodbasket_total, $_SESSION['foodbasket_total'], $catid, $_SESSION['id']);	
 }
  
  ?>    
