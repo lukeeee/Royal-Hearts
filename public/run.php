@@ -106,6 +106,18 @@ if($func == "adm_adm_new_store"){
 	}
 }
 
+if($func == "adm_adm_update_store"){
+	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/update/{$_REQUEST['storeID']}/{$_REQUEST['name']}/{$_REQUEST['cityID']}"),true);
+	if($success==1)
+	{
+		header("Location: admin_edit_store.php");
+	}
+	else
+	{
+		echo "error update store";
+	}
+}
+
 if($func == "adm_adm_new_supp"){
 	$db = new Db();
 	if($_POST['suppname'] == null || $_POST['username'] == null || $_POST['password'] == null || $_POST['password2'] == null) {
