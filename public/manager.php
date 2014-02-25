@@ -99,7 +99,8 @@
 
 					}
 					
-					echo checkbox('checkbox', 'itemid[]', $itembycat['id'],$checked); 
+					echo checkbox('checkbox', 'checkboxes[]', $itembycat['id'],$checked);
+					echo '<input type="hidden" name="itemid[]" id="itemid[]" value="'.$itembycat["id"].'">'; 
 					?></td>
 		  			<td><?php echo $itembycat["name"] ?></td>
 		  			<td><input id="quantity_<?php echo $itembycat['id'] ?>" name="price[]" class="inputsam" value="<?php echo $itembycat['price'] ?>"><h7>Kr</h7></td>
