@@ -104,7 +104,7 @@ if($func == "adm_adm_new_store"){
 			if($store_success >0){
 				$story_city = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/addcity/{$store_success}/{$_REQUEST['city_id']}"), true);
 				if($story_city == 1){
-					header("Location: administrator.php");	
+					header("Location: admin_edit_store.php");	
 				}else{
 					echo "error store_city";
 				}
@@ -121,6 +121,19 @@ if($func == "adm_adm_new_store"){
 
 if($func == "adm_adm_update_store"){
 	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/update/{$_REQUEST['storeID']}/{$_REQUEST['name']}/{$_REQUEST['cityID']}"),true);
+	if($success==1)
+	{
+		header("Location: admin_edit_store.php");
+	}
+	else
+	{
+		echo "error update store";
+		var_dump($success);
+	}
+}
+
+if($func == "adm_adm_delete_store"){
+	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/delete/{$_REQUEST['storeID']}/{$_REQUEST['cityID']}"),true);
 	if($success==1)
 	{
 		header("Location: admin_edit_store.php");
