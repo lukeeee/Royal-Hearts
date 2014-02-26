@@ -26,6 +26,9 @@
 		  float: right;
 		  font-size: 1em;
 		}
+		.selectmulti{
+			width: 40%;
+		}
 
 
 			.nopadding {
