@@ -133,7 +133,7 @@ if($func == "adm_adm_update_store"){
 }
 
 if($func == "adm_adm_delete_store"){
-	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/delete/{$_REQUEST['storeID']}/{$_REQUEST['cityID']}"),true);
+	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/delete/{$_REQUEST['id']}/{$_REQUEST['cityID']}"),true);
 	if($success==1)
 	{
 		header("Location: admin_edit_store.php");

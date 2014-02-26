@@ -30,7 +30,6 @@ if($privilege == 1){
     <div class="col-md-4 col-md-offset-2">
     <div><h3>Redigera Butiker</h3></div>
   	    <section>
-        
             <?php
             foreach($stores  as $store)
             {
@@ -38,7 +37,7 @@ if($privilege == 1){
             echo "<div><h4 hidden>".$store["id"]."</h4></div>";
             echo "<div><h4>".$store["name"]." &nbsp;(".$store["cityName"].")</h4></div>";
             echo "<a class='btn btn-default adm' href='/edit_store.php?id=".$store['id']."&name=".urlencode($store['name'])."&city=".$store['cityName']."'>Redigera</a>";
-            echo "<a class='btn btn-danger adm' href='/run.php?id=".$store['id']."&func=adm_adm_delete_store' onclick='return confirm(\"Är du säker på att du vill ta bort butiken?\")'>Ta bort</a></br>";
+            echo "<a class='btn btn-danger adm' href='/run.php?id=".$store['id']."&cityID=".$store["cityID"]."&func=adm_adm_delete_store' onclick='return confirm(\"Är du säker på att du vill ta bort butiken?\")'>Ta bort</a></br>";
    		    }    
             ?>
 
