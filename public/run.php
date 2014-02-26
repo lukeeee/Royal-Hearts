@@ -100,7 +100,7 @@ if($func == "adm_adm_new_store"){
 	} else {
 		$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/new/{$_REQUEST['username']}/{$_REQUEST['password']}/3"), true);
 		if($success > 0){
-		$store_success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/new/{$_REQUEST['storename']}/{$success}"), true);
+		$store_success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/new/{$_REQUEST['storename']}/{$success}/{$_REQUEST['city_id']}"), true);
 			if($store_success >0){
 				$story_city = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/addcity/{$store_success}/{$_REQUEST['city_id']}"), true);
 				if($story_city == 1){
@@ -111,6 +111,7 @@ if($func == "adm_adm_new_store"){
 				
 			}else{
 				echo "error store_success";	
+				var_dump($store_success);
 			}
 		}else{
 			echo " error new user";	
@@ -127,6 +128,7 @@ if($func == "adm_adm_update_store"){
 	else
 	{
 		echo "error update store";
+		var_dump($success);
 	}
 }
 
