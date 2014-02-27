@@ -22,7 +22,8 @@ if($privilege == 1){
  	<div class="col-md-2">
   	<div class="list-group">
     <a href="administrator.php" class="list-group-item">Kategorier</a>
-  	<a href="admin_edit_store.php" class="list-group-item active">Butiker</a>				
+  	<a href="admin_edit_store.php" class="list-group-item active">Butiker</a>	
+     <a href="admin_edit_store_city_category.php" class="list-group-item active">Kategorier i specifik butik</a>			
   	<a href="edit_user.php" class="list-group-item">Användare</a>
     <a href="admin_suppliers.php" class="list-group-item">Grossister</a>
 	</div>
@@ -33,11 +34,14 @@ if($privilege == 1){
             <?php
             foreach($stores  as $store)
             {
- 
-            echo "<div><h4 hidden>".$store["id"]."</h4></div>";
+              if($store["id"] != 0){
+                echo "<div><h4 hidden>".$store["id"]."</h4></div>";
             echo "<div><h4>".$store["name"]." &nbsp;(".$store["cityName"].")</h4></div>";
             echo "<a class='btn btn-default adm' href='/edit_store.php?id=".$store['id']."&name=".urlencode($store['name'])."&city=".$store['cityName']."'>Redigera</a>";
-            echo "<a class='btn btn-danger adm' href='/run.php?id=".$store['id']."&cityID=".$store["cityID"]."&func=adm_adm_delete_store' onclick='return confirm(\"Är du säker på att du vill ta bort butiken?\")'>Ta bort</a></br>";
+            echo "<a class='btn btn-danger adm' href='/run.php?id=".$store['id']."&cityID=".$store["cityID"]."&func=adm_adm_delete_store' onclick='return confirm(\"Är du säker på att du vill ta bort butiken?\")'>Ta bort</a></br>";    
+              }
+ 
+            
    		    }    
             ?>
 

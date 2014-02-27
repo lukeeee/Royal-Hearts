@@ -177,7 +177,7 @@ function categoryinStore($cities, $categories){
             $categoryinstoreDiv .= "<div id=\"".$divid."\">";
             $categoryinstoreDiv .= "<ul id=\"sortable_".$city['id']."_".$store['id']."\">";
             foreach ($categories as $category) {
-              $categoryinstoreDiv .= "<li class=\"ui-state-default\" value =\"".$category['id']."\"><span class=\"ui-icon ui-icon-arrowthick-2-n-s\"></span>".$category['name']."</li>";//"<option value=\"".$category['id']."\">".$category['name']."</option>";  
+              $categoryinstoreDiv .= "<li class=\"ui-state-default\" value =\"".$category['id']."\"><span class=\"ui-icon ui-icon-arrowthick-2-n-s\"></span>".$category['name']."</li>";
             }
             $categoryinstoreDiv .= "</ul>";
             $categoryinstoreDiv .= "<a id=\"a_".$city['id']."_".$store['id']."\"><i class=\"glyphicon glyphicon-ok\"></i></a>";
