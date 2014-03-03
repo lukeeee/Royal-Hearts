@@ -2,11 +2,12 @@
 	require_once('../config.php');
 	$pagetitle = "Sök | Matkassen.se";
 	$searchstring = '';
-	if(isset($_POST['search'])){
-		$searchstring = $_POST['search'];
-	}
+	
 ?>
-<?php require_once(ROOT_PATH.'/header.php'); ?>
+<?php require_once(ROOT_PATH.'/header.php');
+if(isset($_POST['search'])){
+		$searchstring = $_POST['search'];
+	} ?>
 
  <link rel="stylesheet" type="text/css" href="css/flexigrid.pack.css" />
  <link rel="stylesheet" href="css/flexigridstyle.css" />

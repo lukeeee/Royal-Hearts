@@ -1,3 +1,5 @@
+
+
 <?php
 	require_once('../config.php');
 
@@ -7,7 +9,8 @@ $sortname = isset($_POST['sortname']) ? $_POST['sortname'] : 'id';
 $sortorder = isset($_POST['sortorder']) ? $_POST['sortorder'] : 'desc';
 
 
-$searchstring = $_GET['search'];
+$searchstring = utf8_decode($_GET['search']);
+
 $arraycount = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodproduct/searchall/".$searchstring));
 $total = count($arraycount);
 $pages = ceil($total / $rp);
