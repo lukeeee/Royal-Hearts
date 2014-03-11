@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -60,11 +61,23 @@ public class MeatAdapter extends BaseAdapter {
         holder.groText = (TextView)v.findViewById(R.id.groText);
         holder.groText.setTypeface(tf);
         holder.addbtn = (Button)v.findViewById(R.id.addBtn);
-        Meats mea = JsonManager.getMeats().get(i);
+        final Meats mea = JsonManager.getMeats().get(i);
 
         holder.groText.setText(mea.getName().toString());
         holder.addbtn.setTag(mea.getName());
         v.setTag(meats.get(i));
+        holder.addbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HelperClass.Item.item_id = mea.getId();
+                if (HelperClass.Item.item_id == 1){
+                    JsonManager.addToBag();
+                    Toast.makeText(context, "1 " + mea.getName() +
+                            ", har lagts till i din lista", 1000).show();
+                    SoundManager.start(R.raw.stapler, context);
+                }
+            }
+        });
 
         return v;
     }

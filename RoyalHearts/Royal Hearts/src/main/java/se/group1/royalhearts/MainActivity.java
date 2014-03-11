@@ -101,18 +101,15 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         mbags = JsonManager.getMBags();
 
 
+
         Log.i("userid", Integer.toString(HelperClass.User.userId));
         Log.i("userid", HelperClass.User.userName);
 
         citySpinner.setOnItemSelectedListener(this);
         storeSpinner.setOnItemSelectedListener(this);
         btnKasse.setOnClickListener(this);
-
         setInvisible();
-
-
     }
-
 
 
     @Override
@@ -147,6 +144,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
             case R.id.action_settings:
                 Intent settingsIntent = new Intent(getBaseContext(), Settings.class);
                 startActivity(settingsIntent);
+                //this.finish();
                 return true;
             case R.id.action_add:
                 Intent addIntent = new Intent(getBaseContext(), AddProducts.class);
