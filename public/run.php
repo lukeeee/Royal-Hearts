@@ -273,10 +273,11 @@ if($func == "addtobasket"){
 
 if($func == "changecategoryorder"){
 	$pieces = explode(",", $_GET['catarray']);
+	$city_storeID = $_GET['citystoreid'];
+	json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/deleteorder/".$city_storeID),true);	
 	foreach ($pieces as $piece) {
 		if($piece != ''){
-			//json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/additem/".$userid."/".$itemid."/".$quantity),true);	
-			echo $piece."->";
+			json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/addcatorder/".$city_storeID."/".$piece),true);	
 		}
 	}
 }

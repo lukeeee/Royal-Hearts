@@ -26,13 +26,13 @@
 <div class="col-md-3 col-md-offset-4">
      <section>
 		 <?php
-            foreach($products  as $product){
-                echo "<div><h4 hidden>".$product["id"]."</h4></div>";
-                echo "<div><h4>".$product["name"]."</h4></div>";
-                echo "<a class='btn btn-default adm' href='/edit_supplier.php?id=".$product['id']."&name=".$product['name']."&cat_id=".$product["categoryID"]."'>Redigera</a>";
-                echo "<a class='btn btn-danger adm' href='/run.php?id=".$product['id']."&func=adm_supp_delete' onclick='return confirm(\"Är du säker på att du vill ta bort grossisten?\")'>Ta bort</a></br>";
-            }
-        ?>
+        foreach($products  as $product){
+            echo "<div><h4 hidden>".$product["id"]."</h4></div>";
+            echo "<div><h4>".$product["name"]."</h4></div>";
+            echo "<a class='btn btn-default adm' href='/edit_supplier.php?id=".$product['id']."&name=".$product['name']."&cat_id=".$product["categoryID"]."'>Redigera</a>";
+            echo "<a class='btn btn-danger adm' href='/run.php?id=".$product['id']."&func=adm_supp_delete' onclick='return confirm(\"Är du säker på att du vill ta bort grossisten?\")'>Ta bort</a></br>";
+        }
+      ?>
      	<div><h3><a href='new_product.php'>Ny Vara</a></h3></div>
      </section>
 </div>

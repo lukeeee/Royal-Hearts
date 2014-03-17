@@ -22,11 +22,11 @@
 	<div class="col-md-1"></div>
  	<div class="col-md-2">
   	<div class="list-group">
-    <a href="administrator.php" class="list-group-item">Kategorier</a>
-  	<a href="admin_edit_store.php" class="list-group-item">Butiker</a>
-	 <a href="admin_edit_store_city_category.php" class="list-group-item">Kategorier i specifik butik</a>
-  	<a href="edit_user.php" class="list-group-item">Användare</a>
-    <a href="admin_suppliers.php" class="list-group-item active">Grossister</a>
+	    <a href="administrator.php" class="list-group-item">Kategorier</a>
+	  	<a href="admin_edit_store.php" class="list-group-item">Butiker</a>
+		 <a href="admin_edit_store_city_category.php" class="list-group-item">Kategorier i specifik butik</a>
+	  	<a href="edit_user.php" class="list-group-item">Användare</a>
+	    <a href="admin_suppliers.php" class="list-group-item active">Grossister</a>
 	</div>
   	</div>
       <div class="col-md-6 col-md-offset-2">

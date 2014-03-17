@@ -146,7 +146,7 @@ function foodbasketDiv($script, $foodbasket_total){
     return $html;
 }
 
-function categoryinStore($cities, $categories){
+/*function categoryinStore($cities, $categories){
   $html = '<div>';
   $selectscript = '';
   $categoryinstore = '';
@@ -201,9 +201,7 @@ function categoryinStore($cities, $categories){
   }
   return $html;
 }    
-
-
-  function categoryinStoreScript($cities){
+function categoryinStoreScript($cities){
     $ids[] = "";
     $selectscript = "";
     foreach($cities  as $city){
@@ -254,7 +252,64 @@ function categoryinStore($cities, $categories){
       
     }
   }return $selectscript;
+}*/
+
+
+function categoryinStore($storeid, $categories){
+  $html = '';
+  $categoryinstore = '';
+  $categoryinstore = '';    
+  $divid = '';
+  $categoryinstoreDiv = "<style>";
+  $categoryinstoreDiv .= "#sortable_".$storeid."{ list-style-type: none; margin: 0; padding: 0; width: 100%; }";
+  $categoryinstoreDiv .= "#sortable_".$storeid." li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;  }";
+  $categoryinstoreDiv .= "#sortable_".$storeid." li span { position: absolute; margin-left: -1.3em; }";
+  $categoryinstoreDiv .= "$sortable_ul".$storeid." li:hover { color: #ffff00; background-color: #003366; }";
+  $categoryinstoreDiv .= "</style>";
+  $categoryinstoreDiv .= "<script>";
+  $categoryinstoreDiv .= '$(function() {';
+  $categoryinstoreDiv .= '$("#sortable_'.$storeid.'").sortable();';
+  $categoryinstoreDiv .= '$("#sortable_'.$storeid.'").disableSelection();});';
+  $categoryinstoreDiv .= "</script>";
+  $categoryinstoreDiv .= "<ul id=\"sortable_".$storeid."\">";
+  
+  foreach ($categories as $category) {
+    $categoryinstoreDiv .= "<li class=\"ui-state-default\" value =\"".$category['category_id']."\"><span class=\"ui-icon ui-icon-arrowthick-2-n-s\"></span>".$category['name']."</li>";
+  }
+  
+  $categoryinstoreDiv .= "</ul>";
+  $categoryinstoreDiv .= "<a id=\"a_".$storeid."\"><i class=\"glyphicon glyphicon-ok\"></i></a>";
+  
+  $categoryinstore .= $categoryinstoreDiv;
+  $html .= $categoryinstore;  
+  
+  return $html;
+} 
+function categoryinStoreScript($categories){
+  $selectscript = "<script>";
+    foreach($categories  as $category){
+      $selectscript .= '$(function() {';
+      $selectscript .= "var selected = ".$category['id'].";";
+      $selectscript .= "var classID = '#div_'+selected;";
+      $selectscript .= "var listID = '#sortable_'+selected;";
+      $selectscript .= "var aID = '#a_'+selected;";
+
+      $selectscript .= "$(aID).click(function(){";
+        $selectscript .= "var listItems = $(listID+\" li\");";
+        $selectscript .= "listItems.each(function(idx, li) {";
+          $selectscript .= "post += $(li).val()+\",\";";
+        $selectscript .=  "});";
+      $selectscript .= "});";
+      $selectscript .= "window.location = \"run.php?func=changecategoryorder&catarray=\"+post;";
+      $selectscript .= "});});";
+      
+    
+  }
+  $selectscript .= "</script>";
+  return $selectscript;
 }
+
+  
 
  
   
