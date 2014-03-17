@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -61,11 +62,23 @@ public class DairyAdapter extends BaseAdapter {
         holder.groText = (TextView)v.findViewById(R.id.groText);
         holder.groText.setTypeface(tf);
         holder.addbtn = (Button)v.findViewById(R.id.addBtn);
-        Dairies dai = JsonManager.getDairies().get(i);
+        final Dairies dai = JsonManager.getDairies().get(i);
 
         holder.groText.setText(dai.getName().toString());
         holder.addbtn.setTag(dai.getName());
         v.setTag(dairies.get(i));
+        holder.addbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HelperClass.Item.item_id = dai.getId();
+                if (HelperClass.Item.item_id == 1){
+                    JsonManager.addToBag();
+                    Toast.makeText(context, "1 " + dai.getName() +
+                            ", har lagts till i din lista", 1000).show();
+                    SoundManager.start(R.raw.stapler, context);
+                }
+            }
+        });
 
         return v;
     }

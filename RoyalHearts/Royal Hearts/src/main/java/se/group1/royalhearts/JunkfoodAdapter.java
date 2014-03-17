@@ -2,7 +2,6 @@ package se.group1.royalhearts;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,11 +69,13 @@ public class JunkfoodAdapter extends BaseAdapter {
         holder.addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //CabinetManager.AddIngredient(getGroup(groupPosition) + ", " + ingredientName);
-                JsonManager.addToBag();
-                Log.i("Spenat", Integer.toString(jun.getId()));
-                Toast.makeText(context, jun.getName() + ", har lagts till i din lista", 1000).show();
-                SoundManager.start(R.raw.stapler, context);
+                HelperClass.Item.item_id = jun.getId();
+                if (HelperClass.Item.item_id == 1){
+                    JsonManager.addToBag();
+                    Toast.makeText(context, "1 " + jun.getName() +
+                            ", har lagts till i din lista", 1000).show();
+                    SoundManager.start(R.raw.stapler, context);
+                }
             }
         });
 

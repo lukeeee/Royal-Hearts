@@ -169,7 +169,7 @@ if($func == "adm_adm_new_supp"){
 	}
 }
 if($func == "adm_adm_supp_update"){
-	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/supplier/update/{$_REQUEST['id']}/{$_REQUEST['name']}"), true);
+	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/supplier/update/{$_REQUEST['id']}/".urlencode($_REQUEST['name']).""), true);
 	if($success == 1){
 		header("Location: admin_suppliers.php");
 	}else{
