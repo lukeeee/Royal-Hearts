@@ -280,7 +280,16 @@ if($func == "changecategoryorder"){
 			json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/addcatorder/".$city_storeID."/".$piece),true);	
 		}
 	}
+	header("Location: manager.php");	
 }
+
+if($func == "deletecategoryorder"){
+	$city_storeID = $_GET['citystoreid'];
+	json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/deleteorder/".$city_storeID),true);	
+	
+	header("Location: manager.php");	
+}
+
 
  if($func == 'additemtobasket') {
  	$itemid = $_GET['itemid'];

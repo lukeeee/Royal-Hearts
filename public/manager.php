@@ -30,11 +30,33 @@
 		$itemsbycat = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/manager/getProductsByCat/".$categoryID."/".$manInfo['city_storeID']),true); 
 	}
 	
-	$categories = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true); 
+	$categories = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getorder"),true); 
+	$currentstore = "";
+	
+	foreach($categories as $category){
+		if($category['city_storeID'] == $manInfo['city_storeID']){
+			$currentstore[] = $category;
+			
+		}
+	}	
+	
+	echo count($currentstore);
+	if(count($currentstore) > 1){
+		foreach($currentstore as $currentstor){
+			//echo $currentstor['city_storeID'];
+		}
+	} else {
+		$categories = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true);
+		echo count($categories);
+	}
 	
 ?>
+
 <?php require_once(ROOT_PATH.'/header.php'); ?>
 
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+
+  <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <br/>
 <div class="row">
 <div class="col-md-6 col-md-offset-4">
@@ -46,26 +68,15 @@
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-2">
-  	<div class="list-group">
-  	<?php 
-	
-	
-	
-	//$_SESSION['privilege'] = $user['privilege'];	//stores user privilege in session
-	//$_SESSION['username'] = $user['username'];		//stores username in session
-	//$_SESSION['id'] = $user['id'];	//stores user id in session
-	
-	
-	foreach ($categories as $category) 
-	{
-  		if($categoryID == $category["id"]){
-  			echo '<a href="manager.php?catid='.$category["id"].'" class="list-group-item active">'.$category["name"].'</a>';				
-  		} else {
-  			echo '<a href="manager.php?catid='.$category["id"].'" class="list-group-item">'.$category["name"].'</a>';				
-  		}
-	} ?>
+
+  	<?php if(count($currentstore) > 1){
+  	 echo categoryinStore($manInfo['city_storeID'], $categories, true);
+  	 } else {
+  	 	echo categoryinStore($manInfo['city_storeID'], $categories, false);
+  	 	} ?>
   
-	</div>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+
   </div>
   <div class="col-md-6">
   <?php if($itemsbycat != null || count($itemsbycat) != 0) : ?>
@@ -80,9 +91,7 @@
 	</thead>
 	<tbody>
 
-	<input type="hidden" name="userid" id="userid" value="<?php echo $_SESSION['id'];
-	 
-	?>">
+	<input type="hidden" name="userid" id="userid" value="<?php echo $_SESSION['id'];?>">
 	<?php  foreach ($itemsbycat as $itembycat) : ?>
    
 	  			<tr>
@@ -114,12 +123,35 @@
 	  			</button>
 </form>	
 <?php endif ?>
-<?php if($itemsbycat = null || count($itemsbycat) == 0 ) : ?>
-	Välj kategori i menyn
-<?php endif ?>
+
   </div>
   <div class="col-md-3"></div>
   
 </div>
-
-<?php require_once(ROOT_PATH.'/footer.php'); ?>
+ 
+<?php require_once(ROOT_PATH.'/footer.php') ?>
+<script>
+      var selected = "<?php echo $manInfo['city_storeID'] ?>";
+      var listID = '#sortable_'+selected;
+      var aID = '#a_'+selected;
+      var adelID = '#adel_'+selected;
+      var post = "";
+      console.log(selected+"-"+listID);
+      $(aID).click(function(){
+	      var listItems = $(listID+" li")
+	      listItems.each(function(idx, li) {
+          	post += $(li).val()+",";
+          });
+          
+          console.log(post);
+      window.location = "run.php?func=changecategoryorder&citystoreid="+selected+"&catarray="+post;
+      });
+      $(adelID).click(function(){
+	      
+      window.location = "run.php?func=deletecategoryorder&citystoreid="+selected;
+      });
+   $(listID+' li').click(function(e){ 
+		    var catid = $(this).val();
+		    window.location = "manager_cat.php?catid="+catid;
+		   });
+</script>
