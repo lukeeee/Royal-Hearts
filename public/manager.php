@@ -146,12 +146,12 @@
           console.log(post);
       window.location = "run.php?func=changecategoryorder&citystoreid="+selected+"&catarray="+post;
       });
-      $(adelID).click(function(){
+      $(adel ID).click(function(){
 	      
       window.location = "run.php?func=deletecategoryorder&citystoreid="+selected;
       });
    $(listID+' li').click(function(e){ 
 		    var catid = $(this).val();
-		    window.location = "manager_cat.php?catid="+catid;
+		    window.location = "manager.php?catid="+catid;
 		   });
 </script>
