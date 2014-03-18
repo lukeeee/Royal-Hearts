@@ -36,19 +36,18 @@
 	foreach($categories as $category){
 		if($category['city_storeID'] == $manInfo['city_storeID']){
 			$currentstore[] = $category;
-			
 		}
 	}	
+	//echo count($currentstore);
 	
-	echo count($currentstore);
+	
 	if(count($currentstore) > 1){
-		foreach($currentstore as $currentstor){
-			//echo $currentstor['city_storeID'];
-		}
+		//var_dump($currentstore);
 	} else {
 		$categories = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true);
-		echo count($categories);
+			//echo '--'.count($categories);
 	}
+
 	
 ?>
 
@@ -70,12 +69,13 @@
   <div class="col-md-2">
 
   	<?php if(count($currentstore) > 1){
-  	 echo categoryinStore($manInfo['city_storeID'], $categories, true);
-  	 } else {
-  	 	echo categoryinStore($manInfo['city_storeID'], $categories, false);
-  	 	} ?>
+	  	 	echo categoryinStore($manInfo['city_storeID'], $currentstore, true);
+	  	 } else {
+	  	 	echo categoryinStore($manInfo['city_storeID'], $categories, false);
+	  	 } 
+  	?>
   
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  
 
   </div>
   <div class="col-md-6">
@@ -146,7 +146,7 @@
           console.log(post);
       window.location = "run.php?func=changecategoryorder&citystoreid="+selected+"&catarray="+post;
       });
-      $(adel ID).click(function(){
+      $(adelID).click(function(){
 	      
       window.location = "run.php?func=deletecategoryorder&citystoreid="+selected;
       });
