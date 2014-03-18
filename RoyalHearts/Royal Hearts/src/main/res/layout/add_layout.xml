@@ -94,10 +94,10 @@
             android:layout_gravity="center"
             android:orientation="vertical"/>
         <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#fff"
-            android:layout_marginTop="10dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#fff"
+        android:layout_marginTop="10dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -116,6 +116,31 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:id="@+id/pro4"
+            android:layout_gravity="center"
+            android:orientation="vertical"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#fff"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="#000"
+            android:id="@+id/pro5text"
+            android:paddingLeft="3dp"
+            android:layout_marginBottom="1dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"/>
+        <LinearLayout
+            android:layout_marginTop="4dp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/pro5"
             android:layout_gravity="center"
             android:orientation="vertical"/>
 
