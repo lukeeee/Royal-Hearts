@@ -70,18 +70,19 @@ public class MeatAdapter extends BaseAdapter {
         v.setTag(meats.get(i));
         for(int z = 0; z < 1; z++){
             final int g = z;
-        holder.addbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                HelperClass.Item.item_id = mea.getId();
+            holder.addbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    HelperClass.Item.item_id = mea.getId();
 
                     JsonManager.addToBag();
                     Log.i("äckligt", Integer.toString(g));
-                Toast.makeText(context, "1 " + mea.getName() +
-                        ", har lagts till i din lista", 1000).show();
-                SoundManager.start(R.raw.stapler, context);
-            }
-        });}
+                    Toast.makeText(context, "1 " + mea.getName() +
+                            ", har lagts till i din lista", 1000).show();
+                    SoundManager.start(R.raw.stapler, context);
+                }
+            });
+        }
 
         return v;
     }

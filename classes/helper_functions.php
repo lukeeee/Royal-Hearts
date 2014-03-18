@@ -21,7 +21,25 @@
 		$html .= '</label>';
 		return $html;
 	}
-
+	function SortStores($array){
+			$stores = array("stores" => array());
+			$storesID = array();
+			foreach($array as $itemCity){
+				//var_dump($itemCity);
+			
+				if(in_array($itemCity["store"], $storesID, true)){
+					
+				}else{
+					array_push($storesID, $itemCity["store"]);
+					array_push($stores["stores"], array("id" => $itemCity["store"], "name" => $itemCity["storeName"]));
+				}
+				
+				
+			}
+			return $stores;
+			
+		}
+	
 
   function hidden_input($name, $id) {
     $html = '<input type="hidden" name="'.$name.'" value="'.$id.'">';

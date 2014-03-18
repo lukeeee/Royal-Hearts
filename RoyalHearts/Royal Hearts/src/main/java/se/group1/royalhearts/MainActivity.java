@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private ProgressDialog progressDialog;
-    private TextView kasse,cat1text,cat2text,cat3text,cat4text,store,city;
+    private TextView kasse,cat1text,cat2text,cat3text,cat4text,store,city,cat5text;
     private Spinner storeSpinner;
     private Spinner citySpinner;
     private ArrayList<Categories> categories;
@@ -35,9 +35,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
     private ArrayList<JBags> jbags;
     private ArrayList<DBags> dbags;
     private ArrayList<MBags> mbags;
+    private ArrayList<HBags> hbags;
     private Button btnKasse;
-    private LinearLayout cat1,cat2,cat3,cat4;
-    private View line_one,line_two,line_three;
+    private LinearLayout cat1,cat2,cat3,cat4,cat5;
+    private View line_one,line_two,line_three,line_four;
     Animation move_out,fade_in,zoom;
 
     @Override
@@ -51,15 +52,18 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         cat2text = (TextView)findViewById(R.id.cat2Text);
         cat3text = (TextView)findViewById(R.id.cat3text);
         cat4text = (TextView)findViewById(R.id.cat4text);
+        cat5text = (TextView)findViewById(R.id.cat5text);
         store = (TextView)findViewById(R.id.store);
         city = (TextView)findViewById(R.id.city);
         cat1 = (LinearLayout)findViewById(R.id.cat1);
         cat2 = (LinearLayout)findViewById(R.id.cat2);
         cat3 = (LinearLayout)findViewById(R.id.cat3);
         cat4 = (LinearLayout)findViewById(R.id.cat4);
+        cat5 = (LinearLayout)findViewById(R.id.cat5);
         line_one = (View)findViewById(R.id.line_one);
         line_two = (View)findViewById(R.id.line_two);
         line_three = (View)findViewById(R.id.line_three);
+        line_four = (View)findViewById(R.id.line_four);
         btnKasse = (Button)findViewById(R.id.btnKasse);
         Typeface tf = Typeface.createFromAsset(getAssets(),
                 "fonts/Locked.ttf");
@@ -74,6 +78,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         cat3text.setTypeface(tf);
         cat2text.setTypeface(tf);
         cat1text.setTypeface(tf);
+        cat5text.setTypeface(tf);
         btnKasse.setTypeface(tf);
         city.setTypeface(tf);
         store.setTypeface(tf);
@@ -99,6 +104,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         jbags = JsonManager.getJBags();
         dbags = JsonManager.getDBags();
         mbags = JsonManager.getMBags();
+        hbags = JsonManager.getHBags();
 
 
 
@@ -239,9 +245,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         cat3.setVisibility(View.INVISIBLE);
         cat4text.setVisibility(View.INVISIBLE);
         cat4.setVisibility(View.INVISIBLE);
+        cat5text.setVisibility(View.INVISIBLE);
+        cat5.setVisibility(View.INVISIBLE);
         line_one.setVisibility(View.INVISIBLE);
         line_two.setVisibility(View.INVISIBLE);
         line_three.setVisibility(View.INVISIBLE);
+        line_four.setVisibility(View.INVISIBLE);
     }
     public void setVisible(){
         cat1text.setVisibility(View.VISIBLE);
@@ -260,12 +269,18 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         cat4text.startAnimation(zoom);
         cat4.setVisibility(View.VISIBLE);
         cat4.startAnimation(zoom);
+        cat5text.setVisibility(View.VISIBLE);
+        cat5text.startAnimation(zoom);
+        cat5.setVisibility(View.VISIBLE);
+        cat5.startAnimation(zoom);
         line_one.setVisibility(View.VISIBLE);
         line_one.startAnimation(zoom);
         line_two.setVisibility(View.VISIBLE);
         line_two.startAnimation(zoom);
         line_three.setVisibility(View.VISIBLE);
         line_three.startAnimation(zoom);
+        line_four.setVisibility(View.VISIBLE);
+        line_four.startAnimation(zoom);
     }
     public void animation(){
         storeSpinner.setVisibility(View.GONE);
@@ -285,6 +300,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
             cat2text.setText(categories.get(1).getName().toString());
             cat3text.setText(categories.get(3).getName().toString());
             cat4text.setText(categories.get(2).getName().toString());
+            cat5text.setText(categories.get(4).getName().toString());
         }
         JBagAdapter jbagAdapter = new JBagAdapter(getApplicationContext());
         final int jadapterCount = jbagAdapter.getCount();
@@ -309,15 +325,22 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         for (int i = 0; i < adapterCount; i++) {
             View item = fbagAdapter.getView(i, null, null);
             cat1.addView(item);
+        }
+        HBagAdapter hbagAdapter = new HBagAdapter(getApplicationContext());
+        final int hadapterCount = hbagAdapter.getCount();
+        for (int i = 0; i < adapterCount; i++) {
+            View item = hbagAdapter.getView(i, null, null);
+            cat5.addView(item);
         }
     }
     public void maxi(){
         for(Categories cat : categories){
             Log.i("hej", cat.getName().toString());
-            cat1text.setText(categories.get(3).getName().toString());
-            cat2text.setText(categories.get(0).getName().toString());
-            cat3text.setText(categories.get(1).getName().toString());
-            cat4text.setText(categories.get(2).getName().toString());
+            cat1text.setText(categories.get(4).getName().toString());
+            cat2text.setText(categories.get(1).getName().toString());
+            cat3text.setText(categories.get(2).getName().toString());
+            cat4text.setText(categories.get(3).getName().toString());
+            cat5text.setText(categories.get(0).getName().toString());
         }
         JBagAdapter jbagAdapter = new JBagAdapter(getApplicationContext());
         final int jadapterCount = jbagAdapter.getCount();
@@ -342,6 +365,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         for (int i = 0; i < adapterCount; i++) {
             View item = fbagAdapter.getView(i, null, null);
             cat2.addView(item);
+        }
+        HBagAdapter hbagAdapter = new HBagAdapter(getApplicationContext());
+        final int hadapterCount = hbagAdapter.getCount();
+        for (int i = 0; i < adapterCount; i++) {
+            View item = hbagAdapter.getView(i, null, null);
+            cat5.addView(item);
         }
     }
     public void citygross(){
@@ -351,6 +380,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
             cat2text.setText(categories.get(0).getName().toString());
             cat3text.setText(categories.get(1).getName().toString());
             cat4text.setText(categories.get(3).getName().toString());
+            cat5text.setText(categories.get(4).getName().toString());
         }
         JBagAdapter jbagAdapter = new JBagAdapter(getApplicationContext());
         final int jadapterCount = jbagAdapter.getCount();
@@ -375,6 +405,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         for (int i = 0; i < adapterCount; i++) {
             View item = fbagAdapter.getView(i, null, null);
             cat2.addView(item);
+        }
+        HBagAdapter hbagAdapter = new HBagAdapter(getApplicationContext());
+        final int hadapterCount = hbagAdapter.getCount();
+        for (int i = 0; i < adapterCount; i++) {
+            View item = hbagAdapter.getView(i, null, null);
+            cat5.addView(item);
         }
     }
     public void lidl(){
@@ -384,6 +420,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
             cat2text.setText(categories.get(0).getName().toString());
             cat3text.setText(categories.get(3).getName().toString());
             cat4text.setText(categories.get(1).getName().toString());
+            cat5text.setText(categories.get(4).getName().toString());
         }
         JBagAdapter jbagAdapter = new JBagAdapter(getApplicationContext());
         final int jadapterCount = jbagAdapter.getCount();
@@ -408,6 +445,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         for (int i = 0; i < adapterCount; i++) {
             View item = fbagAdapter.getView(i, null, null);
             cat2.addView(item);
+        }
+        HBagAdapter hbagAdapter = new HBagAdapter(getApplicationContext());
+        final int hadapterCount = hbagAdapter.getCount();
+        for (int i = 0; i < adapterCount; i++) {
+            View item = hbagAdapter.getView(i, null, null);
+            cat5.addView(item);
         }
     }
 

@@ -100,7 +100,7 @@ if($func == "adm_adm_new_store"){
 	} else {
 		$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/user/new/{$_REQUEST['username']}/{$_REQUEST['password']}/3"), true);
 		if($success > 0){
-		$store_success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/new/{$_REQUEST['storename']}/{$success}"), true);
+		$store_success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/new/".urlencode($_REQUEST['storename'])."/{$success}"), true);
 			if($store_success >0){
 				$story_city = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/addcity/{$store_success}/{$_REQUEST['city_id']}"), true);
 				if($story_city == 1){
@@ -120,7 +120,7 @@ if($func == "adm_adm_new_store"){
 }
 
 if($func == "adm_adm_update_store"){
-	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/update/{$_REQUEST['storeID']}/{$_REQUEST['name']}/{$_REQUEST['cityID']}"),true);
+	$success = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/store/update/{$_REQUEST['storeID']}/".urlencode($_REQUEST['name'])."/{$_REQUEST['cityID']}"),true);
 	if($success==1)
 	{
 		header("Location: admin_edit_store.php");

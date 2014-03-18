@@ -11,11 +11,13 @@ import se.group1.royalhearts.Json.AddToBag;
 import se.group1.royalhearts.Json.GetAllCategories;
 import se.group1.royalhearts.Json.GetAllCities;
 import se.group1.royalhearts.Json.GetAllDairies;
+import se.group1.royalhearts.Json.GetAllHealth;
 import se.group1.royalhearts.Json.GetAllJunkfoods;
 import se.group1.royalhearts.Json.GetAllMeats;
 import se.group1.royalhearts.Json.GetAllVegetables;
 import se.group1.royalhearts.Json.GetDBagByUser;
 import se.group1.royalhearts.Json.GetFBagByUser;
+import se.group1.royalhearts.Json.GetHBagByUser;
 import se.group1.royalhearts.Json.GetJBagByUser;
 import se.group1.royalhearts.Json.GetMBagByUser;
 import se.group1.royalhearts.Json.GetStoresByCity;
@@ -34,6 +36,8 @@ public class JsonManager {
     public static ArrayList<JBags> jbags = new ArrayList<JBags>();
     public static ArrayList<DBags> dbags = new ArrayList<DBags>();
     public static ArrayList<MBags> mbags = new ArrayList<MBags>();
+    public static ArrayList<HBags> hbags = new ArrayList<HBags>();
+    public static ArrayList<Health> healths = new ArrayList<Health>();
 
     public static void updateEverything() {
         try {
@@ -48,6 +52,8 @@ public class JsonManager {
             updateJBags(1);
             updateDBags(1);
             updateMBags(1);
+            updateHBags(1);
+            updateHealths();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -97,6 +103,14 @@ public class JsonManager {
     public static void updateMBags(int userId) throws IOException, JSONException {
         GetMBagByUser task = new GetMBagByUser();
         task.execute("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/3/" + HelperClass.User.userId);
+    }
+    public static void updateHealths() throws IOException, JSONException {
+        GetAllHealth task = new GetAllHealth();
+        task.execute("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodproduct/getbycat/30");
+    }
+    public static void updateHBags(int userId) throws IOException, JSONException {
+        GetHBagByUser task = new GetHBagByUser();
+        task.execute("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/30/" + HelperClass.User.userId);
     }
 
 
@@ -188,6 +202,22 @@ public class JsonManager {
         }
         return mbags;
     }
+    public static ArrayList<Health> getHealths() {
+        try {
+            updateHealths();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return healths;
+    }
+    public static ArrayList<HBags> getHBags() {
+        try {
+            updateHBags(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return hbags;
+    }
     public static void addToBag() {
         AddToBag addaToBag = new AddToBag();
         addaToBag.execute("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/foodbasket/additem/" +
@@ -229,6 +259,28 @@ public class JsonManager {
                 int id = royalHeartObj.getInt("id");
                 String name = royalHeartObj.getString("name");
                 listToReturn.add(new Vegetables(id, name));
+                ;
+            }
+            return listToReturn;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static ArrayList<Health> getHealthsFromJson(String json) {
+        try {
+
+            JSONArray HealthsArr = new JSONArray(json);
+            ArrayList<Health> listToReturn = new ArrayList<Health>();
+
+            for (int i = 0; i < HealthsArr.length(); i++) {
+                JSONObject royalHeartObj = HealthsArr.getJSONObject(i);
+
+
+                int id = royalHeartObj.getInt("id");
+                String name = royalHeartObj.getString("name");
+                listToReturn.add(new Health(id, name));
                 ;
             }
             return listToReturn;
@@ -423,6 +475,27 @@ public class JsonManager {
                 int id = royalHeartObj.getInt("id");
                 String name = royalHeartObj.getString("name");
                 listToReturn.add(new MBags(id, name));
+                ;
+            }
+            return listToReturn;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static ArrayList<HBags> getHBagsFromJson(String json) {
+        try {
+            JSONObject Bagsobj = new JSONObject(json);
+            JSONArray BagsArr = Bagsobj.getJSONArray("items");
+            ArrayList<HBags> listToReturn = new ArrayList<HBags>();
+
+            for (int i = 0; i < BagsArr.length(); i++) {
+                JSONObject royalHeartObj = BagsArr.getJSONObject(i);
+
+                int id = royalHeartObj.getInt("id");
+                String name = royalHeartObj.getString("name");
+                listToReturn.add(new HBags(id, name));
                 ;
             }
             return listToReturn;
