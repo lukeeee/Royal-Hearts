@@ -284,7 +284,7 @@ function categoryinStore($storeid, $categories, $catinstore = false){
   $categoryinstoreDiv .= "#sortable_".$storeid."{ list-style-type: none; margin: 0; padding: 0; width: 100%; }";
   $categoryinstoreDiv .= "#sortable_".$storeid." li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;  }";
   $categoryinstoreDiv .= "#sortable_".$storeid." li span { position: absolute; margin-left: -1.3em; }";
-  $categoryinstoreDiv .= "#sortable_".$storeid." li:hover { color: #ffff00; background-color: #003366; }";
+  $categoryinstoreDiv .= "#sortable_".$storeid." li:hover { color: #ffffff; background-color: #000000; }";
   $categoryinstoreDiv .= "</style>";
   $categoryinstoreDiv .= "<script>";
   $categoryinstoreDiv .= '$(function() {';
@@ -295,9 +295,9 @@ function categoryinStore($storeid, $categories, $catinstore = false){
   
   foreach ($categories as $category) {
     if($catinstore == true){
-    $categoryinstoreDiv .= "<li class=\"ui-state-default\" value =\"".$category['category_id']."\"><span class=\"ui-icon ui-icon-arrowthick-2-n-s\"></span>".$category['name']."</li>";  
+    $categoryinstoreDiv .= "<li class=\"ui-state-default list-group-item\" value =\"".$category['category_id']."\"><span class=\"ui-icon ui-icon-arrowthick-2-n-s\"></span>".$category['name']."</li>";  
     } else {
-      $categoryinstoreDiv .= "<li class=\"ui-state-default\" value =\"".$category['id']."\"><span class=\"ui-icon ui-icon-arrowthick-2-n-s\"></span>".$category['name']."</li>";  
+      $categoryinstoreDiv .= "<li class=\"ui-state-default list-group-item\" value =\"".$category['id']."\"><span class=\"ui-icon ui-icon-arrowthick-2-n-s\"></span>".$category['name']."</li>";  
     }
   }
   
