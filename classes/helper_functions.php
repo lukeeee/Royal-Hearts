@@ -21,6 +21,7 @@
 		$html .= '</label>';
 		return $html;
 	}
+	
 	function SortStores($array){
 			$stores = array("stores" => array());
 			$storesID = array();
