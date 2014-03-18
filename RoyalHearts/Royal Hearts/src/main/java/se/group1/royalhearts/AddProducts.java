@@ -20,17 +20,18 @@ import java.util.ArrayList;
 public class AddProducts extends Activity {
 
     private ProgressDialog progressDialog;
-    private TextView pro1text,pro2text,pro3text,pro4text,kassa;
+    private TextView pro1text,pro2text,pro3text,pro4text,kassa,pro5text;
     private ArrayList<Categories> categories;
     private ArrayList<Vegetables> vegetables;
     private ArrayList<Dairies> dairies;
     private ArrayList<Meats> meats;
     private ArrayList<Junkfoods> junkfoods;
-    LinearLayout pro1,pro2,pro3,pro4;
+    LinearLayout pro1,pro2,pro3,pro4,pro5;
     boolean vegetableAdapterCreated = false;
     boolean meatAdapterCreated = false;
     boolean dairyAdapterCreated = false;
     boolean junkfoodAdapterCreated = false;
+    boolean healthAdapterCreated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,8 @@ public class AddProducts extends Activity {
         pro2text = (TextView)findViewById(R.id.pro2Text);
         pro3text = (TextView)findViewById(R.id.pro3text);
         pro4text = (TextView)findViewById(R.id.pro4text);
+        pro5text = (TextView)findViewById(R.id.pro5text);
+        pro5 = (LinearLayout)findViewById(R.id.pro5);
         pro1 = (LinearLayout)findViewById(R.id.pro1);
         pro2 = (LinearLayout)findViewById(R.id.pro2);
         pro3 = (LinearLayout)findViewById(R.id.pro3);
@@ -52,6 +55,7 @@ public class AddProducts extends Activity {
         pro2text.setTypeface(tf);
         pro3text.setTypeface(tf);
         pro4text.setTypeface(tf);
+        pro5text.setTypeface(tf);
         kassa.setTypeface(tf);
 
         categories = JsonManager.getCategories();
@@ -64,9 +68,10 @@ public class AddProducts extends Activity {
             Log.i("hej", cat.getName().toString());
 
             pro1text.setText(categories.get(0).getName().toString());
-            pro2text.setText(categories.get(1).getName().toString());
+            pro2text.setText(categories.get(4).getName().toString());
             pro3text.setText(categories.get(3).getName().toString());
-            pro4text.setText(categories.get(2).getName().toString());
+            pro4text.setText(categories.get(1).getName().toString());
+            pro5text.setText(categories.get(2).getName().toString());
         }
         for(Vegetables veg : vegetables){
             Log.i("svalk", veg.getName().toString());
@@ -75,6 +80,7 @@ public class AddProducts extends Activity {
         createMeatAdapter();
         createDairyAdapter();
         createJunkfoodAdapter();
+        createHealthAdapter();
 
     }
 
@@ -106,7 +112,7 @@ public class AddProducts extends Activity {
 
             for (int i = 0; i < adapterCount; i++) {
                 View item = meatAdapter.getView(i, null, null);
-                pro2.addView(item);
+                pro4.addView(item);
             }
         }
     }
@@ -140,7 +146,24 @@ public class AddProducts extends Activity {
 
             for (int i = 0; i < adapterCount; i++) {
                 View item = junkfoodAdapter.getView(i, null, null);
-                pro4.addView(item);
+                pro5.addView(item);
+            }
+        }
+    }
+    private void createHealthAdapter(){
+        if(!categories.isEmpty()) {
+            healthAdapterCreated = true;
+            HealthAdapter healthAdapter = new HealthAdapter(getApplicationContext(), new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+            final int adapterCount = healthAdapter.getCount();
+
+            for (int i = 0; i < adapterCount; i++) {
+                View item = healthAdapter.getView(i, null, null);
+                pro2.addView(item);
             }
         }
     }

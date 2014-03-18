@@ -408,7 +408,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         }
         HBagAdapter hbagAdapter = new HBagAdapter(getApplicationContext());
         final int hadapterCount = hbagAdapter.getCount();
-        for (int i = 0; i < adapterCount; i++) {
+        for (int i = 0; i < hadapterCount; i++) {
             View item = hbagAdapter.getView(i, null, null);
             cat5.addView(item);
         }

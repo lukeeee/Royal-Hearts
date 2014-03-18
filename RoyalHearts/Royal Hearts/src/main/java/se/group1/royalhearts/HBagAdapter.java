@@ -2,6 +2,7 @@ package se.group1.royalhearts;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +49,7 @@ public class HBagAdapter extends BaseAdapter {
     static class ViewHolder{
         TextView groText;
         CheckBox cBox;
+        ImageView product;
     }
 
     @Override
@@ -68,9 +71,10 @@ public class HBagAdapter extends BaseAdapter {
 
         holder.groText = (TextView)v.findViewById(R.id.grocText);
         holder.cBox = (CheckBox)v.findViewById(R.id.cBox);
+        holder.product = (ImageView)v.findViewById(R.id.product);
         under = (View)v.findViewById(R.id.underline);
         under.setVisibility(View.INVISIBLE);
-        final MBags baga = JsonManager.getMBags().get(i);
+        final HBags baga = JsonManager.getHBags().get(i);
         fade_out = AnimationUtils.loadAnimation(context.getApplicationContext(), R.anim.fade_out);
         fade_in = AnimationUtils.loadAnimation(context.getApplicationContext(), R.anim.fade_in);
 
@@ -80,6 +84,8 @@ public class HBagAdapter extends BaseAdapter {
 
         holder.groText.setText(baga.getName());
         holder.cBox.setTag(baga.getName());
+        Drawable win = context.getResources().getDrawable(R.drawable.shampo);
+        holder.product.setImageDrawable(win);
         v.setTag(hbags.get(i));
         holder.cBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
