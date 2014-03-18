@@ -59,7 +59,7 @@
 <br/>
 <div class="row">
 <div class="col-md-6 col-md-offset-4">
-  <div><h2>Lägg till varor i din butik</h2></div>
+  <div><h2>Lägg till varor i din butik (<em><?php echo $manInfo['storeName']; ?></em>)</h2></div>
 </div> 
 </div> 
 <br/>
