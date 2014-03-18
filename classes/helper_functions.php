@@ -21,7 +21,6 @@
 		$html .= '</label>';
 		return $html;
 	}
-	
 	function SortStores($array){
 			$stores = array("stores" => array());
 			$storesID = array();
@@ -87,9 +86,7 @@
           $catimg = 'img/snacks.png';
         } else if($cat_id == 5){
           $catimg = 'img/dairy.png';
-        } else if($cat_id == 30){
-          $catimg = 'img/health.png';
-        }
+        } 
       
       if($foodbasket_total > $session){
         $script = "$(\"#b\").attr('src','".$catimg."');
@@ -142,14 +139,16 @@
         foreach ($foodbasket["items"] as $arrayitem) {
           $html .= '<tr><td>'.$arrayitem["name"].'</td><td>'.$arrayitem["quantity"].'</td>';
           $html .= '<td><a id="basketitem_'.$arrayitem["id"].'"><i class="glyphicon glyphicon-trash"></i></a>';
-          $html .= '</td></tr>'; 
+          $html .= '</td></tr>';
           $html .= '<script>';
           $html .=  '$(\'#basketitem_'.$arrayitem["id"].'\').click(function(){';
           $html .=  'window.location = "run.php?func=removeitemfrombasket&userid='.$userid.'&itemid='.$arrayitem["id"].'";';
           $html .= '});</script>';       
         } 
+		
       }
      $html .= '</tbody></table>';
+	 $html .= '<a href="price_total.php" class="btn btn-default">Jämför pris</a>'; 
   } else {
     $html .= 'Din varukorg är tom';
   }
@@ -276,7 +275,7 @@ function categoryinStoreScript($cities){
 }*/
 
 
-function categoryinStore($storeid, $categories, $catinstore = false){
+function categoryinStore($storeid, $categories){
   $html = '';
   $categoryinstore = '';
   $categoryinstore = '';    
@@ -285,7 +284,7 @@ function categoryinStore($storeid, $categories, $catinstore = false){
   $categoryinstoreDiv .= "#sortable_".$storeid."{ list-style-type: none; margin: 0; padding: 0; width: 100%; }";
   $categoryinstoreDiv .= "#sortable_".$storeid." li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;  }";
   $categoryinstoreDiv .= "#sortable_".$storeid." li span { position: absolute; margin-left: -1.3em; }";
-  $categoryinstoreDiv .= "#sortable_".$storeid." li:hover { color: #ffff00; background-color: #003366; }";
+  $categoryinstoreDiv .= "$sortable_ul".$storeid." li:hover { color: #ffff00; background-color: #003366; }";
   $categoryinstoreDiv .= "</style>";
   $categoryinstoreDiv .= "<script>";
   $categoryinstoreDiv .= '$(function() {';
@@ -295,24 +294,17 @@ function categoryinStore($storeid, $categories, $catinstore = false){
   $categoryinstoreDiv .= "<ul id=\"sortable_".$storeid."\">";
   
   foreach ($categories as $category) {
-    if($catinstore == true){
-    $categoryinstoreDiv .= "<li class=\"ui-state-default\" value =\"".$category['category_id']."\"><span class=\"ui-icon ui-icon-arrowthick-2-n-s\"></span>".$category['name']."</li>";  
-    } else {
-      $categoryinstoreDiv .= "<li class=\"ui-state-default\" value =\"".$category['id']."\"><span class=\"ui-icon ui-icon-arrowthick-2-n-s\"></span>".$category['name']."</li>";  
-    }
+    $categoryinstoreDiv .= "<li class=\"ui-state-default\" value =\"".$category['category_id']."\"><span class=\"ui-icon ui-icon-arrowthick-2-n-s\"></span>".$category['name']."</li>";
   }
   
   $categoryinstoreDiv .= "</ul>";
   $categoryinstoreDiv .= "<a id=\"a_".$storeid."\"><i class=\"glyphicon glyphicon-ok\"></i></a>";
-  $categoryinstoreDiv .= "<a id=\"adel_".$storeid."\"><i class=\"glyphicon glyphicon-remove\"></i></a>";
   
   $categoryinstore .= $categoryinstoreDiv;
   $html .= $categoryinstore;  
   
   return $html;
-  
 } 
-
 function categoryinStoreScript($categories){
   $selectscript = "<script>";
     foreach($categories  as $category){
