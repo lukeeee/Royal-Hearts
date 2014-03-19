@@ -275,7 +275,7 @@ function categoryinStoreScript($cities){
 }*/
 
 
-function categoryinStore($storeid, $categories){
+function categoryinStore($storeid, $categories, $catinstore = false){
   $html = '';
   $categoryinstore = '';
   $categoryinstore = '';    
@@ -287,7 +287,7 @@ function categoryinStore($storeid, $categories){
 
   $categoryinstoreDiv .= "#sortable_".$storeid." li:hover { color: #ffffff; background-color: #000000; }";
 
-  $categoryinstoreDiv .= "$sortable_ul".$storeid." li:hover { color: #ffff00; background-color: #003366; }";
+  
 
 
   $categoryinstoreDiv .= "</style>";
@@ -306,18 +306,20 @@ function categoryinStore($storeid, $categories){
       $categoryinstoreDiv .= "<li class=\"ui-state-default list-group-item\" value =\"".$category['id']."\"><span class=\"ui-icon ui-icon-arrowthick-2-n-s\"></span>".$category['name']."</li>";  
     }
 
-    $categoryinstoreDiv .= "<li class=\"ui-state-default\" value =\"".$category['category_id']."\"><span class=\"ui-icon ui-icon-arrowthick-2-n-s\"></span>".$category['name']."</li>";
+    
 
   }
   
   $categoryinstoreDiv .= "</ul>";
   $categoryinstoreDiv .= "<a id=\"a_".$storeid."\"><i class=\"glyphicon glyphicon-ok\"></i></a>";
+  $categoryinstoreDiv .= "<a id=\"adel_".$storeid."\"><i class=\"glyphicon glyphicon-remove\"></i></a>";
   
   $categoryinstore .= $categoryinstoreDiv;
   $html .= $categoryinstore;  
   
   return $html;
 } 
+
 function categoryinStoreScript($categories){
   $selectscript = "<script>";
     foreach($categories  as $category){

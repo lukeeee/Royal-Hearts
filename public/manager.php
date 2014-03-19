@@ -38,14 +38,12 @@
 			$currentstore[] = $category;
 		}
 	}	
-	//echo count($currentstore);
-	
 	
 	if(count($currentstore) > 1){
 		//var_dump($currentstore);
 	} else {
 		$categories = json_decode(file_get_contents("http://dev2-vyh.softwerk.se:8080/matkasseWS/rest/category/getall"),true);
-			//echo '--'.count($categories);
+			echo '--'.count($categories);
 	}
 
 	
@@ -69,6 +67,7 @@
   <div class="col-md-2">
 
   	<?php if(count($currentstore) > 1){
+
 	  	 	echo categoryinStore($manInfo['city_storeID'], $currentstore, true);
 	  	 } else {
 	  	 	echo categoryinStore($manInfo['city_storeID'], $categories, false);
