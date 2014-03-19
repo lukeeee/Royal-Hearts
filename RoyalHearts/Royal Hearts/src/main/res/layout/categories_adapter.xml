@@ -21,6 +21,12 @@
         android:layout_marginTop="3dp"
         android:layout_centerVertical="true"
         android:layout_alignParentTop="true" />
+    <View
+        android:layout_width="17dp"
+        android:layout_height="17dp"
+        android:background="#000"
+        android:layout_marginLeft="268dp"
+        android:layout_marginTop="8dp"></View>
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
